@@ -1,5 +1,5 @@
 """Editable native text and asynchronous, read-only PZH document previews."""
-from PySide6.QtCore import QObject,QRunnable,QThreadPool,Signal,Slot,QSignalBlocker
+from PySide6.QtCore import QObject,QRunnable,QThreadPool,Signal,Slot,QSignalBlocker,Qt
 from PySide6.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QPushButton,QLabel,QTableWidget,QTabWidget,QPlainTextEdit,QDialog,QFormLayout,QLineEdit,QFileDialog
 from .planning_panel import fill,buttons
 from . import technical_documents as documents,pzh_entity_texts
@@ -10,13 +10,14 @@ class _Signals(QObject):
 
 
 class _Read(QRunnable):
-    def __init__(self,generation,kind,budget,code=None):
-        super().__init__();self.generation=generation;self.kind=kind;self.budget=budget;self.code=code;self.signals=_Signals()
+    def __init__(self,generation,kind,budget,code=None,parent=None):
+        super().__init__();self.generation=generation;self.kind=kind;self.budget=budget;self.code=code;self.signals=_Signals(parent)
     def run(self):
         try:
             result=pzh_entity_texts.catalogue(self.budget) if self.kind=='catalogue' else pzh_entity_texts.read(self.budget,self.code)
             self.signals.ready.emit(self.generation,self.kind,result,'')
         except Exception as exc:self.signals.ready.emit(self.generation,self.kind,None,str(exc))
+        finally:self.signals.deleteLater()
 
 
 class TechnicalDocumentsPanel(QWidget):
@@ -47,7 +48,7 @@ class TechnicalDocumentsPanel(QWidget):
             if archive:self.source_status.setText('Leyendo índice de textos…');self._start('catalogue')
             else:self.source_status.setText('Este proyecto no conserva textos de un PZH original.')
     def _start(self,kind,code=None):
-        worker=_Read(self._generation,kind,self.host.budget,code);worker.signals.ready.connect(self._ready);self.pool.start(worker)
+        worker=_Read(self._generation,kind,self.host.budget,code,self);worker.signals.ready.connect(self._ready,Qt.ConnectionType.QueuedConnection);self.pool.start(worker)
     @Slot(int,str,object,str)
     def _ready(self,generation,kind,result,error):
         if generation!=self._generation:return

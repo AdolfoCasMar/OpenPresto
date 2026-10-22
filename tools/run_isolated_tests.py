@@ -2,10 +2,17 @@
 from pathlib import Path
 import subprocess
 import sys
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('modules', nargs='*')
+args = parser.parse_args()
 
 root = Path(__file__).resolve().parents[1]
 failed = []
 for path in sorted((root / 'tests').glob('test_*.py')):
+    if args.modules and path.name not in args.modules:
+        continue
     print('TEST MODULE: ' + path.name, flush=True)
     try:
         result = subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-p', path.name, '-v'], cwd=root, timeout=120)

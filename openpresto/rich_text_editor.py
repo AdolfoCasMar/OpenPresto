@@ -61,7 +61,7 @@ class RichTextDialog(QDialog):
         super().__init__(parent);self.setWindowTitle('Texto con formato');self.resize(780,600);box=QVBoxLayout(self);bar=QHBoxLayout();box.addLayout(bar)
         self.editor=RichTextEditor(self);self.editor.setObjectName('asset-rich-text');self.styles={}
         for key,label in (('bold','Negrita'),('italic','Cursiva'),('underline','Subrayado'),('strike','Tachado')):
-            button=QToolButton(self);button.setText(label);button.setCheckable(True);button.setObjectName('rich-'+key);button.clicked.connect(lambda checked,k=key:self.apply_style(k,checked));bar.addWidget(button);self.styles[key]=button
+            button=QToolButton(self);button.setText(label);button.setCheckable(True);button.setObjectName('rich-'+key);button.toggled.connect(lambda checked=False,k=key:self.apply_style(k,checked));bar.addWidget(button);self.styles[key]=button
         self.size=QDoubleSpinBox(self);self.size.setObjectName('rich-size');self.size.setRange(1,200);self.size.setDecimals(1);self.size.setSingleStep(.5);self.size.setSuffix(' pt');self.size.setValue(12);self.size.valueChanged.connect(self.apply_size);bar.addWidget(self.size);box.addWidget(self.editor)
         self.color=QComboBox(self);self.color.setObjectName('rich-color');self.color.addItem('Color automático',None)
         for label,value in (('Negro','#000000'),('Azul','#245a9b'),('Rojo','#b32d35'),('Verde','#287445'),('Gris','#626970')):self.color.addItem(label,value)

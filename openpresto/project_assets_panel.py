@@ -19,8 +19,8 @@ class _Signals(QObject):ready=Signal(int,object,str)
 
 
 class _Read(QRunnable):
-    def __init__(self,generation,budget,identifier):
-        super().__init__();self.generation=generation;self.budget=budget;self.identifier=identifier;self.signals=_Signals()
+    def __init__(self,generation,budget,identifier,parent=None):
+        super().__init__();self.generation=generation;self.budget=budget;self.identifier=identifier;self.signals=_Signals(parent)
     def run(self):
         try:
             data=engine.read(self.budget,self.identifier);data['image']=None;data['vector']=None;data['vector_warning']=''
@@ -51,6 +51,7 @@ class _Read(QRunnable):
                 except Exception as exc:data['vector_warning']='Vista vectorial no disponible: '+str(exc)
             self.signals.ready.emit(self.generation,data,'')
         except Exception as exc:self.signals.ready.emit(self.generation,None,str(exc))
+        finally:self.signals.deleteLater()
 
 
 class ProjectAssetsPanel(QWidget):
@@ -68,7 +69,7 @@ class ProjectAssetsPanel(QWidget):
     def select(self,*_):
         self._generation+=1;self.pool.clear();self.current=None;self.preview.clear();self.image.clear();i=self.table.currentRow()
         if not 0<=i<len(self.ids):return
-        self.status.setText('Leyendo el adjunto seleccionado…');worker=_Read(self._generation,self.host.budget,self.ids[i]);worker.signals.ready.connect(self.ready);self.pool.start(worker)
+        self.status.setText('Leyendo el adjunto seleccionado…');worker=_Read(self._generation,self.host.budget,self.ids[i],self);worker.signals.ready.connect(self.ready,Qt.ConnectionType.QueuedConnection);self.pool.start(worker)
     @Slot(int,object,str)
     def ready(self,generation,result,error):
         if generation!=self._generation:return
