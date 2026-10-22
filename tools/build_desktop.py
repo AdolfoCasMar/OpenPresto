@@ -18,12 +18,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--skip-smoke-test', action='store_true',
                         help='Construir sin ejecutar la batería funcional del paquete')
+    parser.add_argument('--macos-profile', choices=('current', 'catalina'), default='current')
     args = parser.parse_args()
+    if args.macos_profile == 'catalina' and (sys.platform != 'darwin' or platform.machine().lower() != 'x86_64'):
+        raise SystemExit('The Catalina profile requires a native Intel macOS builder.')
     if sys.platform not in ('win32', 'darwin', 'linux'):
         raise SystemExit('Sistema de construcción no compatible.')
     target_os = {'win32': 'windows', 'darwin': 'macos', 'linux': 'linux'}[sys.platform]
     arch = platform.machine().lower().replace('amd64', 'x86_64')
     label = f'OpenPresto-{__version__}-{target_os}-{arch}'
+    if args.macos_profile == 'catalina':
+        from PySide6.QtCore import qVersion
+        if qVersion() != '6.4.3':
+            raise SystemExit('Install requirements-catalina.txt for the Catalina profile.')
+        label = f'OpenPresto-{__version__}-macos-catalina-{arch}'
     work = ROOT / 'build-desktop' / label
     output = ROOT / 'dist' / label
     work.mkdir(parents=True, exist_ok=True)
@@ -72,6 +80,20 @@ def main():
             str(system / 'System32'), str(system)))
     subprocess.run([*command, str(ROOT / 'packaging/desktop_entry.py')], cwd=ROOT,
                    env=build_env, check=True)
+    if sys.platform == 'darwin':
+        import plistlib
+        bundle = output / 'OpenPresto.app'
+        info_path = bundle / 'Contents/Info.plist'
+        info = plistlib.loads(info_path.read_bytes())
+        info['LSMinimumSystemVersion'] = '10.15' if args.macos_profile == 'catalina' else '13.0'
+        info_path.write_bytes(plistlib.dumps(info))
+        subprocess.run(['codesign', '--force', '--deep', '--sign', '-', str(bundle)], check=True)
+        if args.macos_profile == 'catalina':
+            from tools.audit_macos_bundle import audit
+            compatibility = audit(bundle, '10.15', 0x01000007)
+            (work / 'macos-compatibility.json').write_text(json.dumps(compatibility, indent=2), encoding='utf-8')
+            if compatibility['errors']:
+                raise RuntimeError(json.dumps(compatibility))
     if sys.platform == 'win32':
         (output / 'OpenPresto').mkdir()
         shutil.move(str(output / 'OpenPresto.exe'), str(output / 'OpenPresto/OpenPresto.exe'))

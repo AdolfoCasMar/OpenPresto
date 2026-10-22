@@ -1,0 +1,5 @@
+# Dedicated Intel macOS 10.15 profile; do not mix with requirements-build.txt.
+PySide6-Essentials==6.4.3
+shiboken6==6.4.3
+pyinstaller==6.22.0
+pyinstaller-hooks-contrib==2026.8

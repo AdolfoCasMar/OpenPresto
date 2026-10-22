@@ -30,6 +30,8 @@ For PZH files, choose the modules you want to import. You can also request edita
 
 The native JSON project preserves the source PZH snapshot and the supported editable data. Preserving source bytes is different from converting every property. See the [compatibility guide](https://github.com/AdolfoCasMar/OpenPresto/blob/integracion-1.0/docs/COMPATIBILITY.md) for the current boundaries.
 
+See [macOS compatibility](docs/MACOS-COMPATIBILITY.md) for system requirements and the experimental Catalina Intel profile.
+
 ## Run from source
 
 Active development takes place on `integracion-1.0`.
