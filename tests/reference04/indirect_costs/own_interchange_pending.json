@@ -1,0 +1,10 @@
+{
+  "status": "observed_native_import",
+  "fixture": "own_interchange_pending.bc3",
+  "sha256": "188b5ce854127b18ecb509fe80d194151993ab7f44e6222046df3f633c55e1e5",
+  "own_calculated_total": "110.02",
+  "native_result": "110.02",
+  "configuration": "5 percent, include simple partidas, default rounding",
+  "purpose": "Own synthetic interchange trial; not an enabled application export",
+  "observation": "docs/evidencias-04/ensayos/indirectos-propio-observado.json"
+}

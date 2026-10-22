@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.openpresto.OpenPresto</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>OpenPresto</name>
+  <summary>Construction budgets, quantity measurements and project costs</summary>
+  <description>
+    <p>OpenPresto is an independent desktop application for construction budgets, quantity measurements, certification, planning and project documents.</p>
+    <p>It provides decimal calculations, editable native projects, supported BC3 and PZH imports, reports and recovery. Format compatibility is partial and import results must be reviewed. The application interface is currently in Spanish.</p>
+  </description>
+  <launchable type="desktop-id">org.openpresto.OpenPresto.desktop</launchable>
+  <provides><mediatype>application/x-openpresto-bc3</mediatype></provides>
+  <releases><release version="0.4.0a40" date="2026-10-20" type="development"/><release version="0.4.0a28" date="2026-10-18" type="development"/><release version="0.4.0a22" date="2026-10-17" type="development"/><release version="0.4.0a21" date="2026-10-17" type="development"/><release version="0.4.0a19" date="2026-10-16" type="development"/><release version="0.4.0a18" date="2026-10-16" type="development"/><release version="0.4.0a17" date="2026-10-16" type="development"/><release version="0.4.0a9" date="2026-10-15" type="development"/><release version="0.4.0a8" date="2026-10-15" type="development"/><release version="0.4.0a7" date="2026-10-15" type="development"/><release version="0.4.0a6" date="2026-10-15" type="development"/><release version="0.4.0a5" date="2026-10-15" type="development"/><release version="0.4.0a4" date="2026-10-14" type="development"/><release version="0.4.0a3" date="2026-10-14" type="development"/><release version="0.4.0a2" date="2026-10-14" type="development"/><release version="0.4.0a1" date="2026-10-14" type="development"/><release version="0.3.0" date="2026-10-12" type="development"/></releases>
+</component>

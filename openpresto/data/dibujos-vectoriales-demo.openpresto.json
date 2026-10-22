@@ -1,0 +1,123 @@
+{
+  "format": "openpresto-budget",
+  "version": 44,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 15,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 5,
+      "root_code": "ROOT",
+      "concepts": [
+        {
+          "code": "ROOT",
+          "unit": "",
+          "summary": "",
+          "nature": "capitulo",
+          "base_price": "77.06",
+          "text": ""
+        },
+        {
+          "code": "ITEM",
+          "unit": "",
+          "summary": "",
+          "nature": "partida",
+          "base_price": "77.06",
+          "text": ""
+        },
+        {
+          "code": "M01",
+          "unit": "",
+          "summary": "",
+          "nature": "material",
+          "base_price": "20.01",
+          "text": ""
+        },
+        {
+          "code": "M02",
+          "unit": "",
+          "summary": "",
+          "nature": "material",
+          "base_price": "10.02",
+          "text": ""
+        },
+        {
+          "code": "M%10",
+          "unit": "",
+          "summary": "",
+          "nature": "",
+          "base_price": "10.0",
+          "text": ""
+        }
+      ],
+      "relations": [
+        {
+          "id": "pzh-r0",
+          "parent_code": "ROOT",
+          "child_code": "ITEM",
+          "quantity": "1.00",
+          "position": 1,
+          "factor": "1"
+        },
+        {
+          "id": "pzh-r1",
+          "parent_code": "ITEM",
+          "child_code": "M01",
+          "quantity": "3.0",
+          "position": 1,
+          "factor": "1"
+        },
+        {
+          "id": "pzh-r2",
+          "parent_code": "ITEM",
+          "child_code": "M02",
+          "quantity": "1.0",
+          "position": 2,
+          "factor": "1"
+        },
+        {
+          "id": "pzh-r3",
+          "parent_code": "ITEM",
+          "child_code": "M%10",
+          "quantity": "0.1",
+          "position": 3,
+          "factor": "1"
+        }
+      ],
+      "measurements": [],
+      "calculation": {
+        "root_quantity_decimals": 0,
+        "bc3_zero_dimensions_as_blank": true
+      },
+      "bc3": {
+        "records": [],
+        "measurements": {},
+        "warnings": []
+      }
+    },
+    "metadata": {
+      "currency": "EUR",
+      "engine": "native-v1",
+      "pzh_percentage_profile": "8x-prefix-observed-v1",
+      "pzh_operations_rejected": "[]",
+      "pzh_operations_v1": "{\"activities\":[{\"relation_id\":\"pzh-r0\",\"parent\":\"ROOT\",\"code\":\"ITEM\",\"planned_start\":null,\"planned_finish\":null,\"actual_start\":null,\"actual_finish\":null,\"objective_quantity\":\"0\",\"planned_quantity\":\"0\",\"objective_price\":\"0\",\"planned_price\":\"0\"}],\"phases\":[],\"precedences\":[],\"entities\":[{\"id\":1,\"fields\":{\"3\":\"Synthetic client\",\"32\":\"1250.5\",\"37\":\"Title\",\"38\":\"College\",\"39\":\"Registration\"},\"code\":\"CLIENT\",\"name\":\"Synthetic client\",\"contact\":\"\"}],\"offers\":[],\"documents\":[{\"id\":1,\"fields\":{\"2\":5,\"4\":1,\"5\":2,\"7\":\"000000000000f8f7\",\"10\":\"100.0\",\"13\":\"10.0\",\"14\":\"5.0\",\"16\":\"75.0\"},\"date\":\"2020-01-01\",\"reference\":\"INV\",\"entity\":\"CLIENT\",\"kind\":5,\"issued\":true,\"proforma\":false,\"amount\":null,\"invoice_base\":null,\"note\":\"\",\"calculated_base\":\"0.00\",\"base_difference\":null,\"linked_supplies\":0}],\"supplies\":[],\"dues\":[],\"unsupported\":[]}",
+      "pzh_operations_notes": "PZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.",
+      "pzh_source_archive_v1": "{\"format\":\"pzh-source-snapshot-v1\",\"sha256\":\"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\",\"bytes\":3660,\"inventory\":[{\"table\":0,\"records\":5,\"data_start\":2551,\"data_end\":2711},{\"table\":1,\"records\":4,\"data_start\":2711,\"data_end\":2923},{\"table\":2,\"records\":0,\"data_start\":2923,\"data_end\":2923},{\"table\":3,\"records\":1,\"data_start\":2923,\"data_end\":2957},{\"table\":4,\"records\":0,\"data_start\":2974,\"data_end\":2974},{\"table\":5,\"records\":0,\"data_start\":2974,\"data_end\":2974},{\"table\":6,\"records\":0,\"data_start\":2974,\"data_end\":2974},{\"table\":7,\"records\":0,\"data_start\":2974,\"data_end\":2974},{\"table\":8,\"records\":0,\"data_start\":2974,\"data_end\":2974},{\"table\":9,\"records\":3,\"data_start\":2974,\"data_end\":3097},{\"table\":10,\"records\":1,\"data_start\":3097,\"data_end\":3175},{\"table\":11,\"records\":0,\"data_start\":3175,\"data_end\":3175},{\"table\":12,\"records\":1,\"data_start\":3175,\"data_end\":3221},{\"table\":13,\"records\":1,\"data_start\":3238,\"data_end\":3337},{\"table\":14,\"records\":0,\"data_start\":3337,\"data_end\":3337},{\"table\":15,\"records\":0,\"data_start\":3337,\"data_end\":3337},{\"table\":16,\"records\":1,\"data_start\":3337,\"data_end\":3371},{\"table\":17,\"records\":0,\"data_start\":3377,\"data_end\":3377},{\"table\":18,\"records\":0,\"data_start\":3377,\"data_end\":3377},{\"table\":19,\"records\":0,\"data_start\":3377,\"data_end\":3377},{\"table\":20,\"records\":1,\"data_start\":3377,\"data_end\":3421},{\"table\":21,\"records\":1,\"data_start\":3438,\"data_end\":3513},{\"table\":22,\"records\":1,\"data_start\":3530,\"data_end\":3643},{\"table\":23,\"records\":0,\"data_start\":3660,\"data_end\":3660}],\"encoding\":\"zlib-base64\",\"data\":\"eNrtV89rE0EUnplNaDY/SkUP0VJYS6MFtSShFFORriYRg00iaTBYKhh2p8lq3I3ZlVqk/gGCeBDx5kXxf/AmePPmqQfvXq0/atVLndmdTTJNxcvuIdgH32wmb+ab7719y8wA8C8LEuyIADwPA08tABzO2xHguVFOr3kh433sg94XEQcHvMPDKzDeo1Hv64xyNqLe56HhAy9kvM984H1NOMWY93mgnMPCCxnvKR/0pmIO/mdeyHhv+MCrE843PvC+J5znRr3P7+KogwMbHkvRmjg7kwQICJVyuQpGEAgJQEQgjEAEgSgCn+EW/AK/wm/wO9yGP+AOjLPJdILkGgqIr9rnw5vZJTnOCq1QzRd7/iDnRwTFZErq+UPiu+3plSdo1vYLtj/N+cObLwnDlO2nB8BiIpXs+UXRUTUlJ/YEyenkREkSq9ethQQTLewnnlPanRSyV0JMDRqclJb+tpLQtxo/qT8mMunD5MdfD299Wph0P+BDpKEor+mS2caKtqopdUszdI6GnjUn+lLAOZuaqmJ9zeioTn+CiRkYaGLF0FV+INpv4OVCLpcv1cqVnNO/xBizi4V8yc29sLSuW01saYqktDSsW0CymR49lRNVzWphcCJrtFq4gcHJCm5optWxAwMzbElE16d4sNKxVlMSTcE9XTHutDvYNLEq6YaFN1Kzc+luCunZotwXnmuHM4XStV6aOZ0oGIBBNOIM/LnDbi7X5ZhbX+xNHpHH7OfbinyM0cYzCApUVtNoaWp9HTjHRtmQ4xm6DZ92IxknzTgfSd00DUWrWyQOC9+3NrgE0z3milsC86ShuFicZ3/NEUyzMB3Eu9ekQdvlXx7dZ+663DdJQ1GulWqVC1ePQ0A+K4HqHgNq90oXRSrp0V8Rux5CBL+RUxy7bN0zRAjNXUIQyDMMlm0s2yW/p3zojvQH5t/Diw==\"}",
+      "concept_keywords_v1": "{\"ITEM\": {\"terms\": [\"hiddenword\", \"secondword\"], \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"records\": 3}}}",
+      "agenda_v1": "[{\"date\": \"2020-01-06\", \"holiday\": true, \"note\": \"Own holiday\", \"source_id\": 0, \"source_fields\": {\"2\": 1, \"3\": \"Own holiday\", \"11\": \"250.0\"}}]",
+      "project_assets_v1": "[{\"id\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:PZH:3:ITEM\", \"reference\": \"PZH:3:ITEM\", \"title\": \"Texto 2 · ITEM\", \"note\": \"\", \"text\": null, \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"table\": 3, \"code\": \"ITEM\", \"offset\": 2923, \"bytes\": 17}}, {\"id\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:PZH:12:14620\", \"reference\": \"PZH:12:14620\", \"title\": \"Anotación · 14620\", \"note\": \"\", \"text\": null, \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"table\": 12, \"code\": \"14620\", \"offset\": 3175, \"bytes\": 29}}, {\"id\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:PZH:20:ITEM\", \"reference\": \"PZH:20:ITEM\", \"title\": \"Texto asociado · ITEM\", \"note\": \"\", \"text\": null, \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"table\": 20, \"code\": \"ITEM\", \"offset\": 3377, \"bytes\": 27}}, {\"id\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:PZH:21:ITEM\", \"reference\": \"PZH:21:ITEM\", \"title\": \"Imagen · ITEM\", \"note\": \"\", \"text\": null, \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"table\": 21, \"code\": \"ITEM\", \"offset\": 3438, \"bytes\": 58}}, {\"id\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:PZH:22:ITEM\", \"reference\": \"PZH:22:ITEM\", \"title\": \"Dibujo · ITEM\", \"note\": \"\", \"text\": null, \"source\": {\"sha256\": \"184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293\", \"table\": 22, \"code\": \"ITEM\", \"offset\": 3530, \"bytes\": 96}}]",
+      "entities_v1": "[{\"code\": \"CLIENT\", \"name\": \"Synthetic client\", \"contact\": \"\", \"address\": \"\", \"city\": \"\", \"postal_code\": \"\", \"province\": \"\", \"phone\": \"\", \"phone_alt\": \"\", \"fax\": \"\", \"email\": \"\", \"tax_id\": \"\", \"note\": \"\", \"title\": \"Title\", \"college\": \"College\", \"registration\": \"Registration\", \"id\": \"pzh:184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:entity:1\", \"role\": 0, \"source_id\": 1, \"source_fields\": {\"3\": \"Synthetic client\", \"32\": \"1250.5\", \"37\": \"Title\", \"38\": \"College\", \"39\": \"Registration\"}}]",
+      "pzh_records_v1": "[{\"id\": \"pzh:184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293:record:1\", \"source_id\": 1, \"reference\": \"INV\", \"entity\": \"CLIENT\", \"date\": \"2020-01-01\", \"state\": 2, \"note\": \"\", \"source_fields\": {\"2\": 5, \"4\": 1, \"5\": 2, \"7\": \"000000000000f8f7\", \"10\": \"100.0\", \"13\": \"10.0\", \"14\": \"5.0\", \"16\": \"75.0\"}}]",
+      "pzh_native_conversion_v1": "[{\"module\": \"Entidades\", \"item\": \"Directorio de entidades\", \"status\": \"available\", \"detail\": \"Copia nativa disponible; documentos como borradores, sin movimientos históricos\"}, {\"module\": \"Registros de control\", \"item\": \"1\", \"status\": \"available\", \"detail\": \"Copia nativa disponible; documentos como borradores, sin movimientos históricos\"}]",
+      "pzh_import_modules": "[\"certifications\", \"management\", \"planning\"]",
+      "import_format": "pzh-8x-experimental",
+      "import_source": "own-vector.pzh",
+      "import_sha256": "184dcd519aacf0ef1865a982759f4cbed6bb5d5d90cfdf649f04ee4fc02bc293",
+      "pzh_import_notes": "PZH: importación experimental del presupuesto; no acredita compatibilidad completa con Presto.\nSe conserva el PZH original. Guarda el resultado como un proyecto OpenPresto nuevo.\nPorcentajes PZH convertidos al motor nativo: tipos del concepto y bases de relaciones contrastados con los importes guardados; prefijos y orden conservados.\nPZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nTablas adicionales PZH con campos aún no convertidos: 3 (1 registros), 9 (3 registros), 12 (1 registros), 16 (1 registros), 20 (1 registros), 21 (1 registros), 22 (1 registros).\nTérminos de búsqueda PZH convertidos: 3 registros; no cambian códigos ni precios.\nCopias nativas editables: 2 conversiones disponibles; 0 pendientes. Documentos como borradores, sin movimientos ni cobros/pagos históricos inventados.\nEl PZH fuente completo se conserva como instantánea verificable en el proyecto JSON. Conservar los bytes originales no equivale a convertir todos sus módulos en datos nativos editables."
+    },
+    "documents": [],
+    "locked_prices": {},
+    "indirect_costs": null,
+    "percentage_profile": null
+  }
+}

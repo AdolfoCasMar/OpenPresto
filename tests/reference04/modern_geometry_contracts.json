@@ -1,0 +1,15 @@
+{
+  "source": "manual-presto-completo.pdf",
+  "source_sha256": "359c66a81776265570fdedf76b619b8c07404e3aa2713b92932e1ef97e861248",
+  "pdf_pages": [58, 59],
+  "evidence_kind": "documented_not_runtime_observed",
+  "cases": [
+    {"id": "decimal_n_unrounded", "n": "1.234", "length": "2", "width": null, "height": null, "redparc": 2, "annulled": [], "expected_partial": "2.47"},
+    {"id": "dimensions_before_product", "n": "2", "length": "1.234", "width": "2.346", "height": null, "redparc": 2, "annulled": [], "expected_partial": "5.78"},
+    {"id": "informational_thickness", "n": "2", "length": "3", "width": "4", "height": "0.2", "redparc": 2, "annulled": ["height"], "expected_partial": "24.00"},
+    {"id": "reactivated_thickness", "n": "2", "length": "3", "width": "4", "height": "0.2", "redparc": 2, "annulled": [], "expected_partial": "4.80"},
+    {"id": "annulled_n", "n": "7", "length": "3", "width": "4", "height": null, "redparc": 2, "annulled": ["n"], "expected_partial": "12.00"},
+    {"id": "retained_digits_after_precision_change", "n": "2", "length": "1.234", "width": "2.346", "height": null, "redparc": 3, "annulled": [], "expected_partial": "5.790"}
+  ],
+  "unresolved": ["rounding ties", "annulled variables explicitly referenced by formulas", "direct quantity persistence", "auxiliary measurements and measurement references"]
+}

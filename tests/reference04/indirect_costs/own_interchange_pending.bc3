@@ -1,0 +1,13 @@
+~V|OpenPresto ensayos propios|FIEBDC-3/2002|OpenPresto||ANSI|
+~K|\2\2\3\2\2\2\2\EUR\|5|
+~C|CIROOT##||Ensayo propio indirectos|110.02||0|
+~C|CIA#||Capitulo A|57.49||0|
+~C|CIB#||Capitulo B|52.53||0|
+~C|CID|ud|Partida descompuesta reutilizada|16.68||0|
+~C|CIS|ud|Partida simple|7.13||0|
+~C|R01|h|Recurso uno|20.01||1|
+~C|R02|ud|Recurso dos|10.02||3|
+~D|CIROOT|CIA\1\1\CIB\1\1\|
+~D|CIA|CID\1\2\CIS\1\3\|
+~D|CIB|CID\1\3\|
+~D|CID|R01\1\0.333\R02\1\1\|

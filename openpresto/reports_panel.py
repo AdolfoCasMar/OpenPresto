@@ -1,0 +1,22 @@
+"""Report selection/preview using the same report engine as export."""
+from PySide6.QtWidgets import QWidget,QVBoxLayout,QHBoxLayout,QComboBox,QPushButton,QTextBrowser
+from .reports import report_html
+
+REPORT_KINDS=(('Presupuesto', 'presupuesto'), ('Resumen por capítulos', 'resumen'), ('Mediciones', 'mediciones'), ('Cuadro de precios', 'precios'), ('Resumen económico', 'economico'), ('Certificación aprobada', 'certificaciones'), ('Planificación mensual', 'planificacion'), ('Recursos planificados', 'recursos'), ('Comparación de ofertas nativas', 'ofertas'), ('Documentos de gestión', 'gestion'), ('Existencias y consumos', 'existencias'), ('Vencimientos previstos', 'vencimientos'), ('Directorio de entidades', 'entidades'))
+REPORT_KINDS += (('Liquidaciones de retenciones','retention_settlements'),('Agenda y festivos','agenda'),('PZH · Importes de agenda en origen','agenda_source_totals'),('Adjuntos y textos asociados','project_assets'),('Términos de búsqueda','concept_keywords'),('Propiedades adicionales de entidades','entity_properties'),('PZH · Totales de entidades en origen','entity_source_totals'),('PZH · Cobertura pendiente','pzh_completion'),('Aperturas de retenciones emitidas','retenciones_emitidas_apertura'),('Aperturas de retenciones','retenciones_apertura'),('Mediciones por fases','mediciones_fases'),('Documentos técnicos','documentos_tecnicos'),('Inventario a fecha','inventario'),('Seguimiento de no conformidades','no_conformidades'),('Líneas base del presupuesto','lineas_base'),('Rendimientos de obra','rendimientos'),('Controles de calidad','calidad_controles'),('Comprobaciones de calidad','calidad_comprobaciones'),('Incidencias de obra','incidencias'),('Historial de incidencias','incidencias_historial'),('Horas y equipos','horas_recursos'),('Partes de obra','partes_obra'),('Seguimiento de pedidos','seguimiento_compras'),('Control económico de documentos','control_economico'),('Tesorería mensual','tesoreria'),('Registros de control','pzh_control_records'),('PZH · Conversiones nativas','pzh_conversion'),('Documentos emitidos y saldos','issued_documents'),('Clientes','issued_customers'),('Cobros reales','issued_receipts'),('PZH · Vencimientos emitidos','issued_dues'),('PZH · Conversión de emitidos','issued_source'),('PZH · Registros sin convertir','pzh_rejected'),('PZH · Referencias sin resolver','pzh_unresolved'),('Valor ganado y curvas S','valor_ganado'),('Actividades del plan por fases','plan_fases_actividades'),('Reparto del plan por fases','plan_fases_reparto'),('Ruta crítica y objetivo','ruta_critica'),('Pagos y saldos','pagos_saldos'),('Calendario de pagos','calendario_pagos'),('Saldos de apertura','saldos_apertura'),('PZH · Actividades y objetivo','pzh_plan'),('PZH · Reparto por fases','pzh_phases'),('PZH · Precedencias','pzh_edges'),('PZH · Entidades','pzh_entities'),('PZH · Precios de entidades','pzh_offers'),('PZH · Comparación de ofertas','pzh_contracts'),('PZH · Saldos de facturas','pzh_balances'),('PZH · Conversión de contratos','pzh_native_contracts'),('PZH · Conversión a borradores','pzh_native_documents'),('PZH · Documentos originales','pzh_documents'),('PZH · Suministros','pzh_supplies'),('PZH · Vencimientos originales','pzh_dues'))
+
+
+class ReportsPanel(QWidget):
+    def __init__(self,host):
+        super().__init__(host);self.host=host;layout=QVBoxLayout(self);bar=QHBoxLayout();self.kind=QComboBox()
+        for label,key in REPORT_KINDS:self.kind.addItem(label,key)
+        self.kind.currentIndexChanged.connect(self.render);bar.addWidget(self.kind)
+        from .report_actions import export_report,preview_report
+        for text,callback in (('Exportar…',lambda:export_report(host,self.kind.currentData())),('Imprimir / vista previa…',lambda:preview_report(host,self.kind.currentData()))):
+            b=QPushButton(text);b.clicked.connect(callback);bar.addWidget(b)
+        layout.addLayout(bar);self.preview=QTextBrowser();layout.addWidget(self.preview)
+
+    def render(self,*_):
+        if self.host.project_open:
+            optional={'agenda','agenda_source_totals','project_assets','entity_properties','entity_source_totals','pzh_completion','documentos_tecnicos','documentos_tecnicos_contenido','entidades','incidencias','incidencias_historial','calidad_controles','calidad_comprobaciones','no_conformidades','lineas_base'}
+            self.preview.setHtml(report_html(self.host.budget,self.kind.currentData()) if self.host.budget.root_code or self.kind.currentData() in optional else '<p>Añade los conceptos de la obra para generar el informe.</p>')

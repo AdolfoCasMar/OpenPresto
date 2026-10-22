@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=OpenPresto
+GenericName=Construction budgeting
+Comment=Prepare construction budgets, quantities and project costs
+Exec=openpresto %f
+Icon=org.openpresto.OpenPresto
+Terminal=false
+Categories=Office;Engineering;
+MimeType=application/x-openpresto-bc3;
+Keywords=construction;budget;quantities;BC3;PZH;cost;
+StartupNotify=true

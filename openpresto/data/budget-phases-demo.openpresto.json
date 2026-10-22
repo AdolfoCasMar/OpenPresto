@@ -1,0 +1,121 @@
+{
+  "format": "openpresto-budget",
+  "version": 37,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 15,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 8,
+      "root_code": "ROOT",
+      "concepts": [
+        {
+          "code": "ROOT",
+          "unit": "",
+          "summary": "",
+          "nature": "capitulo",
+          "base_price": "10.43",
+          "text": "",
+          "measurement_decimals": null
+        },
+        {
+          "code": "ITEM",
+          "unit": "",
+          "summary": "",
+          "nature": "partida",
+          "base_price": "10.43",
+          "text": "",
+          "measurement_decimals": 2
+        },
+        {
+          "code": "RES",
+          "unit": "",
+          "summary": "",
+          "nature": "material",
+          "base_price": "9.75",
+          "text": "",
+          "measurement_decimals": null
+        },
+        {
+          "code": "%CI",
+          "unit": "",
+          "summary": "",
+          "nature": "",
+          "base_price": "7.0",
+          "text": "",
+          "measurement_decimals": null
+        }
+      ],
+      "relations": [
+        {
+          "id": "pzh-r0",
+          "parent_code": "ROOT",
+          "child_code": "ITEM",
+          "quantity": "1.00",
+          "position": 1,
+          "factor": "1"
+        },
+        {
+          "id": "pzh-r1",
+          "parent_code": "ITEM",
+          "child_code": "RES",
+          "quantity": "1.0",
+          "position": 1,
+          "factor": "1"
+        },
+        {
+          "id": "pzh-r2",
+          "parent_code": "ITEM",
+          "child_code": "%CI",
+          "quantity": "0.07",
+          "position": 2,
+          "factor": "1"
+        }
+      ],
+      "measurements": [
+        {
+          "id": "pzh-m0",
+          "relation_id": "pzh-r0",
+          "comment": "",
+          "n_lines": "1.0",
+          "length": null,
+          "width": null,
+          "height": null,
+          "formula": "",
+          "annulled_dimensions": []
+        }
+      ],
+      "calculation": {
+        "root_quantity_decimals": 0,
+        "bc3_zero_dimensions_as_blank": true
+      },
+      "bc3": {
+        "records": [],
+        "measurements": {},
+        "warnings": []
+      }
+    },
+    "metadata": {
+      "currency": "EUR",
+      "engine": "native-v1",
+      "pzh_percentage_profile": "8x-prefix-observed-v1",
+      "pzh_phase:pzh-m0": "1",
+      "percentage_base_mode": "exact-amount-v1",
+      "pzh_operations_rejected": "[]",
+      "pzh_operations_v1": "{\"activities\":[{\"relation_id\":\"pzh-r0\",\"parent\":\"ROOT\",\"code\":\"ITEM\",\"planned_start\":null,\"planned_finish\":null,\"actual_start\":null,\"actual_finish\":null,\"objective_quantity\":\"0\",\"planned_quantity\":\"0\",\"objective_price\":\"0\",\"planned_price\":\"0\"}],\"phases\":[],\"precedences\":[],\"entities\":[],\"offers\":[],\"documents\":[],\"supplies\":[],\"dues\":[],\"unsupported\":[]}",
+      "pzh_operations_notes": "PZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.",
+      "pzh_source_archive_v1": "{\"format\":\"pzh-source-snapshot-v1\",\"sha256\":\"f3cee9165c463da460f661601c21582fde6fedb0f6c1f1b9388b81246e5b749f\",\"bytes\":2940,\"inventory\":[{\"table\":0,\"records\":4,\"data_start\":2551,\"data_end\":2679},{\"table\":1,\"records\":3,\"data_start\":2679,\"data_end\":2838},{\"table\":2,\"records\":0,\"data_start\":2838,\"data_end\":2838},{\"table\":3,\"records\":0,\"data_start\":2838,\"data_end\":2838},{\"table\":4,\"records\":2,\"data_start\":2838,\"data_end\":2940},{\"table\":5,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":6,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":7,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":8,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":9,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":10,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":11,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":12,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":13,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":14,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":15,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":16,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":17,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":18,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":19,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":20,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":21,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":22,\"records\":0,\"data_start\":2940,\"data_end\":2940},{\"table\":23,\"records\":0,\"data_start\":2940,\"data_end\":2940}],\"encoding\":\"zlib-base64\",\"data\":\"eNpjYCAEWID4OycDQzkXA1UBMwPETDFuBqoDkJlDxVwmqLk1NHBvzai5o+aOmjtq7qi5o+YOoLmjgHbAEIgZLfQMgA0J5iB//xAGdiYGDmYGTiYGLiYGbiYGHiaG94wfGD8yfmL8zPiF8SvjN8bvjBJQzSANCjDAxMIZ03/oq8YdFQeQPCMQe4a4+iLkWVHkQQ2XINdgBYQ8ByfY0AZlsDyogafq7IkkzwmRZ5BxUEXzBIo7UCxVUOCDKPlgrwp1FCM2x6G4BE0TExJG0YTiPKCmbxogD+6wVyfWbYw8MHvUkRyGVwsTVAuDAwBee1a+\"}",
+      "budget_phase_measurements_v1": "{\"source_sha256\":\"f3cee9165c463da460f661601c21582fde6fedb0f6c1f1b9388b81246e5b749f\",\"approved_through\":1,\"active_through\":null,\"lines\":[{\"id\":\"0\",\"relation_id\":\"pzh-r0\",\"phase\":1,\"order\":0,\"kind\":0,\"comment\":\"\",\"formula\":\"\",\"n_lines\":\"1.0\",\"length\":null,\"width\":null,\"height\":null},{\"id\":\"1\",\"relation_id\":\"pzh-r0\",\"phase\":2,\"order\":1,\"kind\":0,\"comment\":\"\",\"formula\":\"\",\"n_lines\":\"2.0\",\"length\":null,\"width\":null,\"height\":null}]}",
+      "pzh_native_conversion_v1": "[{\"module\": \"Mediciones presupuestarias\", \"item\": \"Todas las fases\", \"status\": \"available\", \"detail\": \"Copia nativa disponible; documentos como borradores, sin movimientos históricos\"}]",
+      "pzh_import_modules": "[\"certifications\", \"management\", \"planning\"]",
+      "import_format": "pzh-8x-experimental",
+      "import_source": "own-budget-phases.pzh",
+      "import_sha256": "f3cee9165c463da460f661601c21582fde6fedb0f6c1f1b9388b81246e5b749f",
+      "pzh_import_notes": "PZH: importación experimental del presupuesto; no acredita compatibilidad completa con Presto.\nSe conserva el PZH original. Guarda el resultado como un proyecto OpenPresto nuevo.\nImportes porcentuales calculados sobre la base completa; todos los precios guardados y bases visibles coinciden. Se conserva esta política al editar y guardar.\nPorcentajes PZH convertidos al motor nativo: tipos del concepto y bases de relaciones contrastados con los importes guardados; prefijos y orden conservados.\nPZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nFases de medición presupuestaria consolidadas en la cantidad actual; no se conservan sus estados de aprobación.\n1 líneas de fases posteriores a la fase presupuestaria aprobada (1) no se incorporan a las cantidades actuales.\nCopias nativas editables: 1 conversiones disponibles; 0 pendientes. Documentos como borradores, sin movimientos ni cobros/pagos históricos inventados.\nEl PZH fuente completo se conserva como instantánea verificable en el proyecto JSON. Conservar los bytes originales no equivale a convertir todos sus módulos en datos nativos editables."
+    },
+    "documents": [],
+    "locked_prices": {},
+    "indirect_costs": null,
+    "percentage_profile": null
+  }
+}

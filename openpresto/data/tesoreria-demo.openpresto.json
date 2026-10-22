@@ -1,0 +1,47 @@
+{
+  "format": "openpresto-budget",
+  "version": 25,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 14,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 1,
+      "root_code": "OBRA",
+      "concepts": [
+        {
+          "code": "OBRA",
+          "unit": "",
+          "summary": "Ejemplo de tesorería",
+          "nature": "",
+          "base_price": "0"
+        },
+        {
+          "code": "MAT",
+          "unit": "ud",
+          "summary": "Suministro de ejemplo",
+          "nature": "material",
+          "base_price": "100"
+        }
+      ],
+      "relations": [
+        {
+          "id": "r",
+          "parent_code": "OBRA",
+          "child_code": "MAT",
+          "quantity": "10",
+          "position": 1
+        }
+      ],
+      "measurements": []
+    },
+    "metadata": {
+      "title": "Ejemplo sintético de tesorería; no corresponde a una obra real",
+      "management_v1": "{\"suppliers\": [{\"id\": \"sup\", \"name\": \"Proveedor de ejemplo\", \"contact\": \"\"}], \"contracts\": [], \"documents\": [{\"id\": \"purchase\", \"kind\": \"invoice\", \"reference\": \"COMPRA-001\", \"supplier_id\": \"sup\", \"date\": \"2026-10-01\", \"due_date\": \"2026-11-15\", \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"10\", \"unit_price\": \"100\", \"source_document\": null, \"source_index\": null}], \"tax_percent\": \"21\", \"retention_percent\": \"5\"}], \"consumptions\": []}",
+      "issued_management_v1": "{\"customers\": [{\"id\": \"cli\", \"name\": \"Cliente de ejemplo\", \"contact\": \"\"}], \"documents\": [{\"id\": \"sale\", \"kind\": \"invoice\", \"reference\": \"VENTA-001\", \"customer_id\": \"cli\", \"date\": \"2026-10-01\", \"due_date\": \"2026-11-20\", \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"10\", \"unit_price\": \"150\", \"source_document\": null, \"source_index\": null, \"stock\": false}], \"tax_percent\": \"21\", \"retention_percent\": \"5\"}, {\"id\": \"extra\", \"kind\": \"proforma\", \"reference\": \"TRABAJO-ADICIONAL\", \"customer_id\": \"cli\", \"date\": \"2026-10-01\", \"due_date\": \"2026-11-30\", \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"5\", \"unit_price\": \"100\", \"source_document\": null, \"source_index\": null, \"stock\": false}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}], \"receipts\": [{\"id\": \"0f6de251b3104f10824f23331adebb25\", \"document_id\": \"sale\", \"date\": \"2026-10-15\", \"amount\": \"500\", \"reference\": \"COBRO-001\"}], \"source_states\": {}, \"openings\": {}}",
+      "management_schedule_v1": "{\"purchase\": {\"dues\": [{\"id\": \"n1\", \"date\": \"2026-11-15\", \"kind\": \"normal\", \"amount\": \"600\", \"note\": \"\"}, {\"id\": \"n2\", \"date\": \"2026-12-15\", \"kind\": \"normal\", \"amount\": \"560\", \"note\": \"\"}, {\"id\": \"g1\", \"date\": \"2027-01-15\", \"kind\": \"guarantee\", \"amount\": \"50\", \"note\": \"\"}], \"source_paid\": \"0\", \"opening\": null}}",
+      "management_advanced_v1": "{\"payments\": [{\"id\": \"5b0b5c97ed38452da02bf202a8f3a0e6\", \"supplier_id\": \"sup\", \"reference\": \"PAGO-001\", \"date\": \"2026-10-10\", \"method\": \"Transferencia\", \"allocations\": [{\"document_id\": \"purchase\", \"amount\": \"200\"}], \"status\": \"posted\", \"cancellation_date\": null, \"cancellation_reason\": null}]}"
+    },
+    "documents": []
+  }
+}

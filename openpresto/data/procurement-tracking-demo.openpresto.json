@@ -1,0 +1,44 @@
+{
+  "format": "openpresto-budget",
+  "version": 19,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 14,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 1,
+      "root_code": "OBRA",
+      "concepts": [
+        {
+          "code": "OBRA",
+          "unit": "",
+          "summary": "Ejemplo de seguimiento de compras",
+          "nature": "",
+          "base_price": "0"
+        },
+        {
+          "code": "MAT",
+          "unit": "ud",
+          "summary": "Suministro de ejemplo",
+          "nature": "material",
+          "base_price": "100"
+        }
+      ],
+      "relations": [
+        {
+          "id": "r",
+          "parent_code": "OBRA",
+          "child_code": "MAT",
+          "quantity": "10",
+          "position": 1
+        }
+      ],
+      "measurements": []
+    },
+    "metadata": {
+      "management_v1": "{\"suppliers\": [{\"id\": \"sup\", \"name\": \"Proveedor de ejemplo\", \"contact\": \"\"}], \"contracts\": [], \"documents\": [{\"id\": \"PEDIDO-001\", \"kind\": \"order\", \"reference\": \"PEDIDO-001\", \"supplier_id\": \"sup\", \"date\": \"2026-10-01\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"10\", \"unit_price\": \"100\", \"source_document\": null, \"source_index\": null}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"ALBARAN-001\", \"kind\": \"delivery\", \"reference\": \"ALBARAN-001\", \"supplier_id\": \"sup\", \"date\": \"2026-10-05\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"6\", \"unit_price\": \"100\", \"source_document\": \"PEDIDO-001\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"FACTURA-ALBARAN\", \"kind\": \"invoice\", \"reference\": \"FACTURA-ALBARAN\", \"supplier_id\": \"sup\", \"date\": \"2026-10-10\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"4\", \"unit_price\": \"100\", \"source_document\": \"ALBARAN-001\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"FACTURA-DIRECTA\", \"kind\": \"invoice\", \"reference\": \"FACTURA-DIRECTA\", \"supplier_id\": \"sup\", \"date\": \"2026-10-15\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"2\", \"unit_price\": \"100\", \"source_document\": \"PEDIDO-001\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}], \"consumptions\": []}",
+      "title": "Ejemplo sintético de seguimiento; no corresponde a una obra real"
+    },
+    "documents": []
+  }
+}

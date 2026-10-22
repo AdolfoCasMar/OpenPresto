@@ -1,0 +1,11 @@
+~V|OpenPresto ensayos propios|FIEBDC-3/2002|OpenPresto||ANSI|
+~C|OVROOT##||Ensayo propio precio calculado|0||0|
+~C|OVA#||Capitulo A|0||0|
+~C|OVB#||Capitulo B|0||0|
+~C|OVITEM|ud|Partida reutilizada descompuesta|0||0|
+~C|OVR1|h|Recurso uno|3||1|
+~C|OVR2|ud|Recurso dos|4||3|
+~D|OVROOT|OVA\1\1\OVB\1\1\|
+~D|OVA|OVITEM\1\2\|
+~D|OVB|OVITEM\1\5\|
+~D|OVITEM|OVR1\1\2\OVR2\1\1\|

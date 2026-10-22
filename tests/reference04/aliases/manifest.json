@@ -1,0 +1,11 @@
+{
+  "status": "native_difference_observed",
+  "fixture": "baseline.bc3",
+  "sha256": "f290f0b67744a1f2ee32082e7c10219baac9a6dd8c63f6dbd85c8864e9b21f8c",
+  "expected": {
+    "concept_count": 2,
+    "relation_count": 1,
+    "total": "7.50"
+  },
+  "native_results": "docs/evidencias-04/ensayos/sinonimos-observados.json"
+}

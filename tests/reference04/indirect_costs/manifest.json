@@ -1,0 +1,8 @@
+{
+  "status": "observed_baseline_and_two_rate5_configurations",
+  "fixture": "baseline.bc3",
+  "sha256": "d232118d3561b52720e21a887ef857ffa5bac2c83651e6cf42e0eb00b7135f65",
+  "expected_results": null,
+  "purpose": "Independent native observations in linked JSON; no general indirect-cost oracle",
+  "observation": "docs/evidencias-04/ensayos/indirectos-observados.json"
+}

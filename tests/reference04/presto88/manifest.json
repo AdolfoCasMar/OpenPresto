@@ -1,0 +1,37 @@
+{
+  "dimensions": {
+    "source_sha256": "353a6e81520a490bfe1d3a52b84ede4e8acaff1283e6f07ded0b9df0142038e4",
+    "fixture_sha256": "cdfcd235063fb2e6d9af067f1d87af0ba8526382b7cfb36d8ba23869c39b4451",
+    "encoding": "cp1252",
+    "line_endings": "CRLF",
+    "status": "pending"
+  },
+  "factor_text": {
+    "source_sha256": "13e320cc1834a42e95dca085a71b40760fafca858aba5c24d1e2e32a87eab0aa",
+    "fixture_sha256": "36fb0d64356bbc481b8fe74df215ed54abde4f697fa2a15018282c65c4cf58a2",
+    "encoding": "cp1252",
+    "line_endings": "CRLF",
+    "status": "pending"
+  },
+  "reuse": {
+    "source_sha256": "7630ef519a3d63645c7cfd3bba4c7acb2eb6ade4769d16127eaca77f62291ccf",
+    "fixture_sha256": "4844568551572eb8eb76a74fc84a85dd751abd0939340c8ada79866a472cbecb",
+    "encoding": "cp1252",
+    "line_endings": "CRLF",
+    "status": "pending"
+  },
+  "rounding": {
+    "source_sha256": "79f98bcd3a269367c0d23ddc1f8a21e9b655b0191418946a25495d2adb3bc236",
+    "fixture_sha256": "b89f5d3ff794c2c5b6ae458386f37c96189b5ef4f95efffc6d35448a2428a58b",
+    "encoding": "cp1252",
+    "line_endings": "CRLF",
+    "status": "pending"
+  },
+  "simple": {
+    "source_sha256": "82411aa75673b9468f6467971d341ccf49d54f42fbb81fc6bfdd71e1bccd1ea5",
+    "fixture_sha256": "f4331dc1acf0f1ccd12f11d2af3be6e2eb2a4d879487649db09ceabff70b461b",
+    "encoding": "cp1252",
+    "line_endings": "CRLF",
+    "status": "simple observed; others pending"
+  }
+}

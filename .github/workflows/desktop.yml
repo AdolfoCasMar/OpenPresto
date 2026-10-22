@@ -1,0 +1,107 @@
+name: Desktop packages (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish a release after native builds (uses Actions minutes)'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: desktop-manual-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-22.04, macos-15-intel]
+    uses: ./.github/workflows/build-platform.yml
+    with:
+      runner: ${{ matrix.os }}
+      artifact-name: OpenPresto-required-${{ matrix.os }}
+
+  desktop-arm:
+    name: Additional macOS Apple Silicon package
+    uses: ./.github/workflows/build-platform.yml
+    with:
+      runner: macos-15
+      artifact-name: OpenPresto-optional-macos-arm64
+
+  release:
+    name: Publish release packages
+    needs: desktop
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: OpenPresto-required-*
+          path: release-assets
+          merge-multiple: true
+      - name: Verify the three required platform packages
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          folder = Path('release-assets')
+          checks = list(folder.glob('*.sha256'))
+          assert len(checks) == 3, 'Missing packages for one or more platforms'
+          for check in checks:
+              digest, name = check.read_text().strip().split(None, 1)
+              file = folder / name.strip()
+              assert file.parent == folder and file.is_file()
+              assert hashlib.sha256(file.read_bytes()).hexdigest() == digest
+          PY
+      - name: Publish desktop preview
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(python -c 'from openpresto import __version__; print(__version__)')
+          gh release create "v$VERSION" release-assets/* --target "$GITHUB_SHA" --prerelease --title "OpenPresto $VERSION — Desktop preview" --notes-file docs/RELEASE-NOTES.md
+
+  release-arm:
+    name: Add the Apple Silicon package when available
+    needs: [desktop-arm, release]
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: OpenPresto-optional-macos-arm64
+          path: release-assets
+      - name: Verify Apple Silicon package checksum
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          folder = Path('release-assets')
+          checks = list(folder.glob('*.sha256'))
+          assert len(checks) == 1, 'Expected one Apple Silicon package'
+          digest, name = checks[0].read_text().strip().split(None, 1)
+          file = folder / name.strip()
+          assert file.parent == folder and file.is_file()
+          assert hashlib.sha256(file.read_bytes()).hexdigest() == digest
+          PY
+      - name: Add the verified native package
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(python -c 'from openpresto import __version__; print(__version__)')
+          gh release upload "v$VERSION" release-assets/* --clobber

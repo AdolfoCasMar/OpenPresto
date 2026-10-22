@@ -1,0 +1,5 @@
+~V|OpenPresto pruebas sintéticas|FIEBDC-3/2002|OpenPresto||ANSI|
+~C|ROOT##||Raíz|0||0|
+~C|ITEM|m|Árido y albañilería|4.25||0|
+~D|ROOT|ITEM\2\1.5\|
+~T|ITEM|Texto sintético: áéíóú, ñ y €; revisión 0.4.|

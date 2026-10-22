@@ -1,0 +1,5 @@
+~V|OpenPresto pruebas sintéticas|FIEBDC-3/2002|OpenPresto||ANSI|
+~C|ROOT##||Raíz|0||0|
+~C|ITEM|m2|Dimensiones|10||0|
+~D|ROOT|ITEM\1\99\|
+~M|ROOT\ITEM|1|4|\Vacías\2\3\\\\Cero\1\0\4\\\Deducción\-1\2\\\\Comentario sin dimensiones\\\\\|

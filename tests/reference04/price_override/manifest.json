@@ -1,0 +1,25 @@
+{
+  "status": "partial_native_observation",
+  "fixture": "baseline.bc3",
+  "sha256": "346392fd5008f7f9d8a67fcc55a7c3a663e3e40b14b8b6cb286b9cdb8e676c9d",
+  "native_results": [
+    "docs/evidencias-04/ensayos/precio-calculado-observado.json",
+    "docs/evidencias-04/ensayos/precio-bloqueado-observado.json",
+    "docs/evidencias-04/ensayos/precio-desbloqueado-observado.json"
+  ],
+  "pending": [
+    "native undo semantics",
+    "adjust and remove decomposition alternatives"
+  ],
+  "persistence_exchange_result": "docs/evidencias-04/ensayos/bloqueo-persistencia-intercambio-observados.json",
+  "without_recalculation_result": "docs/evidencias-04/ensayos/bloqueo-sin-recalcular-observado.json",
+  "actions": [
+    "import fresh work and record baseline",
+    "type partida price 20, inspect dialog, cancel",
+    "repeat each offered option in independent copy",
+    "edit resource price and observe propagation",
+    "unlock if available, undo, save and reopen",
+    "export and reimport own data"
+  ],
+  "own_export_result": "docs/evidencias-04/ensayos/bloqueo-propio-observado.json"
+}

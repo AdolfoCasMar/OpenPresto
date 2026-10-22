@@ -1,0 +1,407 @@
+{
+  "format": "openpresto-budget",
+  "version": 11,
+  "percentage_profile": "presto88_bc3",
+  "project": {
+    "format": "openpresto-budget",
+    "version": 5,
+    "root_code": "PCTROOT##",
+    "concepts": [
+      {
+        "code": "PCTROOT##",
+        "unit": "",
+        "summary": "Ensayos propios porcentajes orden y alcance",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "PCTCH#",
+        "unit": "",
+        "summary": "Capitulo sintetico",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "PCTA",
+        "unit": "ud",
+        "summary": "Ensayo PCTA",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "PCTB",
+        "unit": "ud",
+        "summary": "Ensayo PCTB",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "PCTC",
+        "unit": "ud",
+        "summary": "Ensayo PCTC",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "PCTD",
+        "unit": "ud",
+        "summary": "Ensayo PCTD",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "M01",
+        "unit": "h",
+        "summary": "Recurso M01",
+        "nature": "1",
+        "base_price": "20.01",
+        "text": ""
+      },
+      {
+        "code": "M02",
+        "unit": "h",
+        "summary": "Recurso M02",
+        "nature": "1",
+        "base_price": "10.02",
+        "text": ""
+      },
+      {
+        "code": "P01",
+        "unit": "ud",
+        "summary": "Recurso P01",
+        "nature": "3",
+        "base_price": "100",
+        "text": ""
+      },
+      {
+        "code": "M%99",
+        "unit": "%",
+        "summary": "Porcentaje propio M%99",
+        "nature": "0",
+        "base_price": "99",
+        "text": ""
+      },
+      {
+        "code": "M%ORDER",
+        "unit": "%",
+        "summary": "Porcentaje propio M%ORDER",
+        "nature": "0",
+        "base_price": "99",
+        "text": ""
+      },
+      {
+        "code": "%GEN",
+        "unit": "%",
+        "summary": "Porcentaje propio %GEN",
+        "nature": "0",
+        "base_price": "10",
+        "text": ""
+      },
+      {
+        "code": "M%FIRST",
+        "unit": "%",
+        "summary": "Porcentaje propio M%FIRST",
+        "nature": "0",
+        "base_price": "10",
+        "text": ""
+      },
+      {
+        "code": "M%SECOND",
+        "unit": "%",
+        "summary": "Porcentaje propio M%SECOND",
+        "nature": "0",
+        "base_price": "10",
+        "text": ""
+      }
+    ],
+    "relations": [
+      {
+        "id": "976833b2bb3e4772837cd7cfebc938b2",
+        "parent_code": "PCTROOT##",
+        "child_code": "PCTCH#",
+        "quantity": "1",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "0fe3302b468945389c471845d20b477d",
+        "parent_code": "PCTCH#",
+        "child_code": "PCTA",
+        "quantity": "1",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "9836e6ec8e584a2684ef2a32a0cff6e3",
+        "parent_code": "PCTCH#",
+        "child_code": "PCTB",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "3d50df38340a4a9498e6b1be49334d83",
+        "parent_code": "PCTCH#",
+        "child_code": "PCTC",
+        "quantity": "1",
+        "position": 3,
+        "factor": "1"
+      },
+      {
+        "id": "7a893de49e9e463693cbea5610cb8c78",
+        "parent_code": "PCTCH#",
+        "child_code": "PCTD",
+        "quantity": "1",
+        "position": 4,
+        "factor": "1"
+      },
+      {
+        "id": "5d79b169935142df96824bcc2b02e533",
+        "parent_code": "PCTA",
+        "child_code": "M01",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "683be72269f54a5aab57be71b9b569d7",
+        "parent_code": "PCTA",
+        "child_code": "M02",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "e10b51bbd3f44ab6b2301c18cc6056db",
+        "parent_code": "PCTA",
+        "child_code": "P01",
+        "quantity": "1",
+        "position": 3,
+        "factor": "1"
+      },
+      {
+        "id": "e614b4dec522487f845b8a71a260ec51",
+        "parent_code": "PCTA",
+        "child_code": "M%99",
+        "quantity": "0.99",
+        "position": 4,
+        "factor": "1"
+      },
+      {
+        "id": "466b0fe3b9114b8d8568eb4a105077e7",
+        "parent_code": "PCTB",
+        "child_code": "M01",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "b59e1a1aa0d043fb8cf7a24cd231d511",
+        "parent_code": "PCTB",
+        "child_code": "M%ORDER",
+        "quantity": "0.99",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "714525d3f7b84d97a901487c0033ecc9",
+        "parent_code": "PCTB",
+        "child_code": "M02",
+        "quantity": "1",
+        "position": 3,
+        "factor": "1"
+      },
+      {
+        "id": "19f2a5bf853d4369a4dc605c19995f0d",
+        "parent_code": "PCTB",
+        "child_code": "P01",
+        "quantity": "1",
+        "position": 4,
+        "factor": "1"
+      },
+      {
+        "id": "0a3499eb50cf476e9af66e149514c5c4",
+        "parent_code": "PCTC",
+        "child_code": "M01",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "36261909e6114eec97a8d724a233786c",
+        "parent_code": "PCTC",
+        "child_code": "M02",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "800b9366d5eb4a4abbb0baa4594e0ff3",
+        "parent_code": "PCTC",
+        "child_code": "P01",
+        "quantity": "1",
+        "position": 3,
+        "factor": "1"
+      },
+      {
+        "id": "f72a1caa93f247ec9bcca2238f3a74c0",
+        "parent_code": "PCTC",
+        "child_code": "%GEN",
+        "quantity": "0.1",
+        "position": 4,
+        "factor": "1"
+      },
+      {
+        "id": "d594499bbaae47d7809c4072c5a430e9",
+        "parent_code": "PCTD",
+        "child_code": "M01",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "37c1870f5e3c4ddda348731a19b68fd2",
+        "parent_code": "PCTD",
+        "child_code": "M02",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "6c1f4cfad0994a258d57aceb920f2ad7",
+        "parent_code": "PCTD",
+        "child_code": "P01",
+        "quantity": "1",
+        "position": 3,
+        "factor": "1"
+      },
+      {
+        "id": "3e44715c59df4a649df038f07325ef52",
+        "parent_code": "PCTD",
+        "child_code": "M%FIRST",
+        "quantity": "0.1",
+        "position": 4,
+        "factor": "1"
+      },
+      {
+        "id": "a143f79fef8f41cf88afd3f0c9771df6",
+        "parent_code": "PCTD",
+        "child_code": "M%SECOND",
+        "quantity": "0.1",
+        "position": 5,
+        "factor": "1"
+      }
+    ],
+    "measurements": [],
+    "bc3": {
+      "records": [
+        [
+          "V",
+          "OpenPresto pruebas propias|FIEBDC-3/2002|OpenPresto||ANSI|"
+        ],
+        [
+          "C",
+          "PCTROOT##||Ensayos propios porcentajes orden y alcance|0||0|"
+        ],
+        [
+          "C",
+          "PCTCH#||Capitulo sintetico|0||0|"
+        ],
+        [
+          "C",
+          "PCTA|ud|Ensayo PCTA|0||0|"
+        ],
+        [
+          "C",
+          "PCTB|ud|Ensayo PCTB|0||0|"
+        ],
+        [
+          "C",
+          "PCTC|ud|Ensayo PCTC|0||0|"
+        ],
+        [
+          "C",
+          "PCTD|ud|Ensayo PCTD|0||0|"
+        ],
+        [
+          "C",
+          "M01|h|Recurso M01|20.01||1|"
+        ],
+        [
+          "C",
+          "M02|h|Recurso M02|10.02||1|"
+        ],
+        [
+          "C",
+          "P01|ud|Recurso P01|100||3|"
+        ],
+        [
+          "C",
+          "M%99|%|Porcentaje propio M%99|99||0|"
+        ],
+        [
+          "C",
+          "M%ORDER|%|Porcentaje propio M%ORDER|99||0|"
+        ],
+        [
+          "C",
+          "%GEN|%|Porcentaje propio %GEN|10||0|"
+        ],
+        [
+          "C",
+          "M%FIRST|%|Porcentaje propio M%FIRST|10||0|"
+        ],
+        [
+          "C",
+          "M%SECOND|%|Porcentaje propio M%SECOND|10||0|"
+        ],
+        [
+          "D",
+          "PCTROOT##|PCTCH#\\1\\1\\|"
+        ],
+        [
+          "D",
+          "PCTCH#|PCTA\\1\\1\\PCTB\\1\\1\\PCTC\\1\\1\\PCTD\\1\\1\\|"
+        ],
+        [
+          "D",
+          "PCTA|M01\\1\\3\\M02\\1\\1\\P01\\1\\1\\M%99\\1\\0.99\\|"
+        ],
+        [
+          "D",
+          "PCTB|M01\\1\\3\\M%ORDER\\1\\0.99\\M02\\1\\1\\P01\\1\\1\\|"
+        ],
+        [
+          "D",
+          "PCTC|M01\\1\\3\\M02\\1\\1\\P01\\1\\1\\%GEN\\1\\0.1\\|"
+        ],
+        [
+          "D",
+          "PCTD|M01\\1\\3\\M02\\1\\1\\P01\\1\\1\\M%FIRST\\1\\0.1\\M%SECOND\\1\\0.1\\|"
+        ]
+      ],
+      "measurements": {},
+      "warnings": [
+        "Perfil de medición: parciales a 2 decimales HALF_UP; fórmulas por línea (+, -, *, /).",
+        "Política económica: cantidades raíz 0 y resto 3, precios 2, importes 2 decimales; ~K no se aplica.",
+        "Los precios ~C se conservan por separado: el motor puede calcular importes distintos.",
+        "Textos ~T editables; imágenes, ofertas y pliegos permanecen en registros originales.",
+        "Conceptos desconectados de la raíz principal: 0.",
+        "No guardar el Budget parcial como sustituto del BC3 original.",
+        "Perfil contrastado parcial Presto 8.8: factor separado; cantidades de raíz a 0 decimales; dimensiones cero tratadas como vacías en líneas normales BC3. No certifica compatibilidad general ni aplica ~K.",
+        "Mediciones aplicadas: 0 de 0.",
+        "Porcentajes: perfil parcial Presto 8.8; exportación parcial disponible."
+      ]
+    },
+    "calculation": {
+      "root_quantity_decimals": 0,
+      "bc3_zero_dimensions_as_blank": true
+    }
+  }
+}

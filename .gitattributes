@@ -1,0 +1,10 @@
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.bc3 -text whitespace=cr-at-eol
+*.desktop text eol=lf
+packaging/openpresto text eol=lf
+tests/reference04/*.bc3 -text whitespace=cr-at-eol
+tests/reference04/presto88/*.bc3 -text whitespace=cr-at-eol
+docs/evidencias-04/ensayos/*.bc3 -text whitespace=cr-at-eol

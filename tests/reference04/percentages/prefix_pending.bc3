@@ -1,0 +1,11 @@
+~V|OpenPresto pruebas propias|FIEBDC-3/2002|OpenPresto||ANSI|
+~C|ROOT##||Prueba propia de porcentaje|0||0|
+~C|CH#||Capitulo|0||0|
+~C|ITEM|ud|Partida sintetica|0||0|
+~C|M01|h|Recurso M01|20||1|
+~C|M02|h|Recurso M02|10||1|
+~C|P01|ud|Recurso P01|100||3|
+~C|M%10|%|Porcentaje pendiente de contraste|10||0|
+~D|ROOT##|CH#\1\1\|
+~D|CH#|ITEM\1\1\|
+~D|ITEM|M01\1\2\M02\1\1\P01\1\1\M%10\1\999\|

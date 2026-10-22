@@ -1,0 +1,23 @@
+# Treasury projection
+
+Management → Tesorería brings registered payments/receipts and outstanding due schedules into a read-only monthly view. Select a cut date, optionally include proforma forecasts, and export the selected scenario through the existing report tools.
+
+## Calculation rules
+
+- Only registered payments and receipts up to the cut date appear as registered flows. A cancelled payment is excluded from its recorded cancellation date. This describes native records, not a bank statement or an inferred bank refund.
+- Forecasts cover confirmed invoices; proformas are excluded unless explicitly selected. Existing actual payments to proformas remain registered flows regardless of this forecast filter. Proformas are not automatically offset against other invoices.
+- Accepted opening settlements reduce outstanding amounts but never become dated cash events. Unreviewed source paid states and cuts preceding a non-zero opening are flagged for review instead of being treated as zero.
+- Invoice-level settlements cover the oldest dated ordinary dues first, with undated dues last. This allocation is a projection convention, not proof of which instalment was paid.
+- Explicit retention schedules remain separate. Retentions without a schedule appear as undated amounts. Source retentions marked paid without an equivalent native record require review.
+- Missing due dates remain in a separate undated group. Overdue forecasts keep their original dates; no payment or rescheduling is invented.
+- Known forecasts and review counts remain separate. A source calendar that no longer reconciles with an edited native invoice cannot silently drive an exact projection.
+
+The engine uses current document and schedule states with a cut date. It does not reconstruct earlier versions of those states, perform bank reconciliation, convert currencies or calculate an opening bank balance. All amounts use the project's native monetary model.
+
+## Core and reports
+
+The Qt-free `treasury.snapshot` function derives a view without changing the project. Detail and monthly aggregation are independent of the desktop adapter. No new project-container version is required for viewing treasury.
+
+The `tesoreria` report uses today's cut date. A selected cut can be exported as `tesoreria:YYYY-MM-DD`; append `:+proformas` to include the optional proforma scenario. Exports use the same calculations as the panel.
+
+Validation covers partial settlement, multiple dues, retentions, cancellation dates, imported openings, missing dates, future records, proforma filtering, source-calendar mismatches, Decimal precision, read-only behavior and scenario export.

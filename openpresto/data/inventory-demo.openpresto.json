@@ -1,0 +1,84 @@
+{
+  "format": "openpresto-budget",
+  "version": 34,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 14,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 1,
+      "root_code": "ROOT",
+      "concepts": [
+        {
+          "code": "ROOT",
+          "unit": "",
+          "summary": "",
+          "nature": "capítulo",
+          "base_price": "0"
+        },
+        {
+          "code": "A",
+          "unit": "m2",
+          "summary": "Wall",
+          "nature": "partida",
+          "base_price": "22.50"
+        },
+        {
+          "code": "B",
+          "unit": "m3",
+          "summary": "Concrete",
+          "nature": "partida",
+          "base_price": "30"
+        },
+        {
+          "code": "MO01",
+          "unit": "h",
+          "summary": "Oficial de obra",
+          "nature": "mano de obra",
+          "base_price": "25"
+        },
+        {
+          "code": "MQ01",
+          "unit": "h",
+          "summary": "Excavadora",
+          "nature": "maquinaria",
+          "base_price": "80"
+        },
+        {
+          "code": "MAT01",
+          "unit": "m3",
+          "summary": "Material de ejemplo",
+          "nature": "material",
+          "base_price": "100"
+        }
+      ],
+      "relations": [
+        {
+          "id": "A",
+          "parent_code": "ROOT",
+          "child_code": "A",
+          "quantity": "12",
+          "position": 1
+        },
+        {
+          "id": "B",
+          "parent_code": "ROOT",
+          "child_code": "B",
+          "quantity": "10",
+          "position": 2
+        }
+      ],
+      "measurements": []
+    },
+    "metadata": {
+      "production_v1": "[{\"id\": \"c99da6ea137c42beaed035c3c7709657\", \"reference\": \"PO-001\", \"date\": \"2026-10-01\", \"team\": \"Equipo A\", \"note\": \"Ejemplo ficticio\", \"lines\": [{\"relation_id\": \"A\", \"quantity\": \"2.5\"}, {\"relation_id\": \"B\", \"quantity\": \"1.25\"}], \"status\": \"posted\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"b1ef18afdf1f4ec89d2229bdcc07f77e\", \"reference\": \"PO-002\", \"date\": \"2026-10-02\", \"team\": \"Equipo B\", \"note\": \"Ejemplo ficticio\", \"lines\": [{\"relation_id\": \"A\", \"quantity\": \"3\"}], \"status\": \"draft\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"1f562f12d88c432a8db4a3baf1405a7c\", \"reference\": \"PO-003\", \"date\": \"2026-10-03\", \"team\": \"Equipo A\", \"note\": \"Ejemplo ficticio\", \"lines\": [{\"relation_id\": \"A\", \"quantity\": \"1\"}], \"status\": \"cancelled\", \"cancellation_date\": \"2026-10-03\", \"cancellation_reason\": \"Parte sustituido\"}]",
+      "resource_hours_v1": "[{\"id\": \"9d6ca5427ba446deaf9582882ae6a30c\", \"reference\": \"H-001\", \"date\": \"2026-10-01\", \"team\": \"Equipo de ejemplo\", \"note\": \"Datos ficticios\", \"resource_code\": \"MO01\", \"relation_id\": \"A\", \"hours\": \"8\", \"rate\": \"25\", \"status\": \"posted\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"825ad203f73346b7b8daadf5bb4642bf\", \"reference\": \"H-002\", \"date\": \"2026-10-01\", \"team\": \"Equipo de ejemplo\", \"note\": \"Datos ficticios\", \"resource_code\": \"MQ01\", \"relation_id\": \"B\", \"hours\": \"2\", \"rate\": \"80\", \"status\": \"posted\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"7ef173b7386e4d0a8b9f07a548adaa8b\", \"reference\": \"H-003\", \"date\": \"2026-10-02\", \"team\": \"Equipo de ejemplo\", \"note\": \"Datos ficticios\", \"resource_code\": \"MO01\", \"relation_id\": null, \"hours\": \"3\", \"rate\": \"25\", \"status\": \"posted\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"7b71c059994741f9a88c412b71f979f6\", \"reference\": \"H-004\", \"date\": \"2026-10-03\", \"team\": \"Equipo de ejemplo\", \"note\": \"Datos ficticios\", \"resource_code\": \"MO01\", \"relation_id\": \"A\", \"hours\": \"8\", \"rate\": \"25\", \"status\": \"draft\", \"cancellation_date\": null, \"cancellation_reason\": \"\"}, {\"id\": \"2138ef5587ad45beb3f561305c8d4eef\", \"reference\": \"H-005\", \"date\": \"2026-10-03\", \"team\": \"Equipo de ejemplo\", \"note\": \"Datos ficticios\", \"resource_code\": \"MQ01\", \"relation_id\": \"B\", \"hours\": \"1\", \"rate\": \"80\", \"status\": \"cancelled\", \"cancellation_date\": \"2026-10-03\", \"cancellation_reason\": \"Registro sustituido\"}]",
+      "site_issues_v1": "[{\"id\": \"20883255c5b24d5cb2d54c66f78c3b87\", \"reference\": \"INC-001\", \"opened\": \"2026-10-01\", \"title\": \"Revisar fisura en encuentro\", \"responsible\": \"Equipo de ejemplo\", \"priority\": \"high\", \"category\": \"quality\", \"due\": \"2026-10-15\", \"relation_id\": \"A\", \"description\": \"Datos ficticios\", \"status\": \"open\", \"events\": [{\"date\": \"2026-10-01\", \"status\": \"open\", \"note\": \"\"}]}, {\"id\": \"0b52c2c52be64084bbc5abfdf9e20de4\", \"reference\": \"INC-002\", \"opened\": \"2026-10-01\", \"title\": \"Organizar acceso de maquinaria\", \"responsible\": \"Equipo de ejemplo\", \"priority\": \"normal\", \"category\": \"general\", \"due\": null, \"relation_id\": null, \"description\": \"Datos ficticios\", \"status\": \"in_progress\", \"events\": [{\"date\": \"2026-10-01\", \"status\": \"open\", \"note\": \"\"}, {\"date\": \"2026-10-05\", \"status\": \"in_progress\", \"note\": \"Revisión de ejemplo\"}]}, {\"id\": \"dc3ad5fcdf83412e987a018e5b1d0abd\", \"reference\": \"INC-003\", \"opened\": \"2026-10-01\", \"title\": \"Retirar obstáculo de paso\", \"responsible\": \"Equipo de ejemplo\", \"priority\": \"critical\", \"category\": \"safety\", \"due\": \"2026-10-07\", \"relation_id\": \"B\", \"description\": \"Datos ficticios\", \"status\": \"resolved\", \"events\": [{\"date\": \"2026-10-01\", \"status\": \"open\", \"note\": \"\"}, {\"date\": \"2026-10-05\", \"status\": \"resolved\", \"note\": \"Revisión de ejemplo\"}]}, {\"id\": \"749f221b157f4d97b22fc652e54cf2cd\", \"reference\": \"INC-004\", \"opened\": \"2026-10-01\", \"title\": \"Aviso duplicado\", \"responsible\": \"Equipo de ejemplo\", \"priority\": \"low\", \"category\": \"general\", \"due\": null, \"relation_id\": null, \"description\": \"Datos ficticios\", \"status\": \"cancelled\", \"events\": [{\"date\": \"2026-10-01\", \"status\": \"open\", \"note\": \"\"}, {\"date\": \"2026-10-05\", \"status\": \"cancelled\", \"note\": \"Aviso duplicado\"}]}, {\"id\": \"76543d2099b5470a83d98be4051c056c\", \"reference\": \"NC-001\", \"opened\": \"2026-10-03\", \"title\": \"Ausencia de fisuras visibles\", \"responsible\": \"Equipo de ejemplo\", \"priority\": \"high\", \"category\": \"quality\", \"due\": \"2026-10-15\", \"relation_id\": \"A\", \"description\": \"CC-002 · 1 · Fisura observada en encuentro\", \"status\": \"open\", \"events\": [{\"date\": \"2026-10-03\", \"status\": \"open\", \"note\": \"\"}]}]",
+      "quality_control_v1": "[{\"id\": \"e0eec5a840314fe5bf7e1d0e11c549b2\", \"reference\": \"CC-001\", \"date\": \"2026-10-01\", \"title\": \"Inspección visual de muro\", \"checks\": [{\"criterion\": \"Aspecto y acabado según criterio de ejemplo\", \"result\": \"pass\", \"note\": \"Comprobado\"}], \"inspector\": \"Responsable de ejemplo\", \"relation_id\": \"A\", \"note\": \"Datos ficticios\", \"status\": \"reviewed\", \"reviewed_on\": \"2026-10-02\", \"cancelled_on\": null, \"cancellation_reason\": \"\"}, {\"id\": \"27b5df223e4042c49031b902008a6dec\", \"reference\": \"CC-002\", \"date\": \"2026-10-01\", \"title\": \"Revisión de encuentro\", \"checks\": [{\"criterion\": \"Ausencia de fisuras visibles\", \"result\": \"fail\", \"note\": \"Fisura observada en encuentro\"}], \"inspector\": \"Responsable de ejemplo\", \"relation_id\": \"A\", \"note\": \"Datos ficticios\", \"status\": \"reviewed\", \"reviewed_on\": \"2026-10-02\", \"cancelled_on\": null, \"cancellation_reason\": \"\"}, {\"id\": \"6187fbb54d904e21b50141ece436456e\", \"reference\": \"CC-003\", \"date\": \"2026-10-01\", \"title\": \"Comprobación previa de hormigonado\", \"checks\": [{\"criterion\": \"Revisión previa\", \"result\": \"pending\", \"note\": \"\"}], \"inspector\": \"Responsable de ejemplo\", \"relation_id\": \"B\", \"note\": \"Datos ficticios\", \"status\": \"draft\", \"reviewed_on\": null, \"cancelled_on\": null, \"cancellation_reason\": \"\"}, {\"id\": \"bc4c66468b814be1a8e0476ae2cdeca0\", \"reference\": \"CC-004\", \"date\": \"2026-10-01\", \"title\": \"Control duplicado\", \"checks\": [{\"criterion\": \"Comprobación duplicada\", \"result\": \"pending\", \"note\": \"\"}], \"inspector\": \"Responsable de ejemplo\", \"relation_id\": null, \"note\": \"Datos ficticios\", \"status\": \"cancelled\", \"reviewed_on\": null, \"cancelled_on\": \"2026-10-02\", \"cancellation_reason\": \"Control duplicado\"}]",
+      "budget_baselines_v1": "[{\"root\": \"ROOT\", \"total\": \"500.00\", \"rows\": [{\"relation_id\": \"A\", \"parent\": \"ROOT\", \"child\": \"A\", \"summary\": \"Wall\", \"unit\": \"m2\", \"quantity\": \"10.000\", \"price\": \"20.00\", \"factor\": \"1\", \"amount\": \"200.00\"}, {\"relation_id\": \"B\", \"parent\": \"ROOT\", \"child\": \"B\", \"summary\": \"Concrete\", \"unit\": \"m3\", \"quantity\": \"10.000\", \"price\": \"30.00\", \"factor\": \"1\", \"amount\": \"300.00\"}], \"id\": \"b196b78a53fe446a9fb34bc21e4956ff\", \"reference\": \"Presupuesto inicial\", \"date\": \"2026-10-01\", \"note\": \"Referencia ficticia\"}]",
+      "quality_issue_links_v1": "[{\"inspection_id\": \"27b5df223e4042c49031b902008a6dec\", \"check_index\": 0, \"issue_id\": \"76543d2099b5470a83d98be4051c056c\"}]",
+      "management_v1": "{\"suppliers\": [{\"id\": \"demo-supplier\", \"name\": \"Proveedor de ejemplo\", \"contact\": \"\"}], \"contracts\": [], \"documents\": [{\"id\": \"demo-order\", \"kind\": \"order\", \"reference\": \"PED-001\", \"supplier_id\": \"demo-supplier\", \"date\": \"2026-10-01\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT01\", \"quantity\": \"10\", \"unit_price\": \"100\", \"source_document\": null, \"source_index\": null}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"demo-delivery\", \"kind\": \"delivery\", \"reference\": \"ALB-001\", \"supplier_id\": \"demo-supplier\", \"date\": \"2026-10-02\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT01\", \"quantity\": \"10\", \"unit_price\": \"100\", \"source_document\": \"demo-order\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"demo-invoice\", \"kind\": \"invoice\", \"reference\": \"FAC-001\", \"supplier_id\": \"demo-supplier\", \"date\": \"2026-10-03\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT01\", \"quantity\": \"10\", \"unit_price\": \"100\", \"source_document\": \"demo-delivery\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}], \"consumptions\": [{\"id\": \"c8edecfbffad4f9ca146c9122d328b74\", \"code\": \"MAT01\", \"date\": \"2026-10-04\", \"quantity\": \"4\", \"destination\": \"Ejemplo de obra\"}]}"
+    },
+    "documents": []
+  }
+}

@@ -1,0 +1,5 @@
+~V|OpenPresto pruebas sintéticas|FIEBDC-3/2002|OpenPresto||UTF-8|
+~C|ROOT##||Raíz|0||0|
+~C|ITEM|ud|Redondeo y fórmula|2||0|
+~D|ROOT|ITEM\1\99\|
+~M|ROOT\ITEM|1|2.01|\Positivo\0.005\\\\\Negativo\-0.005\\\\1\Subtotal\\\\\3\a*b+c/d\2\3\-8\2\2\Acumulado\\\\\\Final\0.005\\\\|

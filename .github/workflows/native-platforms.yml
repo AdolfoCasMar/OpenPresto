@@ -1,0 +1,39 @@
+name: Linux and macOS packages (manual, bounded)
+
+on:
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: 'Runner labels as a JSON list; omit successful targets when retrying'
+        default: '["ubuntu-22.04","macos-15-intel","macos-15"]'
+        type: string
+      recheck-tests:
+        description: 'Repeat source tests; disable only when retrying packaging of already-tested code'
+        type: boolean
+        default: true
+      release-tag:
+        description: 'Optional existing draft release to receive verified packages'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: native-platforms-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: ${{ fromJSON(inputs.platforms) }}
+    uses: ./.github/workflows/build-platform.yml
+    with:
+      runner: ${{ matrix.runner }}
+      artifact-name: OpenPresto-${{ matrix.runner }}
+      timeout-minutes: ${{ matrix.runner == 'ubuntu-22.04' && 8 || 3 }}
+      full-smoke: true
+      recheck-tests: ${{ inputs.recheck-tests }}
+      release-tag: ${{ inputs.release-tag }}

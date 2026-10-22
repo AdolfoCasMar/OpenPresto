@@ -1,0 +1,54 @@
+{
+  "format": "openpresto-budget",
+  "version": 6,
+  "root_code": "ROOT",
+  "concepts": [
+    {
+      "code": "ROOT",
+      "unit": "",
+      "summary": "Ejemplo independiente de formula documentada",
+      "nature": "",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "ITEM",
+      "unit": "m2",
+      "summary": "Promedio de dimensiones",
+      "nature": "",
+      "base_price": "2",
+      "text": ""
+    }
+  ],
+  "relations": [
+    {
+      "id": "formula-demo",
+      "parent_code": "ROOT",
+      "child_code": "ITEM",
+      "quantity": "1",
+      "position": 1,
+      "factor": "1"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "formula-line",
+      "relation_id": "formula-demo",
+      "comment": "Promedio B y C multiplicado por N y altura",
+      "n_lines": "2",
+      "length": "3",
+      "width": "5",
+      "height": "4",
+      "formula": "(B+C)/2"
+    }
+  ],
+  "calculation": {
+    "root_quantity_decimals": null,
+    "bc3_zero_dimensions_as_blank": false
+  },
+  "bc3": {
+    "records": [],
+    "measurements": {},
+    "warnings": []
+  }
+}

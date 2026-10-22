@@ -1,0 +1,8 @@
+~V|OpenPresto pruebas sintéticas|FIEBDC-3/2002|OpenPresto||UTF-8|
+~C|ROOT##||Raíz|0||0|
+~C|A#||Capítulo A|0||0|
+~C|B#||Capítulo B|0||0|
+~C|ITEM|ud|Concepto reutilizado|3||0|
+~D|ROOT|A\1\1\B\1\1\|
+~D|A|ITEM\1\2\|
+~D|B|ITEM\1\5\|

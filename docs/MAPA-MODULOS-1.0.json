@@ -1,0 +1,373 @@
+{
+  "app": {
+    "lines": 269,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtGui",
+      "PySide6.QtWidgets",
+      "__future__",
+      "bc3",
+      "pathlib"
+    ]
+  },
+  "bc3": {
+    "lines": 159,
+    "imports": [
+      "__future__",
+      "collections",
+      "dataclasses",
+      "decimal",
+      "pathlib"
+    ]
+  },
+  "bc3_aliases": {
+    "lines": 51,
+    "imports": [
+      "budget"
+    ]
+  },
+  "bc3_coefficients": {
+    "lines": 29,
+    "imports": [
+      "decimal"
+    ]
+  },
+  "bc3_exporter": {
+    "lines": 281,
+    "imports": [
+      "bc3_aliases",
+      "bc3_measurements",
+      "calculations",
+      "dataclasses",
+      "decimal",
+      "indirect_costs",
+      "pathlib",
+      "percentage_calculations",
+      "storage"
+    ]
+  },
+  "bc3_importer": {
+    "lines": 275,
+    "imports": [
+      "__future__",
+      "bc3",
+      "bc3_aliases",
+      "bc3_coefficients",
+      "bc3_measurements",
+      "budget",
+      "collections",
+      "dataclasses",
+      "decimal",
+      "indirect_costs",
+      "pathlib"
+    ]
+  },
+  "bc3_measurements": {
+    "lines": 179,
+    "imports": [
+      "__future__",
+      "dataclasses",
+      "decimal",
+      "pathlib"
+    ]
+  },
+  "budget": {
+    "lines": 272,
+    "imports": [
+      "__future__",
+      "calculations",
+      "dataclasses",
+      "decimal",
+      "modern_formulas",
+      "uuid"
+    ]
+  },
+  "calculations": {
+    "lines": 143,
+    "imports": [
+      "__future__",
+      "budget",
+      "dataclasses",
+      "decimal",
+      "indirect_costs",
+      "locked_prices",
+      "percentage_calculations"
+    ]
+  },
+  "certifications": {
+    "lines": 71,
+    "imports": [
+      "budget",
+      "calculations",
+      "collections.abc",
+      "dataclasses",
+      "decimal",
+      "types"
+    ]
+  },
+  "certification_phases": {
+    "lines": 126,
+    "imports": [
+      "budget",
+      "certifications",
+      "collections.abc",
+      "dataclasses",
+      "datetime",
+      "decimal",
+      "types"
+    ]
+  },
+  "clipboard_services": {
+    "lines": 119,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtWidgets",
+      "budget",
+      "dataclasses",
+      "storage",
+      "uuid"
+    ]
+  },
+  "editing_services": {
+    "lines": 70,
+    "imports": [
+      "bc3_measurements",
+      "budget",
+      "calculations",
+      "dataclasses",
+      "storage",
+      "uuid"
+    ]
+  },
+  "editor": {
+    "lines": 610,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtWidgets",
+      "__future__",
+      "bc3_importer",
+      "bc3_measurements",
+      "budget",
+      "calculations",
+      "dataclasses",
+      "decimal",
+      "pathlib",
+      "percentage_calculations",
+      "storage"
+    ]
+  },
+  "help_view": {
+    "lines": 41,
+    "imports": [
+      "PySide6.QtWidgets"
+    ]
+  },
+  "hierarchy_services": {
+    "lines": 47,
+    "imports": [
+      "bc3_measurements",
+      "budget",
+      "dataclasses",
+      "storage",
+      "uuid"
+    ]
+  },
+  "indirect_costs": {
+    "lines": 121,
+    "imports": [
+      "budget",
+      "calculations",
+      "decimal"
+    ]
+  },
+  "locked_prices": {
+    "lines": 42,
+    "imports": [
+      "budget",
+      "calculations",
+      "decimal",
+      "types"
+    ]
+  },
+  "mdi_workspace": {
+    "lines": 1130,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtGui",
+      "PySide6.QtWidgets",
+      "bc3_aliases",
+      "bc3_exporter",
+      "bc3_measurements",
+      "budget",
+      "calculations",
+      "certifications",
+      "clipboard_services",
+      "dataclasses",
+      "decimal",
+      "editing_services",
+      "editor",
+      "help_view",
+      "hierarchy_services",
+      "locked_prices",
+      "pathlib",
+      "percentage_calculations",
+      "phase_editor",
+      "precision_settings",
+      "price_adjustment",
+      "price_operations",
+      "project_properties",
+      "report_actions",
+      "session_services",
+      "storage",
+      "theme",
+      "workspace_settings"
+    ]
+  },
+  "measurements": {
+    "lines": 91,
+    "imports": [
+      "__future__",
+      "budget",
+      "dataclasses",
+      "decimal"
+    ]
+  },
+  "modern_formulas": {
+    "lines": 115,
+    "imports": [
+      "budget",
+      "decimal"
+    ]
+  },
+  "percentage_calculations": {
+    "lines": 124,
+    "imports": [
+      "budget",
+      "calculations",
+      "dataclasses",
+      "decimal"
+    ]
+  },
+  "phase_editor": {
+    "lines": 152,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtWidgets",
+      "budget",
+      "certification_phases",
+      "certifications"
+    ]
+  },
+  "precision_settings": {
+    "lines": 27,
+    "imports": [
+      "PySide6.QtWidgets",
+      "budget"
+    ]
+  },
+  "presto_workspace": {
+    "lines": 31,
+    "imports": [
+      "PySide6.QtWidgets",
+      "app",
+      "mdi_workspace",
+      "theme"
+    ]
+  },
+  "price_adjustment": {
+    "lines": 116,
+    "imports": [
+      "budget",
+      "calculations",
+      "dataclasses",
+      "decimal",
+      "storage"
+    ]
+  },
+  "price_operations": {
+    "lines": 62,
+    "imports": [
+      "budget",
+      "calculations",
+      "dataclasses",
+      "decimal",
+      "storage"
+    ]
+  },
+  "project_properties": {
+    "lines": 54,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtGui",
+      "PySide6.QtWidgets",
+      "pathlib"
+    ]
+  },
+  "reports": {
+    "lines": 68,
+    "imports": [
+      "calculations",
+      "html",
+      "measurements"
+    ]
+  },
+  "report_actions": {
+    "lines": 66,
+    "imports": [
+      "PySide6.QtGui",
+      "PySide6.QtPrintSupport",
+      "PySide6.QtWidgets",
+      "pathlib",
+      "reports"
+    ]
+  },
+  "session_services": {
+    "lines": 87,
+    "imports": [
+      "PySide6.QtCore",
+      "PySide6.QtWidgets",
+      "mdi_workspace",
+      "pathlib",
+      "storage",
+      "uuid"
+    ]
+  },
+  "storage": {
+    "lines": 503,
+    "imports": [
+      "__future__",
+      "bc3_aliases",
+      "bc3_importer",
+      "bc3_measurements",
+      "budget",
+      "calculations",
+      "certification_phases",
+      "certifications",
+      "decimal",
+      "indirect_costs",
+      "locked_prices",
+      "pathlib",
+      "percentage_calculations"
+    ]
+  },
+  "theme": {
+    "lines": 138,
+    "imports": []
+  },
+  "workspace_settings": {
+    "lines": 36,
+    "imports": [
+      "PySide6.QtCore"
+    ]
+  },
+  "__init__": {
+    "lines": 4,
+    "imports": []
+  },
+  "__main__": {
+    "lines": 3,
+    "imports": [
+      "presto_workspace"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "source": "own_synthetic_input",
+  "status": "observed_import_conversion",
+  "fixture_sha256": "7a24f37d804c13cfd66d2f7cff2671fa5ba781b10787b6326b625a3e709efc25",
+  "source_url": "https://www.rib-software.com/pdf/es/posibilidades-calculo-precios.pdf",
+  "source_pages": [
+    6,
+    7
+  ],
+  "input_placeholder_quantity": "999",
+  "own_mathematical_expectation": {
+    "eligible_resource_amount": "50.00",
+    "rate_percent": "10.00",
+    "percentage_amount": "5.00",
+    "item_amount": "155.00"
+  },
+  "limits": [
+    "Original mathematical expectation is not the observed import result. See separate runtime observations.",
+    "Native base 0.500 and 0.700 observed; rounding options and general BC3 conversion remain unverified.",
+    "No PDF or diagram is redistributed."
+  ],
+  "runtime_observation": "docs/evidencias-04/ensayos/porcentajes-observados.json"
+}

@@ -1,0 +1,65 @@
+{
+  "format": "openpresto-budget",
+  "version": 9,
+  "root_code": "ROOT",
+  "concepts": [
+    {
+      "code": "ROOT",
+      "unit": "",
+      "summary": "Ensayo propio de certificación a origen",
+      "nature": "",
+      "base_price": "0",
+      "text": "",
+      "measurement_decimals": null
+    },
+    {
+      "code": "CH",
+      "unit": "",
+      "summary": "Capítulo de prueba",
+      "nature": "capitulo",
+      "base_price": "0",
+      "text": "",
+      "measurement_decimals": null
+    },
+    {
+      "code": "ITEM",
+      "unit": "m2",
+      "summary": "",
+      "nature": "partida",
+      "base_price": "12.50",
+      "text": "",
+      "measurement_decimals": null
+    }
+  ],
+  "relations": [
+    {
+      "id": "chapter",
+      "parent_code": "ROOT",
+      "child_code": "CH",
+      "quantity": "1",
+      "position": 1,
+      "factor": "1"
+    },
+    {
+      "id": "cert-line",
+      "parent_code": "CH",
+      "child_code": "ITEM",
+      "quantity": "10",
+      "position": 1,
+      "factor": "1"
+    }
+  ],
+  "measurements": [],
+  "bc3": {
+    "records": [],
+    "measurements": {},
+    "warnings": []
+  },
+  "calculation": {
+    "root_quantity_decimals": null,
+    "bc3_zero_dimensions_as_blank": false
+  },
+  "certification_at_origin": {
+    "cert-line": "4"
+  }
+}

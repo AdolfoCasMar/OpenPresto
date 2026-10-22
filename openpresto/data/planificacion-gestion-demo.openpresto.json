@@ -1,0 +1,72 @@
+{
+  "format": "openpresto-budget",
+  "version": 19,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 14,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 1,
+      "root_code": "ROOT",
+      "concepts": [
+        {
+          "code": "ROOT",
+          "unit": "",
+          "summary": "",
+          "nature": "capitulo",
+          "base_price": "0"
+        },
+        {
+          "code": "CH",
+          "unit": "",
+          "summary": "",
+          "nature": "capitulo",
+          "base_price": "0"
+        },
+        {
+          "code": "ITEM",
+          "unit": "",
+          "summary": "",
+          "nature": "partida",
+          "base_price": "0"
+        },
+        {
+          "code": "MAT",
+          "unit": "",
+          "summary": "",
+          "nature": "material",
+          "base_price": "5"
+        }
+      ],
+      "relations": [
+        {
+          "id": "bc19f776d1f7479791dbebfdf2f64456",
+          "parent_code": "ROOT",
+          "child_code": "CH",
+          "quantity": "1",
+          "position": 1
+        },
+        {
+          "id": "46550c09f20e4a6c842eb681939390d5",
+          "parent_code": "CH",
+          "child_code": "ITEM",
+          "quantity": "10",
+          "position": 1
+        },
+        {
+          "id": "625b0ea5c6954720a22766ad68a42021",
+          "parent_code": "ITEM",
+          "child_code": "MAT",
+          "quantity": "2",
+          "position": 1
+        }
+      ],
+      "measurements": []
+    },
+    "metadata": {
+      "planning_v1": "{\"weekdays\": [0, 1, 2, 3, 4], \"holidays\": [\"2026-11-02\"], \"tasks\": [{\"relation_id\": \"46550c09f20e4a6c842eb681939390d5\", \"start\": \"2026-10-30\", \"end\": \"2026-11-03\", \"quantity\": \"10\", \"predecessors\": []}]}",
+      "management_v1": "{\"suppliers\": [{\"id\": \"S1\", \"name\": \"Proveedor de prueba\", \"contact\": \"\"}], \"contracts\": [{\"id\": \"C1\", \"title\": \"Material\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"10\"}], \"offers\": {\"S1\": {\"MAT\": \"6\"}}, \"award\": {\"supplier_id\": \"S1\", \"prices\": {\"MAT\": \"4\"}}}], \"documents\": [{\"id\": \"O1\", \"kind\": \"order\", \"reference\": \"O1\", \"supplier_id\": \"S1\", \"date\": \"2026-10-01\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"10\", \"unit_price\": \"4\", \"source_document\": null, \"source_index\": null}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"D1\", \"kind\": \"delivery\", \"reference\": \"D1\", \"supplier_id\": \"S1\", \"date\": \"2026-10-01\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"3\", \"unit_price\": \"4\", \"source_document\": \"O1\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"D2\", \"kind\": \"delivery\", \"reference\": \"D2\", \"supplier_id\": \"S1\", \"date\": \"2026-10-01\", \"due_date\": null, \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"5\", \"unit_price\": \"4\", \"source_document\": \"O1\", \"source_index\": 0}], \"tax_percent\": \"0\", \"retention_percent\": \"0\"}, {\"id\": \"I1\", \"kind\": \"invoice\", \"reference\": \"I1\", \"supplier_id\": \"S1\", \"date\": \"2026-10-01\", \"due_date\": \"2026-11-01\", \"status\": \"posted\", \"lines\": [{\"code\": \"MAT\", \"quantity\": \"3\", \"unit_price\": \"4\", \"source_document\": \"D1\", \"source_index\": 0}], \"tax_percent\": \"21\", \"retention_percent\": \"5\"}], \"consumptions\": [{\"id\": \"47b00ead18f44db9aa22e53c8eaae67e\", \"code\": \"MAT\", \"date\": \"2026-10-02\", \"quantity\": \"2\", \"destination\": \"Actividad ITEM\"}]}"
+    },
+    "documents": []
+  }
+}

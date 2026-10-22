@@ -1,0 +1,169 @@
+{
+  "format": "openpresto-budget",
+  "version": 5,
+  "root_code": "OVROOT##",
+  "concepts": [
+    {
+      "code": "OVROOT##",
+      "unit": "",
+      "summary": "Ensayo propio precio calculado",
+      "nature": "0",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "OVA#",
+      "unit": "",
+      "summary": "Capitulo A",
+      "nature": "0",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "OVB#",
+      "unit": "",
+      "summary": "Capitulo B",
+      "nature": "0",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "OVITEM",
+      "unit": "ud",
+      "summary": "Partida reutilizada descompuesta",
+      "nature": "0",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "OVR1",
+      "unit": "h",
+      "summary": "Recurso uno",
+      "nature": "1",
+      "base_price": "5",
+      "text": ""
+    },
+    {
+      "code": "OVR2",
+      "unit": "ud",
+      "summary": "Recurso dos",
+      "nature": "3",
+      "base_price": "4",
+      "text": ""
+    }
+  ],
+  "relations": [
+    {
+      "id": "a8b15f0cec6f46baa1c67d1e0ae80dc9",
+      "parent_code": "OVROOT##",
+      "child_code": "OVA#",
+      "quantity": "1",
+      "position": 1,
+      "factor": "1"
+    },
+    {
+      "id": "0f410ce5937b472486edeca51ad1fd5d",
+      "parent_code": "OVROOT##",
+      "child_code": "OVB#",
+      "quantity": "1",
+      "position": 2,
+      "factor": "1"
+    },
+    {
+      "id": "188cdbe6afee440184384e091e0dbded",
+      "parent_code": "OVA#",
+      "child_code": "OVITEM",
+      "quantity": "2",
+      "position": 1,
+      "factor": "1"
+    },
+    {
+      "id": "f305f005cdae4ec58fc0c44e082fc47a",
+      "parent_code": "OVB#",
+      "child_code": "OVITEM",
+      "quantity": "5",
+      "position": 1,
+      "factor": "1"
+    },
+    {
+      "id": "65bd5697f54d4db88225775965f6dea4",
+      "parent_code": "OVITEM",
+      "child_code": "OVR1",
+      "quantity": "2",
+      "position": 1,
+      "factor": "1"
+    },
+    {
+      "id": "fdb56365766343a99173e93b0e2c185c",
+      "parent_code": "OVITEM",
+      "child_code": "OVR2",
+      "quantity": "1",
+      "position": 2,
+      "factor": "1"
+    }
+  ],
+  "measurements": [],
+  "bc3": {
+    "records": [
+      [
+        "V",
+        "OpenPresto ensayos propios|FIEBDC-3/2002|OpenPresto||ANSI|"
+      ],
+      [
+        "C",
+        "OVROOT##||Ensayo propio precio calculado|0||0|"
+      ],
+      [
+        "C",
+        "OVA#||Capitulo A|0||0|"
+      ],
+      [
+        "C",
+        "OVB#||Capitulo B|0||0|"
+      ],
+      [
+        "C",
+        "OVITEM|ud|Partida reutilizada descompuesta|0||0|"
+      ],
+      [
+        "C",
+        "OVR1|h|Recurso uno|3||1|"
+      ],
+      [
+        "C",
+        "OVR2|ud|Recurso dos|4||3|"
+      ],
+      [
+        "D",
+        "OVROOT|OVA\\1\\1\\OVB\\1\\1\\|"
+      ],
+      [
+        "D",
+        "OVA|OVITEM\\1\\2\\|"
+      ],
+      [
+        "D",
+        "OVB|OVITEM\\1\\5\\|"
+      ],
+      [
+        "D",
+        "OVITEM|OVR1\\1\\2\\OVR2\\1\\1\\|"
+      ]
+    ],
+    "measurements": {},
+    "warnings": [
+      "Perfil de medición: parciales a 2 decimales HALF_UP; fórmulas por línea (+, -, *, /).",
+      "Política económica: cantidades raíz 0 y resto 3, precios 2, importes 2 decimales; ~K no se aplica.",
+      "Los precios ~C se conservan por separado: el motor puede calcular importes distintos.",
+      "Textos ~T editables; imágenes, ofertas y pliegos permanecen en registros originales.",
+      "Conceptos desconectados de la raíz principal: 0.",
+      "No guardar el Budget parcial como sustituto del BC3 original.",
+      "Perfil contrastado parcial Presto 8.8: factor separado; cantidades de raíz a 0 decimales; dimensiones cero tratadas como vacías en líneas normales BC3. No certifica compatibilidad general; solo admite la configuración ~K contrastada.",
+      "Mediciones aplicadas: 0 de 0."
+    ]
+  },
+  "calculation": {
+    "root_quantity_decimals": 0,
+    "bc3_zero_dimensions_as_blank": true
+  }
+}

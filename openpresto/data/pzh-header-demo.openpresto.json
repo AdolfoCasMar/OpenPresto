@@ -1,0 +1,50 @@
+{
+  "format": "openpresto-budget",
+  "version": 28,
+  "project": {
+    "format": "openpresto-budget",
+    "version": 14,
+    "project": {
+      "format": "openpresto-budget",
+      "version": 5,
+      "root_code": "ROOT",
+      "concepts": [
+        {
+          "code": "ROOT",
+          "unit": "",
+          "summary": "",
+          "nature": "capitulo",
+          "base_price": "77.06",
+          "text": ""
+        }
+      ],
+      "relations": [],
+      "measurements": [],
+      "calculation": {
+        "root_quantity_decimals": 0,
+        "bc3_zero_dimensions_as_blank": true
+      },
+      "bc3": {
+        "records": [],
+        "measurements": {},
+        "warnings": []
+      }
+    },
+    "metadata": {
+      "pzh_reference_only": "1",
+      "currency": "EUR",
+      "pzh_operations_rejected": "[]",
+      "pzh_operations_v1": "{\"activities\":[],\"phases\":[],\"precedences\":[],\"entities\":[{\"id\":1,\"fields\":{\"3\":\"Synthetic client\",\"32\":\"1250.5\",\"37\":\"Title\",\"38\":\"College\",\"39\":\"Registration\"},\"code\":\"CLIENT\",\"name\":\"Synthetic client\",\"contact\":\"\"}],\"offers\":[],\"documents\":[],\"supplies\":[],\"dues\":[],\"unsupported\":[]}",
+      "pzh_operations_notes": "PZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.",
+      "pzh_source_archive_v1": "{\"format\":\"pzh-source-snapshot-v1\",\"sha256\":\"ef37a61369728dbba6592f5b6ccf388805a1e1f174bdd7f94628bb70f7f3804a\",\"bytes\":2643,\"inventory\":[{\"table\":0,\"records\":1,\"data_start\":2533,\"data_end\":2565},{\"table\":1,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":2,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":3,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":4,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":5,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":6,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":7,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":8,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":9,\"records\":0,\"data_start\":2565,\"data_end\":2565},{\"table\":10,\"records\":1,\"data_start\":2565,\"data_end\":2643},{\"table\":11,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":12,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":13,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":14,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":15,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":16,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":17,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":18,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":19,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":20,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":21,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":22,\"records\":0,\"data_start\":2643,\"data_end\":2643},{\"table\":23,\"records\":0,\"data_start\":2643,\"data_end\":2643}],\"encoding\":\"zlib-base64\",\"data\":\"eNpjYMAEjEBsaGxqbgkmjICEnJWxqY0zQoxahJWjpaGFPZUNBRJmtqbmdtZUdy44DEBuprbJoDAAuZnaJoPCYDTehla8GUHjrYsG8dYBDIM2GsRbCzAMemgQb6Aw6KBBvIHCoIUG+a1nNN5G42003kYJOhIBQGyUnZxuaWxs0dnR0G5qZ21obWHuZGxsb2lpY2rqbG0oAW3YBfn7hyjAABML55ICW67rzsEObtBGn7OPp6sfTAVzcGVeSUZqSWayQnJOZmpeCYMC2JCuyQ6qIZklOakMas75OTmp6akM6kGp6ZnFJUWJJZn5eQwAoakvMg==\"}",
+      "entities_v1": "[{\"code\": \"CLIENT\", \"name\": \"Synthetic client\", \"contact\": \"\", \"address\": \"\", \"city\": \"\", \"postal_code\": \"\", \"province\": \"\", \"phone\": \"\", \"phone_alt\": \"\", \"fax\": \"\", \"email\": \"\", \"tax_id\": \"\", \"note\": \"\", \"title\": \"Title\", \"college\": \"College\", \"registration\": \"Registration\", \"id\": \"pzh:ef37a61369728dbba6592f5b6ccf388805a1e1f174bdd7f94628bb70f7f3804a:entity:1\", \"role\": 0, \"source_id\": 1, \"source_fields\": {\"3\": \"Synthetic client\", \"32\": \"1250.5\", \"37\": \"Title\", \"38\": \"College\", \"39\": \"Registration\"}}]",
+      "pzh_native_conversion_v1": "[{\"module\": \"Entidades\", \"item\": \"Directorio de entidades\", \"status\": \"available\", \"detail\": \"Copia nativa disponible; documentos como borradores, sin movimientos históricos\"}]",
+      "pzh_import_modules": "[\"certifications\", \"management\", \"planning\"]",
+      "import_format": "pzh-8x-experimental",
+      "import_source": "synthetic-reference.pzh",
+      "import_sha256": "ef37a61369728dbba6592f5b6ccf388805a1e1f174bdd7f94628bb70f7f3804a",
+      "pzh_import_notes": "PZH de referencia documental, sin relaciones económicas; no se identifica como presupuesto de obra completo.\nSe conserva el PZH original. Guarda el resultado como un proyecto OpenPresto nuevo.\nSe recuperan el concepto raíz y las entidades reconocidas. Los contenidos de referencia de otras tablas siguen conservados en el original, sin conversión semántica completa.\nVariante de cabecera PZH normalizada solo en memoria; se conservan exactamente los bytes originales.\nPZH: módulos seleccionados (planning) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nPZH: módulos seleccionados (management) disponibles en Origen PZH. Los datos de origen no equivalen a documentos nativos editables; revisar diferencias y limitaciones.\nCopias nativas editables: 1 conversiones disponibles; 0 pendientes. Documentos como borradores, sin movimientos ni cobros/pagos históricos inventados.\nEl PZH fuente completo se conserva como instantánea verificable en el proyecto JSON. Conservar los bytes originales no equivale a convertir todos sus módulos en datos nativos editables."
+    },
+    "documents": []
+  }
+}

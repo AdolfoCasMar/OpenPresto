@@ -1,0 +1,6 @@
+~V|OpenPresto|FIEBDC-3/2002|OpenPresto||ANSI|
+~C|ROOT##\OBRA##||Obra propia|0||0|
+~C|ITEM\ALT\|m|Partida propia|3.75||0|
+~D|OBRA|ALT\1\2\|
+~T|ALT|Texto propio con ñ|
+~M|OBRA\ALT|1|2|\Ensayo\2\1\1\1\|

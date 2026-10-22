@@ -1,0 +1,128 @@
+name: Build one native desktop package
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        required: true
+        type: string
+      artifact-name:
+        required: true
+        type: string
+      timeout-minutes:
+        type: number
+        default: 30
+      full-smoke:
+        type: boolean
+        default: false
+      recheck-tests:
+        type: boolean
+        default: true
+      release-tag:
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    permissions:
+      contents: write
+    runs-on: ${{ inputs.runner }}
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Qt libraries on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0 libxcb-xinerama0
+      - name: Install build dependencies
+        run: python -m pip install -r requirements-build.txt
+      - name: Check core and interface separation
+        run: python tools/audit_architecture.py
+      - name: Check delivery documentation
+        run: python tools/audit_delivery.py
+      - name: Check native workflow integration
+        if: inputs.recheck-tests
+        run: |
+          python -m unittest discover -s tests -p "test_nonconformities*.py"
+          python -m unittest discover -s tests -p "test_inventory_control*.py"
+          python -m unittest discover -s tests -p "test_budget_baselines*.py"
+          python -m unittest discover -s tests -p "test_quality_control*.py"
+          python -m unittest discover -s tests -p "test_productivity*.py"
+          python -m unittest discover -s tests -p "test_technical_documents*.py"
+          python -m unittest discover -s tests -p test_workflow_navigation.py
+          python -m unittest discover -s tests -p test_mdi_windows.py
+          python -m unittest discover -s tests -p test_entity_properties.py
+          python -m unittest discover -s tests -p test_auxiliary_panels.py
+          python -m unittest discover -s tests -p test_rich_documents.py
+          python -m unittest discover -s tests -p test_rich_text_colours.py
+          python -m unittest discover -s tests -p test_budget_views.py
+          python -m unittest discover -s tests -p test_rtf_pictures.py
+          python -m unittest discover -s tests -p test_wmf_recovery.py
+          python -m unittest discover -s tests -p test_wmf_vector.py
+          python -m unittest discover -s tests -p test_retention_settlements.py
+          python -m unittest discover -s tests -p test_history_snapshots.py
+          python -m unittest discover -s tests -p test_history_view_context.py
+          python -m unittest discover -s tests -p test_operation_results_visibility.py
+          python -m unittest discover -s tests -p test_measurement_copy_integrity.py
+          python -m unittest discover -s tests -p test_measurement_display_batch.py
+          python -m unittest discover -s tests -p test_native_quantity_batch.py
+          python -m unittest discover -s tests -p test_measurement_navigation_index.py
+          python -m unittest discover -s tests -p test_search_tree_navigation.py
+          python -m unittest discover -s tests -p test_subtotal_editing.py
+          python -m unittest discover -s tests -p test_percentage_concept_dialog.py
+          python -m unittest discover -s tests -p test_add_concept_visibility.py
+          python -m unittest discover -s tests -p test_added_lines_visibility.py
+          python -m unittest discover -s tests -p test_line_selection_editing.py
+          python -m unittest discover -s tests -p "test_budget_phase_measurements*.py"
+          python -m unittest discover -s tests -p test_phase_link_review.py
+          python -m unittest discover -s tests -p "test_retention_openings.py"
+          python -m unittest discover -s tests -p "test_issued_retention_openings.py"
+      - name: Check supported PZH profiles
+        if: inputs.recheck-tests
+        run: python -m unittest discover -s tests -p "test_pzh*.py"
+      - name: Check scoped calculations and navigation
+        if: inputs.recheck-tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          python -m unittest discover -s tests -p "test_calculation*.py"
+          python -m unittest discover -s tests -p test_workspace_refresh.py
+      - name: Build native package and check startup
+        env:
+          FULL_SMOKE: ${{ inputs.full-smoke }}
+        run: python -c "import os,subprocess,sys; subprocess.run([sys.executable,'tools/build_desktop.py'] + ([] if os.environ['FULL_SMOKE']=='true' else ['--skip-smoke-test']), check=True)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload verified package to the requested release
+        if: inputs.release-tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release-tag }}
+        run: |
+          python - <<'PY'
+          import hashlib,os,subprocess
+          from pathlib import Path
+          assets=[]
+          for check in Path('dist').glob('*.sha256'):
+              digest,name=check.read_text().strip().split(None,1)
+              package=Path('dist')/name.strip()
+              assert package.parent==Path('dist') and package.is_file()
+              assert hashlib.sha256(package.read_bytes()).hexdigest()==digest
+              assets.extend((str(package),str(check)))
+          assert assets
+          subprocess.run(['gh','release','upload',os.environ['RELEASE_TAG'],*assets,'--clobber'],check=True)
+          PY

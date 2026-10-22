@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openpresto"
+version = "0.4.0a83"
+description = "Desktop construction budgeting, quantity measurements and project cost management"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+dependencies = ["PySide6-Essentials==6.10.3"]
+
+[project.scripts]
+openpresto-cli = "openpresto.cli:main"
+
+[project.gui-scripts]
+openpresto = "openpresto.presto_workspace:main"
+
+[tool.setuptools]
+packages = ["openpresto"]
+
+[tool.setuptools.package-data]
+openpresto = ["data/*.svg", "data/*.bc3", "data/*.json"]

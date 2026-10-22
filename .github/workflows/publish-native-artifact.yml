@@ -1,0 +1,46 @@
+name: Upload an existing native package (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      run-id:
+        required: true
+        type: string
+      artifact-name:
+        required: true
+        type: string
+      release-tag:
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.run-id }}
+          name: ${{ inputs.artifact-name }}
+          path: packages
+      - name: Verify and upload the already-built archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.release-tag }}
+        run: |
+          python - <<'PY'
+          import hashlib,os,subprocess
+          from pathlib import Path
+          folder=Path('packages');checks=list(folder.glob('*.sha256'));assert len(checks)==1
+          check=checks[0];digest,name=check.read_text().strip().split(None,1)
+          package=folder/name.strip()
+          assert package.parent==folder and package.is_file()
+          assert hashlib.sha256(package.read_bytes()).hexdigest()==digest
+          subprocess.run(['gh','release','upload',os.environ['RELEASE_TAG'],str(package),str(check),'--clobber'],check=True)
+          PY

@@ -1,0 +1,19 @@
+analisis-estatico/
+.venv/
+__pycache__/
+*.pyc
+.flatpak-builder/
+build-flatpak/
+repo-flatpak/
+dist/
+build-desktop/
+*.log
+
+.continue/
+work/
+
+# Keep private validation records on this computer only.
+/docs/evidencias-04/
+*.pzh
+*.pzhx
+*.pz8

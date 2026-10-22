@@ -1,0 +1,57 @@
+{
+  "format": "openpresto-budget",
+  "version": 7,
+  "root_code": "ROOT",
+  "concepts": [
+    {
+      "code": "ROOT",
+      "unit": "",
+      "summary": "Ensayo propio de dimensión anulada",
+      "nature": "",
+      "base_price": "0",
+      "text": ""
+    },
+    {
+      "code": "ITEM",
+      "unit": "m2",
+      "summary": "",
+      "nature": "",
+      "base_price": "2",
+      "text": ""
+    }
+  ],
+  "relations": [
+    {
+      "id": "annul-demo",
+      "parent_code": "ROOT",
+      "child_code": "ITEM",
+      "quantity": "1",
+      "position": 1,
+      "factor": "1"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "154d21b9b521460589f3619db69ce0e7",
+      "relation_id": "annul-demo",
+      "comment": "",
+      "n_lines": "2",
+      "length": "3",
+      "width": "4",
+      "height": "0.2",
+      "formula": "",
+      "annulled_dimensions": [
+        "height"
+      ]
+    }
+  ],
+  "calculation": {
+    "root_quantity_decimals": null,
+    "bc3_zero_dimensions_as_blank": false
+  },
+  "bc3": {
+    "records": [],
+    "measurements": {},
+    "warnings": []
+  }
+}

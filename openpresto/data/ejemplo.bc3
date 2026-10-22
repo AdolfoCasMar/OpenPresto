@@ -1,0 +1,11 @@
+~V|OpenPresto|FIEBDC-3/2020|OpenPresto 0.1.0|Ejemplo propio de consulta|UTF-8|
+~C|OBRA##||Reforma de vivienda — ejemplo|12500.00||0|
+~C|01#||Demoliciones|850.00||0|
+~C|01.01|m2|Demolición de tabique interior|12.50||0|
+~C|02#||Albañilería|3600.00||0|
+~C|02.01|m2|Tabique de ladrillo cerámico|38.75||0|
+~C|03#||Acabados|8050.00||0|
+~C|03.01|m2|Pintura plástica en paredes|8.90||0|
+~T|01.01|Demolición manual de tabique interior. Incluye recogida y traslado de escombros al punto de acopio.|
+~T|02.01|Ejecución de partición interior con ladrillo cerámico. Ejemplo creado para probar el lector, sin validez como precio de mercado.|
+~T|03.01|Preparación de superficie y aplicación de dos manos de pintura. Los precios de este archivo son ilustrativos.|

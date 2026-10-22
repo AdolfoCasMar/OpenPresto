@@ -1,0 +1,202 @@
+{
+  "format": "openpresto-budget",
+  "version": 12,
+  "indirect_costs": {
+    "profile": "presto88_default",
+    "chapter_codes": [
+      "CIA#",
+      "CIB#"
+    ],
+    "rate": "5.00",
+    "exclude_undecomposed": false
+  },
+  "project": {
+    "format": "openpresto-budget",
+    "version": 5,
+    "root_code": "CIROOT##",
+    "concepts": [
+      {
+        "code": "CIROOT##",
+        "unit": "",
+        "summary": "Ensayo propio indirectos",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "CIA#",
+        "unit": "",
+        "summary": "Capitulo A",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "CIB#",
+        "unit": "",
+        "summary": "Capitulo B",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "CID",
+        "unit": "ud",
+        "summary": "Partida descompuesta reutilizada",
+        "nature": "0",
+        "base_price": "0",
+        "text": ""
+      },
+      {
+        "code": "CIS",
+        "unit": "ud",
+        "summary": "Partida simple",
+        "nature": "0",
+        "base_price": "7.13",
+        "text": ""
+      },
+      {
+        "code": "R01",
+        "unit": "h",
+        "summary": "Recurso uno",
+        "nature": "1",
+        "base_price": "20.01",
+        "text": ""
+      },
+      {
+        "code": "R02",
+        "unit": "ud",
+        "summary": "Recurso dos",
+        "nature": "3",
+        "base_price": "10.02",
+        "text": ""
+      }
+    ],
+    "relations": [
+      {
+        "id": "c00d94fecdc3409bba50366f38ec5286",
+        "parent_code": "CIROOT##",
+        "child_code": "CIA#",
+        "quantity": "1",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "ef2d67f1f89d4b2bb998995080c7ec85",
+        "parent_code": "CIROOT##",
+        "child_code": "CIB#",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "b3b73de9db2647ad8e303f94ac5e8a45",
+        "parent_code": "CIA#",
+        "child_code": "CID",
+        "quantity": "2",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "4de58f8d42ae4badbe6ecf6f0c500454",
+        "parent_code": "CIA#",
+        "child_code": "CIS",
+        "quantity": "3",
+        "position": 2,
+        "factor": "1"
+      },
+      {
+        "id": "724ec43c300948dca2d7f4d07a5fff6a",
+        "parent_code": "CIB#",
+        "child_code": "CID",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "e1573f9085814e5eb59bbab0daf55c87",
+        "parent_code": "CID",
+        "child_code": "R01",
+        "quantity": "3",
+        "position": 1,
+        "factor": "1"
+      },
+      {
+        "id": "cc4d82aa9fa4447b86c8d7ed4beb4502",
+        "parent_code": "CID",
+        "child_code": "R02",
+        "quantity": "1",
+        "position": 2,
+        "factor": "1"
+      }
+    ],
+    "measurements": [],
+    "bc3": {
+      "records": [
+        [
+          "V",
+          "OpenPresto ensayos propios|FIEBDC-3/2002|OpenPresto||ANSI|"
+        ],
+        [
+          "C",
+          "CIROOT##||Ensayo propio indirectos|0||0|"
+        ],
+        [
+          "C",
+          "CIA#||Capitulo A|0||0|"
+        ],
+        [
+          "C",
+          "CIB#||Capitulo B|0||0|"
+        ],
+        [
+          "C",
+          "CID|ud|Partida descompuesta reutilizada|0||0|"
+        ],
+        [
+          "C",
+          "CIS|ud|Partida simple|7.13||0|"
+        ],
+        [
+          "C",
+          "R01|h|Recurso uno|20.01||1|"
+        ],
+        [
+          "C",
+          "R02|ud|Recurso dos|10.02||3|"
+        ],
+        [
+          "D",
+          "CIROOT|CIA\\1\\1\\CIB\\1\\1\\|"
+        ],
+        [
+          "D",
+          "CIA|CID\\1\\2\\CIS\\1\\3\\|"
+        ],
+        [
+          "D",
+          "CIB|CID\\1\\3\\|"
+        ],
+        [
+          "D",
+          "CID|R01\\1\\3\\R02\\1\\1\\|"
+        ]
+      ],
+      "measurements": {},
+      "warnings": [
+        "Perfil de medición: parciales a 2 decimales HALF_UP; fórmulas por línea (+, -, *, /).",
+        "Política económica: cantidades raíz 0 y resto 3, precios 2, importes 2 decimales; ~K no se aplica.",
+        "Los precios ~C se conservan por separado: el motor puede calcular importes distintos.",
+        "Textos ~T editables; imágenes, ofertas y pliegos permanecen en registros originales.",
+        "Conceptos desconectados de la raíz principal: 0.",
+        "No guardar el Budget parcial como sustituto del BC3 original.",
+        "Perfil contrastado parcial Presto 8.8: factor separado; cantidades de raíz a 0 decimales; dimensiones cero tratadas como vacías en líneas normales BC3. No certifica compatibilidad general ni aplica ~K.",
+        "Mediciones aplicadas: 0 de 0."
+      ]
+    },
+    "calculation": {
+      "root_quantity_decimals": 0,
+      "bc3_zero_dimensions_as_blank": true
+    }
+  }
+}

@@ -1,0 +1,1981 @@
+[
+  {
+    "id": "assets.richtext.set",
+    "label": "Edit native formatted text",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "asset_id",
+        "required": true
+      },
+      {
+        "name": "runs",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.phases.line.link",
+    "label": "Link an unresolved phase line",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "line_id",
+        "required": true
+      },
+      {
+        "name": "relation_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "retention.settlement.record",
+    "label": "Record actual retention payment or receipt",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "direction",
+        "required": true
+      },
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "kind",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "retention.settlement.cancel",
+    "label": "Cancel retention settlement with dated reversal",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "settlement_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "agenda.copy_pzh",
+    "label": "Copy PZH agenda",
+    "section": "Planning",
+    "parameters": []
+  },
+  {
+    "id": "agenda.day.set",
+    "label": "Edit agenda day",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "holiday",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "agenda.holidays.add",
+    "label": "Add reviewed agenda holidays to planning",
+    "section": "Planning",
+    "parameters": []
+  },
+  {
+    "id": "assets.copy_pzh",
+    "label": "Copy PZH attachment index",
+    "section": "Management",
+    "parameters": []
+  },
+  {
+    "id": "assets.set",
+    "label": "Edit project attachment",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "asset_id",
+        "required": true
+      },
+      {
+        "name": "title",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      },
+      {
+        "name": "text",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "concept.keywords.set",
+    "label": "Edit concept search terms",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "terms",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "concept.keywords.copy_pzh",
+    "label": "Copy PZH search terms",
+    "section": "Budget",
+    "parameters": []
+  },
+  {
+    "id": "technical.document.attach_original",
+    "label": "Preserve original PZH document payload",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "issued.retention.opening.set",
+    "label": "Review customer retention opening balances",
+    "section": "Issued management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "guarantee",
+        "required": true
+      },
+      {
+        "name": "fiscal",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "issued.retention.opening.clear",
+    "label": "Remove customer retention opening review",
+    "section": "Issued management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.retention.opening.set",
+    "label": "Review retention opening balances",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "guarantee",
+        "required": true
+      },
+      {
+        "name": "fiscal",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.retention.opening.clear",
+    "label": "Remove retention opening review",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.phases.clear",
+    "label": "Remove the editable budget phase copy",
+    "section": "Budget",
+    "parameters": []
+  },
+  {
+    "id": "budget.phases.copy_pzh",
+    "label": "Copy PZH budget measurement phases",
+    "section": "Budget",
+    "parameters": []
+  },
+  {
+    "id": "budget.phases.line.edit",
+    "label": "Edit a budget phase measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "line_id",
+        "required": true
+      },
+      {
+        "name": "changes",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.phases.apply",
+    "label": "Apply a cumulative budget measurement phase",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "phase",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "technical.document.set",
+    "label": "Create or edit a technical document",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "title",
+        "required": true
+      },
+      {
+        "name": "text",
+        "required": true
+      },
+      {
+        "name": "document_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "technical.document.copy_pzh",
+    "label": "Copy an indexed PZH entity text",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "technical.document.remove",
+    "label": "Remove a technical document",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "quality.issue.create",
+    "label": "Create an issue from a failed quality check",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "inspection_id",
+        "required": true
+      },
+      {
+        "name": "check_index",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "opened",
+        "required": true
+      },
+      {
+        "name": "responsible",
+        "required": false
+      },
+      {
+        "name": "priority",
+        "required": false
+      },
+      {
+        "name": "due",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.baseline.freeze",
+    "label": "Freeze a budget baseline",
+    "section": "Budgeting",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.baseline.remove",
+    "label": "Remove a budget baseline",
+    "section": "Budgeting",
+    "parameters": [
+      {
+        "name": "baseline_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "quality.inspection.set",
+    "label": "Create or edit a quality inspection",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "title",
+        "required": true
+      },
+      {
+        "name": "checks",
+        "required": true
+      },
+      {
+        "name": "inspector",
+        "required": false
+      },
+      {
+        "name": "relation_id",
+        "required": false
+      },
+      {
+        "name": "note",
+        "required": false
+      },
+      {
+        "name": "inspection_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "quality.inspection.status",
+    "label": "Review or cancel a quality inspection",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "inspection_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "site.issue.set",
+    "label": "Create or edit a site issue",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "opened",
+        "required": true
+      },
+      {
+        "name": "title",
+        "required": true
+      },
+      {
+        "name": "responsible",
+        "required": false
+      },
+      {
+        "name": "priority",
+        "required": false
+      },
+      {
+        "name": "category",
+        "required": false
+      },
+      {
+        "name": "due",
+        "required": false
+      },
+      {
+        "name": "relation_id",
+        "required": false
+      },
+      {
+        "name": "description",
+        "required": false
+      },
+      {
+        "name": "issue_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "site.issue.status",
+    "label": "Change a site issue state",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "issue_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "resource.hours.set",
+    "label": "Create or edit resource hours",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "team",
+        "required": true
+      },
+      {
+        "name": "resource_code",
+        "required": true
+      },
+      {
+        "name": "hours",
+        "required": true
+      },
+      {
+        "name": "rate",
+        "required": true
+      },
+      {
+        "name": "relation_id",
+        "required": false
+      },
+      {
+        "name": "note",
+        "required": false
+      },
+      {
+        "name": "entry_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "resource.hours.status",
+    "label": "Confirm or cancel resource hours",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "entry_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      },
+      {
+        "name": "cancellation_date",
+        "required": false
+      },
+      {
+        "name": "reason",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "production.report.set",
+    "label": "Create or edit a production report",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "team",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      },
+      {
+        "name": "lines",
+        "required": true
+      },
+      {
+        "name": "report_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "production.report.status",
+    "label": "Confirm or cancel a production report",
+    "section": "Site management",
+    "parameters": [
+      {
+        "name": "report_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      },
+      {
+        "name": "cancellation_date",
+        "required": false
+      },
+      {
+        "name": "reason",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "entities.set",
+    "label": "Edit party contact details",
+    "section": "Management",
+    "parameters": [
+      {
+        "name": "values",
+        "required": true
+      },
+      {
+        "name": "entity_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "pzh.entities.copy",
+    "label": "Copy PZH parties into the native directory",
+    "section": "PZH import",
+    "parameters": []
+  },
+  {
+    "id": "pzh.record.copy",
+    "label": "Copy pzh record",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "source_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.record.set",
+    "label": "Create or update pzh record",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "record_id",
+        "required": true
+      },
+      {
+        "name": "state",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.native.convert",
+    "label": "Convert pzh native",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "modules",
+        "required": false
+      },
+      {
+        "name": "progress",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "issued.customer.set",
+    "label": "Create or update issued customer",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "name",
+        "required": true
+      },
+      {
+        "name": "contact",
+        "required": false
+      },
+      {
+        "name": "customer_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "issued.document.set",
+    "label": "Create or update issued document",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "kind",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "lines",
+        "required": true
+      },
+      {
+        "name": "tax_percent",
+        "required": false
+      },
+      {
+        "name": "retention_percent",
+        "required": false
+      },
+      {
+        "name": "due_date",
+        "required": false
+      },
+      {
+        "name": "status",
+        "required": false
+      },
+      {
+        "name": "document_id",
+        "required": false
+      },
+      {
+        "name": "rounding",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "issued.document.status",
+    "label": "Change status of issued document",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "issued.receipt.record",
+    "label": "Record issued receipt",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": false
+      },
+      {
+        "name": "receipt_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "issued.receipt.cancel",
+    "label": "Cancel issued receipt",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "receipt_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "issued.opening.cancel",
+    "label": "Cancel issued opening",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "issued.opening.accept",
+    "label": "Accept issued opening",
+    "section": "Sales and receipts",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.issued.copy",
+    "label": "Copy pzh issued",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "source_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "earned_value.baseline.freeze",
+    "label": "Freeze earned value baseline",
+    "section": "Earned value",
+    "parameters": [
+      {
+        "name": "explanation",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "earned_value.progress.set",
+    "label": "Create or update earned value progress",
+    "section": "Earned value",
+    "parameters": [
+      {
+        "name": "phase",
+        "required": true
+      },
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "required": false
+      },
+      {
+        "name": "actual_cost",
+        "required": false
+      },
+      {
+        "name": "explanation",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "earned_value.period.set",
+    "label": "Create or update earned value period",
+    "section": "Earned value",
+    "parameters": [
+      {
+        "name": "phase",
+        "required": true
+      },
+      {
+        "name": "rows",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "planning.phases.copy_pzh",
+    "label": "Run planning phases",
+    "section": "Planning",
+    "parameters": []
+  },
+  {
+    "id": "planning.phases.configure",
+    "label": "Configure planning phases",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "end_dates",
+        "required": true
+      },
+      {
+        "name": "approved",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "planning.phases.task.set",
+    "label": "Create or update planning phases task",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "start",
+        "required": false
+      },
+      {
+        "name": "end",
+        "required": false
+      },
+      {
+        "name": "actual_start",
+        "required": false
+      },
+      {
+        "name": "actual_end",
+        "required": false
+      },
+      {
+        "name": "objective_quantity",
+        "required": false
+      },
+      {
+        "name": "objective_price",
+        "required": false
+      },
+      {
+        "name": "planned_price",
+        "required": false
+      },
+      {
+        "name": "phases",
+        "required": false
+      },
+      {
+        "name": "predecessors",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "management.schedule.set",
+    "label": "Create or update management schedule",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "dues",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.opening.set",
+    "label": "Create or update management opening",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "paid",
+        "required": true
+      },
+      {
+        "name": "note",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.management.dues.copy",
+    "label": "Copy pzh management dues",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "source_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.management.contract.copy",
+    "label": "Copy pzh management contract",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "source_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.management.document.copy",
+    "label": "Copy pzh management document",
+    "section": "PZH import",
+    "parameters": [
+      {
+        "name": "source_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "pzh.operations.convert",
+    "label": "Convert pzh operations",
+    "section": "PZH import",
+    "parameters": []
+  },
+  {
+    "id": "budget.concept.add",
+    "label": "Add budget concept",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "data",
+        "required": true
+      },
+      {
+        "name": "parent_code",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.concept.edit",
+    "label": "Edit budget concept",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "changes",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.relation.add",
+    "label": "Add budget relation",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "data",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.relation.edit",
+    "label": "Edit budget relation",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "field",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.replace",
+    "label": "Replace budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "data",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.add",
+    "label": "Add budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "data",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.edit",
+    "label": "Edit budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "measurement_id",
+        "required": true
+      },
+      {
+        "name": "field",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.bc3.edit",
+    "label": "Edit budget measurement bc3",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "index",
+        "required": true
+      },
+      {
+        "name": "field",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.move",
+    "label": "Move budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "kind",
+        "required": true
+      },
+      {
+        "name": "identity",
+        "required": true
+      },
+      {
+        "name": "delta",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.subtotal",
+    "label": "Run budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "accumulated",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.remove",
+    "label": "Remove budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "keys",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.copy",
+    "label": "Copy budget measurement",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "source",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.text.replace",
+    "label": "Replace budget text",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "search",
+        "required": true
+      },
+      {
+        "name": "replacement",
+        "required": true
+      },
+      {
+        "name": "codes",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.children.reorder",
+    "label": "Reorder budget children",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "parent",
+        "required": true
+      },
+      {
+        "name": "key",
+        "required": false
+      },
+      {
+        "name": "reverse",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.relation.move",
+    "label": "Move budget relation",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "parent_code",
+        "required": true
+      },
+      {
+        "name": "position",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.concept.duplicate",
+    "label": "Duplicate budget concept",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "new_code",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.price.lock",
+    "label": "Lock or unlock budget price",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.price.scale",
+    "label": "Scale budget price",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "factor",
+        "required": true
+      },
+      {
+        "name": "codes",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.price.adjust",
+    "label": "Adjust budget price",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "target",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.engine.set",
+    "label": "Create or update budget engine",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "engine",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.precision.set",
+    "label": "Create or update budget precision",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "quantity_decimals",
+        "required": true
+      },
+      {
+        "name": "price_decimals",
+        "required": true
+      },
+      {
+        "name": "amount_decimals",
+        "required": true
+      },
+      {
+        "name": "rounding",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.root.precision.set",
+    "label": "Create or update budget root precision",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "value",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.indirect.set",
+    "label": "Create or update budget indirect",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "config",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.summary.set",
+    "label": "Create or update budget summary",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "overhead_percent",
+        "required": true
+      },
+      {
+        "name": "profit_percent",
+        "required": true
+      },
+      {
+        "name": "tax_percent",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.relation.replace",
+    "label": "Replace budget relation",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "data",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.concept.replace",
+    "label": "Replace budget concept",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "data",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.measurement.bc3.replace",
+    "label": "Replace budget measurement bc3",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "data",
+        "required": true
+      },
+      {
+        "name": "index",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "budget.relations.remove",
+    "label": "Remove budget relations",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "relation_ids",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.concepts.remove",
+    "label": "Remove budget concepts",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "codes",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "budget.concepts.edit",
+    "label": "Edit budget concepts",
+    "section": "Budget",
+    "parameters": [
+      {
+        "name": "codes",
+        "required": true
+      },
+      {
+        "name": "field",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "project.properties.set",
+    "label": "Create or update project properties",
+    "section": "Project",
+    "parameters": [
+      {
+        "name": "changes",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "project.document.attach",
+    "label": "Attach project document",
+    "section": "Project",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "path",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "project.document.remove",
+    "label": "Remove project document",
+    "section": "Project",
+    "parameters": [
+      {
+        "name": "index",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "planning.advanced.configure",
+    "label": "Configure planning advanced",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "start",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "planning.advanced.task.set",
+    "label": "Create or update planning advanced task",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "duration",
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "required": true
+      },
+      {
+        "name": "price",
+        "required": true
+      },
+      {
+        "name": "predecessors",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "planning.advanced.task.remove",
+    "label": "Remove planning advanced task",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.payment.record",
+    "label": "Record management payment",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "supplier_id",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "allocations",
+        "required": true
+      },
+      {
+        "name": "method",
+        "required": false
+      },
+      {
+        "name": "payment_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "management.payment.cancel",
+    "label": "Cancel management payment",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "payment_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "planning.calendar.set",
+    "label": "Create or update planning calendar",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "weekdays",
+        "required": true
+      },
+      {
+        "name": "holidays",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "planning.task.set",
+    "label": "Create or update planning task",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "start",
+        "required": true
+      },
+      {
+        "name": "end",
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "required": true
+      },
+      {
+        "name": "predecessors",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "planning.task.remove",
+    "label": "Remove planning task",
+    "section": "Planning",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.supplier.set",
+    "label": "Create or update management supplier",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "name",
+        "required": true
+      },
+      {
+        "name": "contact",
+        "required": false
+      },
+      {
+        "name": "supplier_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "management.contract.set",
+    "label": "Create or update management contract",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "title",
+        "required": true
+      },
+      {
+        "name": "lines",
+        "required": true
+      },
+      {
+        "name": "contract_id",
+        "required": false
+      },
+      {
+        "name": "rounding",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "management.offer.set",
+    "label": "Create or update management offer",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "contract_id",
+        "required": true
+      },
+      {
+        "name": "supplier_id",
+        "required": true
+      },
+      {
+        "name": "prices",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.contract.award",
+    "label": "Award management contract",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "contract_id",
+        "required": true
+      },
+      {
+        "name": "supplier_id",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.document.set",
+    "label": "Create or update management document",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "kind",
+        "required": true
+      },
+      {
+        "name": "reference",
+        "required": true
+      },
+      {
+        "name": "supplier_id",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "lines",
+        "required": true
+      },
+      {
+        "name": "tax_percent",
+        "required": false
+      },
+      {
+        "name": "retention_percent",
+        "required": false
+      },
+      {
+        "name": "due_date",
+        "required": false
+      },
+      {
+        "name": "status",
+        "required": false
+      },
+      {
+        "name": "document_id",
+        "required": false
+      },
+      {
+        "name": "rounding",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "management.document.status",
+    "label": "Change status of management document",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "document_id",
+        "required": true
+      },
+      {
+        "name": "status",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "management.consumption.add",
+    "label": "Add management consumption",
+    "section": "Procurement",
+    "parameters": [
+      {
+        "name": "code",
+        "required": true
+      },
+      {
+        "name": "date",
+        "required": true
+      },
+      {
+        "name": "quantity",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "required": true
+      },
+      {
+        "name": "consumption_id",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "certification.schedule.set",
+    "label": "Create or update certification schedule",
+    "section": "Certification",
+    "parameters": [
+      {
+        "name": "start_date",
+        "required": true
+      },
+      {
+        "name": "end_dates",
+        "required": true
+      },
+      {
+        "name": "current_phase",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "certification.price.set",
+    "label": "Create or update certification price",
+    "section": "Certification",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "certification.phase.quantity.set",
+    "label": "Create or update certification phase quantity",
+    "section": "Certification",
+    "parameters": [
+      {
+        "name": "phase",
+        "required": true
+      },
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "certification.origin.quantity.set",
+    "label": "Create or update certification origin quantity",
+    "section": "Certification",
+    "parameters": [
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "value",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "certification.lines.replace",
+    "label": "Replace certification lines",
+    "section": "Certification",
+    "parameters": [
+      {
+        "name": "phase",
+        "required": true
+      },
+      {
+        "name": "relation_id",
+        "required": true
+      },
+      {
+        "name": "rows",
+        "required": true
+      }
+    ]
+  }
+]
