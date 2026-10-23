@@ -1,12 +1,20 @@
 """Shared code-cell presentation; colours never determine economic rules."""
 from unicodedata import normalize
 from PySide6.QtGui import QColor
+from PySide6.QtWidgets import QStyledItemDelegate,QStyleOptionViewItem,QStyle,QApplication
+
+
+class NatureIconDelegate(QStyledItemDelegate):
+    """Paint the nature icon while retaining the actual text for copying/export."""
+    def paint(self,painter,option,index):
+        option=QStyleOptionViewItem(option);self.initStyleOption(option,index);option.text=''
+        (option.widget.style() if option.widget else QApplication.style()).drawControl(QStyle.ControlElement.CE_ItemViewItem,option,painter,option.widget)
 
 
 COLOURS = {
-    'obra': ('#bdeee9', '#153f43'),
-    'capitulo': ('#c9ecee', '#183e4c'),
-    'partida': ('#dfebfa', '#234568'),
+    'obra': ('#c6d0de', '#202a38'),
+    'capitulo': ('#cbd4e2', '#202a38'),
+    'partida': ('#fff0df', '#383332'),
     'mano de obra': ('#fff0b8', '#594510'),
     'maquinaria': ('#e6dcf5', '#49345e'),
     'material': ('#dcefdc', '#284b2b'),

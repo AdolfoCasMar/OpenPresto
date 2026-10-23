@@ -36,5 +36,15 @@ class TreasuryPanelTests(unittest.TestCase):
         self.assertEqual(len(headers),len(rows[0]));self.assertIn('105',report_csv(self.host.budget,'tesoreria:2020-01-31:+proformas'))
         with self.assertRaises(ValueError):report_table(self.host.budget,'tesoreria:2020-01-31:unknown')
 
+    def test_aging_filters_and_selected_export_do_not_mutate_project(self):
+        before=dumps(self.host.budget);self.panel.cut.setDate(QDate(2020,3,2));self.assertEqual(self.panel.aging.rowCount(),0)
+        self.panel.proformas.setChecked(True);self.assertEqual(self.panel.aging.rowCount(),2)
+        ordinary=next(i for i in range(2) if self.panel.aging.item(i,4).text()=='Ordinario');self.assertEqual(self.panel.aging.item(ordinary,6).text(),'105.00')
+        self.panel.tabs.setCurrentIndex(2)
+        with patch('openpresto.report_actions.export_report') as export:
+            self.panel.export();export.assert_called_with(self.host,'antiguedad:2020-03-02:resumen:+proformas')
+            self.panel.tabs.setCurrentIndex(3);self.panel.export();export.assert_called_with(self.host,'antiguedad:2020-03-02:detalle:+proformas')
+        self.assertEqual(dumps(self.host.budget),before);self.assertEqual(self.host._undo,[])
+
 
 if __name__=='__main__':unittest.main()

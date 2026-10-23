@@ -12,7 +12,7 @@ def working_directory():
 def apply(host):
     settings = QSettings()
     font = host.font()
-    font.setPointSize(max(8, min(24, settings.value('appearance/font_size', 10, type=int))))
+    font.setPointSize(max(8, min(24, settings.value('appearance/font_size', 9, type=int))))
     host.setFont(font)
     if hasattr(host, '_recovery_timer'):
         minutes = max(1, min(60, settings.value('recovery/minutes', 2, type=int)))
@@ -30,7 +30,7 @@ def configure(host):
     layout.addRow('Recuperación automática (minutos)',interval)
     size = QSpinBox()
     size.setRange(8,24)
-    size.setValue(settings.value('appearance/font_size', 10, type=int))
+    size.setValue(settings.value('appearance/font_size', 9, type=int))
     layout.addRow('Tamaño del texto',size)
     directory = QLineEdit(working_directory())
     layout.addRow('Carpeta de trabajo', directory)

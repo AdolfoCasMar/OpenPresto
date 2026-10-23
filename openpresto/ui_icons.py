@@ -5,6 +5,22 @@ from PySide6.QtCore import Qt
 from PySide6.QtSvg import QSvgRenderer
 
 PATHS = {
+ 'budget': '<rect x="7" y="2" width="14" height="20" fill="#697b92" stroke="none"/><path d="M11 6h6M11 11h6M11 16h6" stroke="white"/><text x="1" y="17" fill="#8094ae" stroke="none" font-size="13">€</text>',
+ 'concepts': '<rect x="5" y="2" width="15" height="20" fill="#66717e" stroke="none"/><path d="M8 6h2m4 0h3M8 11h2m4 0h3M8 16h2m4 0h3" stroke="white"/>',
+ 'parties': '<circle cx="6" cy="12" r="3" fill="#8498b3" stroke="none"/><path d="M1 21v-3a5 5 0 0 1 10 0v3" fill="#8498b3" stroke="none"/><rect x="13" y="2" width="8" height="19" fill="#647080" stroke="none"/><path d="M15 6h4m-4 5h4m-4 5h4" stroke="white"/>',
+ 'gantt': '<path d="M3 2v19h19M5 6h10M9 11h11M13 16h8"/><path d="M5 6h10M9 11h11M13 16h8" stroke="#8399b6" stroke-width="4"/>',
+ 'precedence': '<rect x="2" y="2" width="8" height="5" fill="#879ab4" stroke="none"/><rect x="14" y="17" width="8" height="5" fill="#879ab4" stroke="none"/><path d="M6 8v5h12v3m-3-3 3 3 3-3"/>',
+ 'resources': '<path d="M3 14a9 9 0 0 1 18 0M2 14h20M10 13V3h4v10" fill="#efda45" stroke="#a89d53"/><path d="M4 18h16"/>',
+ 'phases': '<rect x="3" y="5" width="18" height="17"/><path d="M3 10h18M8 2v6M16 2v6"/><text x="6" y="20" fill="#699371" stroke="none" font-size="10">31</text>',
+ 'agenda': '<rect x="3" y="3" width="18" height="19"/><path d="M3 8h18M7 12h3m4 0h3m-10 5h3m4 0h3"/><path d="M3 3h18v5H3" fill="#8498b3" stroke="none"/>',
+ 'attachments': '<path d="M8 17V6a4 4 0 0 1 8 0v12a6 6 0 0 1-12 0V8m8-2v11a2 2 0 0 1-4 0" stroke="#555e69"/>',
+ 'contract': '<path d="M5 2h12l4 4v16H5z"/><path d="M9 6h5M9 10h8M9 14h8"/><circle cx="6" cy="18" r="5" fill="#c99743" stroke="none"/><path d="m3 18 2 2 4-5" stroke="white"/>',
+ 'offer': '<path d="M4 2h12l4 4v16H4z"/><circle cx="15" cy="17" r="6" fill="#8b73a7" stroke="none"/><text x="11" y="21" fill="white" stroke="none" font-size="12">€</text>',
+ 'orders': '<path d="M4 2h12l4 4v16H4z"/><circle cx="15" cy="17" r="6" fill="#8870a6" stroke="none"/><text x="11" y="21" fill="white" stroke="none" font-size="11">P</text>',
+ 'deliveries': '<path d="M4 2h12l4 4v16H4z"/><circle cx="15" cy="17" r="6" fill="#7d96ad" stroke="none"/><text x="11" y="21" fill="white" stroke="none" font-size="11">E</text>',
+ 'invoices': '<path d="M4 2h12l4 4v16H4z"/><circle cx="15" cy="17" r="6" fill="#6a9b76" stroke="none"/><text x="12" y="21" fill="white" stroke="none" font-size="11">F</text>',
+ 'supplies': '<path d="M3 2h18v20H3z" fill="#d9aa4e" stroke="none"/><path d="M7 6h3m4 0h3M7 11h3m4 0h3M7 16h3m4 0h3" stroke="white"/>',
+ 'dues': '<path d="M5 2v20M1 6h8M1 11h8M1 16h8"/><ellipse cx="17" cy="6" rx="4" ry="3" fill="#dfad51" stroke="none"/><path d="M13 6v13a4 3 0 0 0 8 0V6M13 11a4 3 0 0 0 8 0M13 15a4 3 0 0 0 8 0" stroke="#c18c34"/>',
  'chapters': '<path d="M4 4h16v4H4zM4 10h16v4H4zM4 16h16v4H4z"/>',
  'chapter-items': '<path d="M3 3h18v5H3zM5 8v12M5 13h5M5 19h5M10 11h11v4H10zM10 17h11v4H10z"/>',
  'work': '<path d="M3 4h18v16H3zM3 9h18M3 14h18M9 4v5M15 9v5M9 14v6"/>',

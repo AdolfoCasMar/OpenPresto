@@ -19,8 +19,8 @@ def _snapshot(budget,as_of,include_proformas=False):
     from .issued_retention_openings import opening_balances as issued_openings
     issued_retention_balances=issued_openings(budget,as_of)
     events=[];purchase_paid={};sale_paid={}
-    def add(direction,category,day,doc,party,amount,detail=''):
-        events.append(dict(direction=direction,category=category,date=day,document_id=doc['id'],reference=doc['reference'],party=party,amount=amount,detail=detail,overdue=bool(category=='forecast' and day and day<as_of)))
+    def add(direction,category,day,doc,party,amount,detail='',obligation='normal'):
+        events.append(dict(direction=direction,category=category,date=day,document_id=doc['id'],reference=doc['reference'],party=party,party_id=doc['supplier_id'] if direction=='out' else doc['customer_id'],document_kind=doc['kind'],obligation=obligation,amount=amount,detail=detail,overdue=bool(category=='forecast' and day and day<as_of)))
     purchase_docs={r['id']:r for r in purchases['documents']}
     supplier_names={r['id']:r['name'] for r in purchases['suppliers']}
     sale_docs={r['id']:r for r in sales['documents']}
@@ -31,7 +31,7 @@ def _snapshot(budget,as_of,include_proformas=False):
         balances=retention_balances if direction=='out' else issued_retention_balances
         paid=balances.setdefault(doc['id'],{'guarantee':Decimal(0),'fiscal':Decimal(0)})
         if paid is not None:paid[entry['kind']]+=entry['value']
-        add(direction,'actual',entry['event_date'],doc,party,entry['value'],('Anulación de retención · ' if entry['reversal'] else 'Liquidación de retención · ')+entry['reference'])
+        add(direction,'actual',entry['event_date'],doc,party,entry['value'],('Anulación de retención · ' if entry['reversal'] else 'Liquidación de retención · ')+entry['reference'],obligation='retention')
     for payment in payments:
         if payment['date']>as_of or (payment['status']=='cancelled' and payment['cancellation_date']<=as_of):continue
         for allocation in payment['allocations']:
@@ -58,23 +58,23 @@ def _snapshot(budget,as_of,include_proformas=False):
         elif net>settled:
             add(direction,'forecast',doc['due_date'],doc,party,net-settled,'Vencimiento pendiente · '+{'invoice':'Factura','proforma':'Proforma'}[doc['kind']])
         if retention_issue:
-            add(direction,'review',None,doc,party,None,'Revisar apertura de retenciones o corte anterior a su seguimiento')
+            add(direction,'review',None,doc,party,None,'Revisar apertura de retenciones o corte anterior a su seguimiento',obligation='retention')
             return
         retention_paid=dict(retention_paid or {'guarantee':Decimal(0),'fiscal':Decimal(0)})
         scheduled_retention=sum((Decimal(d['amount']) for d in dues if d['kind']!='normal'),Decimal(0))
         if scheduled_retention>retention:
-            add(direction,'review',None,doc,party,None,'Las retenciones de origen no concilian con el documento nativo')
+            add(direction,'review',None,doc,party,None,'Las retenciones de origen no concilian con el documento nativo',obligation='retention')
             return
         if retention>scheduled_retention:
-            add(direction,'forecast',None,doc,party,retention-scheduled_retention,'Retención pendiente de programar')
+            add(direction,'forecast',None,doc,party,retention-scheduled_retention,'Retención pendiente de programar',obligation='retention')
         for due in sorted(dues,key=lambda r:(r['date'] or '9999-12-31',r['id'])):
             if due['kind']=='normal':continue
             amount=Decimal(due['amount'])
             covered=min(amount,retention_paid[due['kind']]);retention_paid[due['kind']]-=covered;amount-=covered
             if amount<=0:continue
             if due.get('paid_in_source',False):
-                add(direction,'review',due['date'],doc,party,None,'Retención liquidada en origen; revisar su estado nativo')
-            else:add(direction,'forecast',due['date'],doc,party,amount,'Retención prevista · '+{'guarantee':'Garantía','fiscal':'Fiscal'}[due['kind']])
+                add(direction,'review',due['date'],doc,party,None,'Retención liquidada en origen; revisar su estado nativo',obligation='retention')
+            else:add(direction,'forecast',due['date'],doc,party,amount,'Retención prevista · '+{'guarantee':'Garantía','fiscal':'Fiscal'}[due['kind']],obligation='retention')
     for doc in purchases['documents']:
         if doc['status']!='posted' or doc['date']>as_of or doc['kind'] not in ('invoice','proforma') or (doc['kind']=='proforma' and not include_proformas):continue
         record=schedules.get(doc['id']);settled=purchase_paid.get(doc['id'],Decimal(0));issue='';dues=[]

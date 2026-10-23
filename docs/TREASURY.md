@@ -16,6 +16,31 @@ The engine uses current document and schedule states with a cut date. It does no
 
 ## Core and reports
 
+### Aging of outstanding balances
+
+Open **Gestión → Tesorería → Antigüedad de saldos** for known outstanding
+amounts grouped by party ID, circuit, document type and ordinary/retention
+balance. Customer and supplier balances are never netted. Separate parties
+with the same display name remain distinct, and optional proformas are not
+merged with invoices.
+
+Buckets are not yet overdue (including dues on the cutoff date), 1–30, 31–60,
+61–90 and more than 90 days overdue. Undated amounts have their own bucket;
+no due date is inferred from an invoice date. The detail tab shows each
+remaining due after the treasury engine's oldest-due settlement allocation.
+Registered cash flows do not appear again as outstanding debt. Ordinary
+settlements do not clear retention balances.
+
+Unresolved source balances appear as review items with a blank amount, not
+as zero debt. Every total is a **known** amount and may be incomplete when
+review items exist. These views use the current native document states at a
+cutoff; they are not an immutable historical receivables ledger or bank balance.
+
+Export the active aging tab as CSV, HTML or PDF. Report selectors are
+`antiguedad:YYYY-MM-DD:resumen` and `antiguedad:YYYY-MM-DD:detalle`, with an
+optional `:+proformas` suffix. The `antiguedad` default uses today's cutoff
+and excludes proformas.
+
 The Qt-free `treasury.snapshot` function derives a view without changing the project. Detail and monthly aggregation are independent of the desktop adapter. No new project-container version is required for viewing treasury.
 
 The `tesoreria` report uses today's cut date. A selected cut can be exported as `tesoreria:YYYY-MM-DD`; append `:+proformas` to include the optional proforma scenario. Exports use the same calculations as the panel.

@@ -29,18 +29,18 @@ def number(value, label):
     return result
 
 
-def resource(budget, code):
-    if code not in budget.concepts or special_price_kind(code) or any(r.parent_code==code for r in budget.relations):
+def resource(budget, code, *, parents=None):
+    if code not in budget.concepts or special_price_kind(code) or (code in parents if parents is not None else any(r.parent_code==code for r in budget.relations)):
         raise BudgetError('El suministro debe ser un concepto básico existente: '+str(code))
 
 
-def purchase_resource(budget, line):
+def purchase_resource(budget, line, *, parents=None):
     """A composed work item can be procured as a non-stock service only."""
     stock=line.get('stock',True)
     if type(stock) is not bool:raise BudgetError('Indicador de existencias inválido')
     code=line['code']
     if stock:
-        resource(budget,code);return
+        resource(budget,code,parents=parents);return
     if code not in budget.concepts or special_price_kind(code) or code==budget.root_code:
         raise BudgetError('Trabajo contratado inexistente o especial')
     concept=budget.concepts[code]
@@ -58,7 +58,14 @@ def indexed(rows):
 
 
 def validate(budget):
+    return validate_with_ledger(budget)[0]
+
+
+def validate_with_ledger(budget):
+    """Return validated data and its ledger from one read-only evaluation."""
     data = state(budget)
+    parents = ({relation.parent_code for relation in budget.relations}
+               if data['contracts'] or data['documents'] or data['consumptions'] else set())
     suppliers,contracts,documents,consumptions = [indexed(data[key]) for key in ('suppliers','contracts','documents','consumptions')]
     for row in suppliers.values():
         if set(row) != {'id','name','contact'} or not isinstance(row['name'],str) or not row['name'].strip() or not isinstance(row['contact'],str):
@@ -70,7 +77,7 @@ def validate(budget):
         for line in row['lines']:
             if not isinstance(line,dict) or set(line) not in ({'code','quantity'},{'code','quantity','stock'}) or line['code'] in seen:
                 raise BudgetError('Suministro de contrato inválido o repetido')
-            purchase_resource(budget,line);number(line['quantity'],'Cantidad contratada');seen.add(line['code'])
+            purchase_resource(budget,line,parents=parents);number(line['quantity'],'Cantidad contratada');seen.add(line['code'])
         for supplier,prices in row['offers'].items():
             if supplier not in suppliers or not isinstance(prices,dict) or set(prices)-seen:
                 raise BudgetError('Oferta sin proveedor o suministro válido')
@@ -102,7 +109,7 @@ def validate(budget):
         for line in row['lines']:
             if not isinstance(line,dict) or set(line) not in ({'code','quantity','unit_price','source_document','source_index'},{'code','quantity','unit_price','source_document','source_index','stock'}):
                 raise BudgetError('Línea documental inválida')
-            purchase_resource(budget,line);number(line['unit_price'],'Precio documental')
+            purchase_resource(budget,line,parents=parents);number(line['unit_price'],'Precio documental')
             if line['quantity'] is not None:number(line['quantity'],'Cantidad documental')
             source_id,index = line['source_document'],line['source_index']
             if source_id is None:
@@ -127,9 +134,8 @@ def validate(budget):
     for row in consumptions.values():
         if set(row) != {'id','code','date','quantity','destination'} or not isinstance(row['destination'],str) or not row['destination'].strip():
             raise BudgetError('Consumo inválido')
-        resource(budget,row['code']);iso(row['date']);number(row['quantity'],'Cantidad consumida')
-    ledger(budget,data)
-    return data
+        resource(budget,row['code'],parents=parents);iso(row['date']);number(row['quantity'],'Cantidad consumida')
+    return data, ledger(budget,data)
 
 
 def write(budget,data):

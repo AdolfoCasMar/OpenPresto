@@ -1,7 +1,7 @@
 """Office-style compact ribbon backed by existing commands and views."""
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtWidgets import (QToolBar, QWidget, QVBoxLayout, QHBoxLayout,
-    QToolButton, QLabel, QScrollArea, QFrame, QTabWidget)
+    QToolButton, QLabel, QScrollArea, QFrame, QTabWidget, QMenu)
 from .ui_icons import icon
 
 
@@ -11,11 +11,11 @@ class ReferenceRibbon(QToolBar):
         self.host = host
         self.setObjectName('cinta-vistas'); self.setMovable(False)
         self.pages = QTabWidget(); self.pages.setDocumentMode(True)
-        self.pages.setFixedHeight(121)
+        self.pages.setFixedHeight(120);self.pages.setObjectName('cinta-2026');self.project_groups=[];self.buttons={}
         # Entries: label, original icon, command key or panel[:tab index].
         definitions = (
             ('Inicio', (
-                ('Editar', (('Pegar','copy','Pegar'), ('Copiar','copy','Copiar'), ('Eliminar','delete','Eliminar'))),
+                ('Editar', (('Pegar','copy','Pegar'), ('Eliminar','delete','Eliminar'), ('Copiar','copy','Copiar'))),
                 ('Deshacer', (('Deshacer','undo','Deshacer'), ('Rehacer','redo','Rehacer'))),
                 ('Añadir', (('Concepto','add','Añadir concepto…'), ('Relación','link','Insertar relación…'), ('Medición','measure','Introducir medición…'))),
                 ('Localizar', (('Buscar','search','Buscar'),)),
@@ -24,12 +24,11 @@ class ReferenceRibbon(QToolBar):
             )),
             ('Ver', (
                 ('Obra', (('Propiedades','settings','Propiedades obra'),)),
-                ('Presupuesto', (('Precios','calculate','precios'), ('Conceptos','work','conceptos'), ('Árbol','tree','arbol'), ('Capítulos','chapters','capitulos'), ('Capítulos y partidas','chapter-items','capitulos-partidas'), ('Relaciones','link','relaciones'))),
-                ('Gestión', (('Entidades','tree','gestion:10'),)),
-                ('Planificación', (('Fechas','calendar','planificacion:0'), ('Diagrama','calendar','planificacion:3'), ('Precedencias','link','planificacion:4'), ('Recursos','tree','planificacion:2'), ('Fases e importes','calculate','planificacion:6'), ('Valor ganado','calculate','planificacion:7'))),
-                ('Listas', (('Mediciones','measure','mediciones'), ('Texto','text','texto'))),
-                ('Certificación', (('Por fases','calendar','certificacion-fases'), ('A origen','calculate','certificacion'))),
-                ('Documentos', (('Contratos','open','gestion:1'), ('Ofertas','calculate','gestion:2'), ('Documentos','copy','gestion:3'), ('Suministros','tree','gestion:4'), ('Vencimientos','calendar','gestion:7'), ('Emitidos','copy','gestion:9'))),
+                ('Presupuesto', (('Árbol','tree','budget:arbol'), ('Presupuesto','budget','budget:precios'), ('Conceptos','concepts','conceptos'), ('Capítulos','chapters','budget:capitulos'), ('Capítulos y partidas','chapter-items','budget:capitulos-partidas'))),
+                ('Gestión', (('Entidades','parties','gestion:entities'),)),
+                ('Planificación', (('Agenda','agenda','planificacion:agenda'),('Fechas','calendar','planificacion:0'), ('Diagrama de barras','gantt','planificacion:3'), ('Precedencias','precedence','planificacion:4'), ('Recursos','resources','planificacion:2'), ('Fechas e importes','phases','planificacion:6'))),
+                ('Listas', (('Archivos','attachments','gestion:technical_documents:assets'),('Relaciones','link','relaciones'),('Mediciones','measure','mediciones'), ('Texto','text','texto'),('Certificaciones','calendar','certificacion-fases'))),
+                ('Documentos', (('Contratos','contract','gestion:1'), ('Ofertas','offer','gestion:2'), ('Pedidos','orders','purchase:order'), ('Entregas','deliveries','purchase:delivery'), ('Partes de obra','phases','gestion:production'),('Facturas','invoices','purchase:invoice'),('Suministros','supplies','gestion:4'), ('Vencimientos','dues','gestion:7'))),
                 ('Mensajes', (('Avisos','help','avisos'),)),
             )),
             ('Herramientas', (
@@ -39,7 +38,7 @@ class ReferenceRibbon(QToolBar):
             ('Seguimiento', (
                 ('Ejecución', (('Partes de obra','measure','gestion:production'),('Horas y equipos','calendar','gestion:resource_hours'),('Rendimientos','calculate','gestion:productivity'))),
                 ('Calidad', (('Controles','calculate','gestion:quality_control'),('No conformidades','link','gestion:nonconformities'),('Incidencias','text','gestion:site_issues'),('Documentación','text','gestion:technical_documents'))),
-                ('Control económico', (('Líneas base','copy','gestion:budget_baselines'),('Mediciones por fases','measure','gestion:budget_phase_measurements'),('Costes','calculate','gestion:cost_control'),('Inventario','tree','gestion:inventory_control'),('Tesorería','calendar','gestion:treasury'),('Retenciones','calendar','gestion:retention_openings'),('Compras','open','gestion:procurement_tracking'))),
+                ('Control económico', (('Líneas base','copy','gestion:budget_baselines'),('Mediciones por fases','measure','gestion:budget_phase_measurements'),('Costes','calculate','gestion:cost_control'),('Inventario','tree','gestion:inventory_control'),('Tesorería','calendar','gestion:treasury'),('Retenciones','calendar','gestion:retention_openings'),('Compras','open','gestion:procurement_tracking'),('Emitidos','invoices','gestion:9'),('Valor ganado','calculate','planificacion:7'))),
             )),
         )
         for title, groups in definitions:
@@ -47,7 +46,8 @@ class ReferenceRibbon(QToolBar):
             scroll.setFrameShape(QFrame.Shape.NoFrame)
             scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
             body = QWidget(); row = QHBoxLayout(body)
-            row.setContentsMargins(3, 0, 3, 0); row.setSpacing(3)
+            row.setContentsMargins(3, 0, 3, 0); row.setSpacing(0)
+            self.project_groups.append(body)
             for group_title, entries in groups:
                 group = QWidget(); column = QVBoxLayout(group)
                 column.setContentsMargins(3, 0, 3, 0); column.setSpacing(0)
@@ -55,7 +55,7 @@ class ReferenceRibbon(QToolBar):
                 for label, symbol, key in entries:
                     button = QToolButton(); button.setIconSize(QSize(22,22))
                     button.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
-                    button.setMinimumHeight(54)
+                    button.setFixedHeight(65);button.setObjectName('ribbon-'+key);button.setAccessibleName(label)
                     if key in host.commands:
                         action = host.commands[key][0]
                         button.setText(label); button.setIcon(icon(symbol))
@@ -65,7 +65,13 @@ class ReferenceRibbon(QToolBar):
                     else:
                         button.setText(label); button.setIcon(icon(symbol))
                         button.clicked.connect(lambda checked=False, key=key:self.show_view(key))
-                    button.setToolTip(label); buttons.addWidget(button)
+                    words=label.split();lines=['']
+                    for word in words:
+                        if lines[-1] and len(lines[-1]+' '+word)>12:lines.append(word)
+                        else:lines[-1]=(lines[-1]+' '+word).strip()
+                    button.setText('\n'.join(lines));button.setFixedWidth(max(44,min(82,max(button.fontMetrics().horizontalAdvance(line) for line in lines)+10)))
+                    button.setToolTip(label);buttons.addWidget(button);self.buttons[key]=button
+                    if key.startswith('budget:') or key=='conceptos':button.setCheckable(True)
                 column.addLayout(buttons)
                 caption = QLabel(group_title); caption.setAlignment(Qt.AlignmentFlag.AlignCenter)
                 caption.setStyleSheet('color: #596575; font-size: 10px;')
@@ -74,9 +80,35 @@ class ReferenceRibbon(QToolBar):
                 divider.setStyleSheet('color: #c9cdd3;'); row.addWidget(divider)
             row.addStretch(); scroll.setWidget(body); self.pages.addTab(scroll,title)
         self.pages.setCurrentIndex(1)
+        file=QToolButton();file.setText('Archivo');file.setMenu(host.menus['Archivo']);file.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup);self.pages.setCornerWidget(file,Qt.Corner.TopLeftCorner)
+        menus=QWidget();menu_row=QHBoxLayout(menus);menu_row.setContentsMargins(0,0,3,0);menu_row.setSpacing(1)
+        for label,name in (('Menús',None),('Informes','Informes'),('Ventanas','Ventana'),('Ayuda','?')):
+            button=QToolButton();button.setText(label);button.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
+            if name:button.setMenu(host.menus[name])
+            else:
+                more=QMenu(button)
+                for menu_name,menu in host.menus.items():
+                    if menu_name not in ('Archivo','Informes','Ventana','?'):more.addMenu(menu)
+                button.setMenu(more)
+            menu_row.addWidget(button)
+        self.pages.setCornerWidget(menus,Qt.Corner.TopRightCorner)
         self.addWidget(self.pages)
 
+    def set_project_open(self,opened):
+        for body in self.project_groups:body.setEnabled(opened)
+        self.sync_views()
+
+    def sync_views(self):
+        for key,button in self.buttons.items():
+            if key.startswith('budget:'):button.setChecked(self.host.project_open and self.host.section_ui.active==0 and key.split(':')[1]==self.host.budget_view.currentData())
+            elif key=='conceptos':button.setChecked('conceptos' in self.host.windows and self.host.windows['conceptos'].isVisible())
+
     def show_view(self, target):
+        if target.startswith('budget:'):
+            self.host.section_ui.tabs.setCurrentIndex(0);self.host.set_budget_view(target.split(':')[1]);self.host.show_panel('precios');return
+        if target.startswith('purchase:'):
+            self.show_view('gestion:3');self.host.management_panel.set_document_filter(target.split(':')[1]);return
+        parts=target.split(':')
         key, _, tab = target.partition(':')
         area = {'planificacion':2, 'gestion':3, 'informes':4, 'certificacion-fases':1, 'certificacion':1}.get(key,0)
         self.host.section_ui.tabs.setCurrentIndex(area)
@@ -84,5 +116,7 @@ class ReferenceRibbon(QToolBar):
         if area: self.host.windows[key].showMaximized()
         if tab:
             panel=self.host.panels[key][1]
+            if len(parts)>2:
+                panel.tabs.setCurrentWidget(getattr(panel,parts[1]));child=getattr(panel,parts[1]);child.tabs.setCurrentWidget(getattr(child,parts[2]));return
             if tab.isdecimal():panel.tabs.setCurrentIndex(int(tab))
             else:panel.tabs.setCurrentWidget(getattr(panel,tab))

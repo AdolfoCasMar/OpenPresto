@@ -26,8 +26,9 @@ class LockedPriceCalculator(BudgetCalculator):
                 raise BudgetError('Precio bloqueado: Decimal finito no negativo')
         # Check the ordinary graph, including data hidden behind a lock.
         direct = BudgetCalculator(budget)
-        for code in budget.concepts:
-            direct.price(code)
+        with direct.batch():
+            for code in budget.concepts:
+                direct.price(code)
         self.locked_prices = MappingProxyType(dict(locked_prices))
 
     def _price(self, code, visiting):

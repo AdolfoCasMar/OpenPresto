@@ -6,6 +6,7 @@ El modelo fuente (`Budget`) nunca se modifica.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass
 from decimal import Decimal, ROUND_HALF_UP, ROUND_HALF_EVEN, ROUND_DOWN
 
@@ -94,6 +95,21 @@ class BudgetCalculator:
         if not isinstance(self.policy, CalculationPolicy):
             raise TypeError("policy debe ser CalculationPolicy")
 
+    @contextmanager
+    def batch(self):
+        """Reuse graph lookups and prices only within a read-only operation."""
+        if getattr(self, '_plain_batch', None) is not None:
+            yield self
+            return
+        children = {}
+        for relation in self.budget.relations:
+            children.setdefault(relation.parent_code, []).append(relation)
+        self._plain_batch = (children, {})
+        try:
+            yield self
+        finally:
+            self._plain_batch = None
+
     def quantity(self, relation_id: str) -> Decimal:
         relation = self.budget._relation(relation_id)
         value = self._raw_quantity(relation_id)
@@ -114,16 +130,23 @@ class BudgetCalculator:
         require_plain_price_code(code)
         if code in visiting:
             raise BudgetError("Ciclo detectado durante el cálculo")
-        children = [r for r in self.budget.relations if r.parent_code == code]
+        batch = getattr(self, '_plain_batch', None)
+        if batch is not None and code in batch[1]:
+            return batch[1][code]
+        children = batch[0].get(code, ()) if batch is not None else [r for r in self.budget.relations if r.parent_code == code]
         if not children:
-            return self.policy.price(self.budget.concepts[code].base_price)
+            result = self.policy.price(self.budget.concepts[code].base_price)
+            if batch is not None:batch[1][code] = result
+            return result
         visiting.add(code)
         try:
             parts = [
                 self.policy.amount(r.factor * self.quantity(r.id) * self._price(r.child_code, visiting))
                 for r in children
             ]
-            return self.policy.price(sum(parts, Decimal("0")))
+            result = self.policy.price(sum(parts, Decimal("0")))
+            if batch is not None:batch[1][code] = result
+            return result
         finally:
             visiting.remove(code)
 

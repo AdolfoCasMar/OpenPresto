@@ -61,5 +61,28 @@ class BudgetViewTests(unittest.TestCase):
         self.assertEqual(code_kind(BudgetConcept('%CI'),None),'porcentaje')
         self.assertEqual(code_kind(BudgetConcept('X',nature='Desconocida'),None),'otro')
 
+    def test_embedded_tree_selects_reused_relation_without_rebuilding_and_preserves_expansion(self):
+        host=self.host;view=host.budget_structure;before=dumps(host.budget)
+        path=('r2','p2');root=view.items[()];root.setExpanded(True);view.items[('r2',)].setExpanded(True)
+        stamp=view._stamp;view.tree.setCurrentItem(view.items[path]);self.app.processEvents()
+        self.assertEqual(host.selected_relation,'p2');self.assertEqual(host.active_concept,'P');self.assertEqual(host.current_code,'C2');self.assertIs(view._stamp,stamp)
+        view._stamp=(host.budget,object(),view._stamp[2]);view.render();self.assertEqual(view.tree.currentItem().data(0,Qt.ItemDataRole.UserRole),path)
+        self.assertTrue(view.items[('r2',)].isExpanded());self.assertEqual(dumps(host.budget),before);self.assertEqual(host._undo,[])
+        host.set_budget_view('precios');self.assertIs(host.budget_stack.currentWidget(),host.prices)
+
+    def test_collapsed_branch_survives_model_copy_on_edit_and_undo(self):
+        host=self.host;view=host.budget_structure;view.items[('r1',)].setExpanded(False)
+        host._execute('budget.concept.edit',code='P',changes={'summary':'Own revised summary'})
+        self.assertFalse(view.items[('r1',)].isExpanded());host.undo();self.assertFalse(view.items[('r1',)].isExpanded())
+
+    def test_tree_search_keeps_ancestors_and_resets_without_modifying_budget(self):
+        host=self.host;view=host.budget_structure;before=dumps(host.budget)
+        host.search.setText('M');self.assertFalse(view.items[('r2','p2','m')].isHidden());self.assertFalse(view.items[('r2',)].isHidden());self.assertTrue(view.items[('r2','p2','l')].isHidden())
+        host.search.clear();self.assertFalse(view.items[('r2','p2','l')].isHidden());self.assertEqual(dumps(host.budget),before)
+
+    def test_root_selection_does_not_delete_a_stale_hidden_price_row(self):
+        host=self.host;before=dumps(host.budget);host.budget_structure.tree.setCurrentItem(host.budget_structure.items[()])
+        self.assertIsNone(host.selected_relation);host.delete_selected();self.assertEqual(dumps(host.budget),before)
+
 
 if __name__=='__main__':unittest.main()

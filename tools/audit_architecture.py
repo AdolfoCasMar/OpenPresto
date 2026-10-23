@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = {'rtf_pictures','wmf_vector','rich_documents','retention_settlements','agenda','pzh_assets','project_assets','concept_keywords','pzh_completion','issued_retention_openings','retention_openings','budget_phase_measurements','history_snapshots','technical_documents','pzh_entity_texts','inventory_control','nonconformities','budget_baselines','productivity','quality_control','site_issues','resource_hours','production','entities','treasury','cost_control','procurement_tracking',
-    'issued_management', 'pzh_native_modules',
+    'issued_management', 'pzh_native_modules', 'receivables_aging',
     'earned_value', 'economic_indicators',
     'planning_phases',
     'management_schedule',

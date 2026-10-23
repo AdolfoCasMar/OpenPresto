@@ -12,3 +12,13 @@ def display(value):
 
 def input_number(text):
     return text.strip().replace(',', '.')
+
+
+def formatter(separator):
+    """Snapshot the separator for a single table render, never across edits."""
+    if separator != ',':
+        return str
+    def format_value(value):
+        text = str(value)
+        return text.replace('.', ',') if isinstance(value, Decimal) else text
+    return format_value

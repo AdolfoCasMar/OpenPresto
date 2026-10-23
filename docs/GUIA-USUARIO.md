@@ -10,6 +10,27 @@ A previous saved version is retained as a `.bak` file. Recovery copies help reco
 
 ## Budget and measurements
 
+The default workspace places the budget tree at the upper left, the concept
+catalogue on the right, and measurements and text below the tree. The **Ver**
+ribbon groups budget, planning, list and document views. Compact quick-access
+icons sit above the ribbon; section shortcuts remain available along the bottom.
+**Archivo**, **Menús**, **Informes**, **Ventanas** and **Ayuda** expose the existing
+commands. Resizing and magnetic alignment of workspace windows remain available.
+
+Use the selector above the budget to switch between **Árbol**, **Capítulos**,
+**Capítulos y partidas** and **Presupuesto · Precios**. Selecting a tree row
+updates the active relation, text and measurements, including the correct
+parent path for reused work items. Double-click opens that relation in the
+editable price table. Tree selection does not rebuild its contents; expanded
+branches are retained across data refreshes. Search includes native search
+terms and supported source synonyms, keeping matching branches visible.
+
+The **Pedidos**, **Entregas** and **Facturas** ribbon buttons select the matching
+purchase-document filter. **Todos los documentos** restores the combined view.
+Filters preserve document IDs and do not change confirmation or payment state.
+Creating a document under a specific filter selects its type initially; if the
+type is changed, the resulting document is made visible in its matching view.
+
 The budget tree groups chapters, work items and resources. Enter a breakdown to see its components; use the up control to return to the previous level. Selecting an item synchronizes its description and measurement lines. Shared resource edits affect every item that uses that resource.
 
 Measurements can contain dimensions, formulas and supported subtotals. Calculated quantities should be changed through their measurement lines. Configurable precision controls rounding in the native calculation profile. Percentage charges, indirect costs and locked prices have distinct rules; review the selected profile before changing them.

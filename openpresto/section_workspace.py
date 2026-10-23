@@ -12,8 +12,10 @@ class SectionWorkspace:
         self.host=host;self.active=0;self.fingerprint=None;self.was_open=False
         bar=host.findChildren(QToolBar)[0]
         for action in list(bar.actions()):bar.removeAction(action)
-        bar.setWindowTitle('Obra');bar.setIconSize(QSize(18,18));bar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
-        for key in ('Nuevo','Abrir…','Guardar','importar','Presto PZH · experimental…','Deshacer','Rehacer','Buscar'):
+        bar.setWindowTitle('Acceso rápido');bar.setIconSize(QSize(16,16));bar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly);bar.setMovable(False);bar.setFixedHeight(27)
+        bar.setStyleSheet('QToolBar { background: #c5cfde; padding: 0 5px; spacing: 2px; } QToolButton { padding: 2px; }')
+        for key in ('Guardar','Preferencias…','Deshacer','Rehacer','Nuevo','Abrir…','importar','Presto PZH · experimental…','Buscar'):
+            if key not in host.commands:continue
             if key in ('Deshacer','Buscar'):bar.addSeparator()
             action=host.commands[key][0];action.setIconText({'Abrir…':'Abrir','importar':'BC3','Presto PZH · experimental…':'PZH'}.get(key,key));bar.addAction(action)
         bar.addSeparator()
@@ -24,11 +26,13 @@ class SectionWorkspace:
         self.ribbon = ReferenceRibbon(host)
         host.addToolBarBreak()
         host.addToolBar(self.ribbon)
-        host.addToolBarBreak()
-        area=QToolBar('Secciones',host);area.setObjectName('secciones');area.setMovable(False);host.addToolBar(area);self.tabs=QTabBar();self.tabs.setExpanding(False)
+        area=QToolBar('Secciones',host);area.setObjectName('secciones');area.setMovable(False);host.addToolBar(Qt.ToolBarArea.BottomToolBarArea,area);self.tabs=QTabBar();self.tabs.setExpanding(False)
+        area.setStyleSheet('QToolBar { padding: 0; spacing: 0; } QTabBar::tab { padding: 3px 8px; }')
         for title,key in AREAS:self.tabs.addTab(icon({'precios':'calculate','certificacion-fases':'calendar','planificacion':'calendar','gestion':'open','informes':'text'}[key]),title)
         area.addWidget(self.tabs);self.tabs.currentChanged.connect(self.activate)
-        self.context=QToolBar('Herramientas de la sección',host);self.context.setObjectName('herramientas-seccion');self.context.setIconSize(QSize(16,16));self.context.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon);host.addToolBar(self.context)
+        self.context=QToolBar('Herramientas de la sección',host);self.context.setObjectName('herramientas-seccion');self.context.setIconSize(QSize(14,14));self.context.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon);self.context.setMovable(False);host.addToolBar(Qt.ToolBarArea.BottomToolBarArea,self.context)
+        host.menuBar().hide()
+        host.addActions([entry[0] for entry in host.commands.values()])
         self.tree=QTreeWidget();self.tree.setHeaderLabels(('Código','Capítulo / partida'));self.tree.setColumnWidth(0,105);self.tree.itemClicked.connect(self.navigate)
         self.dock=QDockWidget('Estructura de la obra',host);self.dock.setObjectName('estructura-obra');self.dock.setWidget(self.tree);self.dock.hide();host.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea,self.dock);host.resizeDocks([self.dock],[265],Qt.Orientation.Horizontal)
         host.menus['Ver'].addAction(self.dock.toggleViewAction())
@@ -73,7 +77,7 @@ class SectionWorkspace:
                 panel._rendered_project=stamp
 
     def refresh(self):
-        host=self.host;self.ribbon.setEnabled(host.project_open);self.tabs.setEnabled(host.project_open);self.context.setVisible(host.project_open);self.stack.setCurrentIndex(0 if host.project_open else 1)
+        host=self.host;self.ribbon.set_project_open(host.project_open);self.tabs.setEnabled(host.project_open);self.context.setVisible(host.project_open);self.stack.setCurrentIndex(0 if host.project_open else 1)
         if host.project_open != self.was_open:
             self.dock.hide();self.was_open=host.project_open
         if not host.project_open:self.fingerprint=None;self.tree.clear();return

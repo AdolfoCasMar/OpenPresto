@@ -84,6 +84,11 @@ class ManagementPanel(QWidget):
           ('stocks','Existencias y consumos',(('Registrar consumo…',self.consume),)),('cash','Vencimientos',()))
         for key,title,actions in specs:
             page=QWidget();box=QVBoxLayout(page);bar=QHBoxLayout()
+            if key=='documents':
+                self.document_filter=QComboBox();self.document_filter.setObjectName('filtro-documentos')
+                self.document_filter.addItem('Todos los documentos',None)
+                for label,value in KINDS.items():self.document_filter.addItem(label,value)
+                self.document_filter.currentIndexChanged.connect(self.filter_documents);bar.addWidget(self.document_filter)
             for text,callback in actions:
                 b=QPushButton(text);b.clicked.connect(callback);bar.addWidget(b)
             box.addLayout(bar);table=QTableWidget();box.addWidget(table);self.tables[key]=table;self.tabs.addTab(page,title)
@@ -137,8 +142,21 @@ class ManagementPanel(QWidget):
         fill(self.tables['contracts'],('Contrato','Suministros','Ofertas','Adjudicatario','Importe adjudicado'),contract_rows(self.host.budget))
         fill(self.tables['bids'],('Contrato','Proveedor','Suministros sin precio','Importe con precios disponibles','Adjudicatario','Importe adjudicado'),offer_rows(self.host.budget))
         fill(self.tables['documents'],('Tipo','Referencia','Fecha','Proveedor','Estado','Base','Impuesto','Retención','Total'),[(LABELS[r[1]],r[2],r[3],names[r[4]],STATES[r[5]],*r[6:]) for r in document_rows(self.host.budget)])
+        self._document_kinds=[row['kind'] for row in data['documents']];self.filter_documents()
         fill(self.tables['stocks'],('Fecha','Suministro','Movimiento','Documento / destino','Cantidad','Valor','Existencias','Valor restante'),ledger(self.host.budget))
         fill(self.tables['cash'],('Vencimiento','Tipo','Documento','Importe previsto'),[(r[0],LABELS[r[1]],r[2],r[3]) for r in cash_rows(self.host.budget)])
+
+    def set_document_filter(self,kind):
+        index=self.document_filter.findData(kind)
+        if index<0:raise ValueError('Tipo de documento desconocido')
+        self.document_filter.setCurrentIndex(index);self.filter_documents()
+
+    def filter_documents(self,*_):
+        kind=self.document_filter.currentData();table=self.tables.get('documents')
+        if table is None:return
+        for index,value in enumerate(getattr(self,'_document_kinds',[])):table.setRowHidden(index,kind is not None and kind!=value)
+        if table.currentRow()<0 or table.isRowHidden(table.currentRow()):
+            table.setCurrentCell(next((i for i in range(table.rowCount()) if not table.isRowHidden(i)),-1),0)
 
     def edit_supplier(self):
         index=self.tables['suppliers'].currentRow();data=validate(self.host.budget)
@@ -203,13 +221,14 @@ class ManagementPanel(QWidget):
         data=validate(self.host.budget)
         if rounding is None:rounding=existing.get('rounding','line') if existing else 'line'
         if not data['suppliers']:self.host._error('Añade un proveedor antes de crear documentos.');return
-        d=QDialog(self);d.setWindowTitle('Documento de gestión');form=QFormLayout(d);k=QComboBox()
+        d=QDialog(self);d.setWindowTitle('Documento de gestión');form=QFormLayout(d);k=QComboBox();k.setObjectName('document-kind')
         for label,value in KINDS.items():k.addItem(label,value)
+        if kind is None and self.document_filter.currentData():k.setCurrentIndex(k.findData(self.document_filter.currentData()))
         if kind:k.setCurrentIndex(k.findData(kind));k.setEnabled(False)
         supplier=QComboBox()
         for r in data['suppliers']:supplier.addItem(r['name'],r['id'])
         if supplier_id:supplier.setCurrentIndex(supplier.findData(supplier_id));supplier.setEnabled(False)
-        reference=QLineEdit();day=QDateEdit(QDate.currentDate());day.setDisplayFormat('yyyy-MM-dd');day.setCalendarPopup(True)
+        reference=QLineEdit();reference.setObjectName('document-reference');day=QDateEdit(QDate.currentDate());day.setDisplayFormat('yyyy-MM-dd');day.setCalendarPopup(True)
         if min_date:day.setMinimumDate(QDate.fromString(min_date,'yyyy-MM-dd'))
         due=QDateEdit(QDate.currentDate());due.setDisplayFormat('yyyy-MM-dd');due.setCalendarPopup(True);has_due=QCheckBox('Registrar vencimiento previsto')
         tax=QLineEdit('0');retention=QLineEdit('0');posted=QCheckBox('Confirmar al guardar')
@@ -228,7 +247,15 @@ class ManagementPanel(QWidget):
         edit.clicked.connect(edit_lines)
         for label,widget in (('Tipo',k),('Referencia',reference),('Proveedor',supplier),('Fecha',day),('Líneas',edit),('Impuesto (%)',tax),('Retención (%)',retention),('',has_due),('Vencimiento',due),('',posted)):form.addRow(label,widget)
         buttons(d,form)
-        if d.exec()==QDialog.DialogCode.Accepted:self.host._execute('management.document.set',kind=k.currentData(),reference=reference.text(),supplier_id=supplier.currentData(),date=day.date().toString('yyyy-MM-dd'),lines=current_lines,tax_percent=tax.text().replace(',','.'),retention_percent=retention.text().replace(',','.'),due_date=due.date().toString('yyyy-MM-dd') if has_due.isChecked() else None,status='posted' if posted.isChecked() else 'draft',document_id=existing['id'] if existing else None,rounding=rounding)
+        if d.exec()==QDialog.DialogCode.Accepted:
+            from uuid import uuid4
+            identity=existing['id'] if existing else uuid4().hex
+            self.host._execute('management.document.set',kind=k.currentData(),reference=reference.text(),supplier_id=supplier.currentData(),date=day.date().toString('yyyy-MM-dd'),lines=current_lines,tax_percent=tax.text().replace(',','.'),retention_percent=retention.text().replace(',','.'),due_date=due.date().toString('yyyy-MM-dd') if has_due.isChecked() else None,status='posted' if posted.isChecked() else 'draft',document_id=identity,rounding=rounding)
+            if any(row['id']==identity for row in validate(self.host.budget)['documents']):
+                if identity not in self.ids.get('documents',[]):self.render()
+                if self.document_filter.currentData() is not None:self.set_document_filter(k.currentData())
+                if identity in self.ids.get('documents',[]):
+                    table=self.tables['documents'];table.setCurrentCell(self.ids['documents'].index(identity),0);table.scrollToItem(table.item(table.currentRow(),0))
 
     def status(self,status):
         index=self.tables['documents'].currentRow()

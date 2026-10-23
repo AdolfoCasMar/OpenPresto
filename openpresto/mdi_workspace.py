@@ -10,7 +10,7 @@ from PySide6.QtGui import QKeySequence, QColor, QIcon, QPalette
 from PySide6.QtWidgets import (QApplication, QMdiArea, QMdiSubWindow, QWidget,
     QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QPlainTextEdit,
     QTableWidgetItem, QAbstractItemView, QHeaderView, QToolBar, QMessageBox,
-    QDialog, QStyleFactory, QInputDialog, QFileDialog, QMenu, QCheckBox)
+    QDialog, QStyleFactory, QInputDialog, QFileDialog, QMenu, QCheckBox, QStackedWidget, QComboBox, QToolButton)
 
 from .editor import BudgetEditor, MeasurementDialog, RelationDialog, ConceptDialog
 from .budget import Budget, BudgetError, BudgetRelation, BudgetMeasurement
@@ -92,6 +92,17 @@ class PrestoWorkspace(BudgetEditor):
         self.prices.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
         for col, width in ((0,100),(1,38),(2,38),(3,42),(5,85),(6,85),(7,95),(8,55)):
             self.prices.setColumnWidth(col, width)
+        for visual,logical in enumerate((0,1,2,4,5,3,6,7,8)):
+            self.prices.horizontalHeader().moveSection(self.prices.horizontalHeader().visualIndex(logical),visual)
+        self.prices.setColumnHidden(2,True);self.prices.setColumnHidden(8,True)
+        self.concepts_table.horizontalHeader().setStretchLastSection(False)
+        self.concepts_table.horizontalHeader().setSectionResizeMode(2,QHeaderView.ResizeMode.Stretch)
+        for visual,logical in enumerate((0,3,2,1,4)):
+            self.concepts_table.horizontalHeader().moveSection(self.concepts_table.horizontalHeader().visualIndex(logical),visual)
+        for column,width in ((0,95),(1,42),(3,55),(4,90)):self.concepts_table.setColumnWidth(column,width)
+        for column,label in ((1,'Ud'),(3,'Nat'),(4,'Pres')):self.concepts_table.horizontalHeaderItem(column).setText(label)
+        from .concept_appearance import NatureIconDelegate
+        self.concepts_table.setItemDelegateForColumn(3,NatureIconDelegate(self.concepts_table))
         self.prices.cellDoubleClicked.connect(self.enter_concept)
         self.prices.itemSelectionChanged.connect(self.select_price)
         self.prices.itemChanged.connect(self.edit_price_cell)
@@ -121,13 +132,31 @@ class PrestoWorkspace(BudgetEditor):
             button.setIconSize(QSize(16,16))
         self.prices_widget = QWidget()
         layout = QVBoxLayout(self.prices_widget)
-        layout.setContentsMargins(6,6,6,6)
-        layout.addWidget(self.description)
+        layout.setContentsMargins(0,0,0,0);layout.setSpacing(0)
+        self.description.setParent(self.prices_widget);self.description.hide()
+        self.crumb.setParent(self.prices_widget);self.crumb.hide()
         row = QHBoxLayout()
-        for widget in (self.crumb, self.search, up, text, measurement):
+        row.setContentsMargins(3,2,3,2);row.setSpacing(3)
+        for label,symbol,callback in (('Ir a raíz','tree',self.go_root),('Desplegar árbol','down',lambda:self.budget_structure.tree.expandAll()),('Plegar árbol','up',lambda:self.budget_structure.tree.collapseAll())):
+            button=QToolButton();button.setIcon(icon(symbol));button.setToolTip(label);button.setIconSize(QSize(16,16));button.clicked.connect(callback);row.addWidget(button)
+        row.addWidget(up)
+        self.budget_view=QComboBox();self.budget_view.setObjectName('vista-presupuesto')
+        for label,key in (('Árbol','arbol'),('Capítulos','capitulos'),('Capítulos y partidas','capitulos-partidas'),('Presupuesto · Precios','precios')):self.budget_view.addItem(label,key)
+        self.budget_view.setMaximumWidth(150)
+        row.addWidget(self.budget_view)
+        phase=QComboBox();phase.addItem('Presupuesto');phase.setToolTip('Importes del presupuesto');phase.setMaximumWidth(220);row.addWidget(phase,1)
+        self.search.setPlaceholderText('Buscar…');self.search.setMaximumWidth(160)
+        for widget in (text,measurement):
             row.addWidget(widget)
+        for label,symbol,target in (('Archivos','attachments','gestion:technical_documents:assets'),('Relaciones','link','relaciones'),('Fechas e importes','phases','planificacion:6')):
+            button=QToolButton();button.setIcon(icon(symbol));button.setToolTip(label);button.setIconSize(QSize(16,16));button.clicked.connect(lambda checked=False,target=target:self.section_ui.ribbon.show_view(target));row.addWidget(button)
+        row.addStretch();row.addWidget(self.search)
         layout.addLayout(row)
-        layout.addWidget(self.prices)
+        self.budget_stack=QStackedWidget();self.budget_stack.addWidget(self.prices)
+        from .budget_views import BudgetStructureView
+        self.budget_structure=BudgetStructureView(self,'arbol',embedded=True);self.budget_stack.addWidget(self.budget_structure);layout.addWidget(self.budget_stack)
+        self.budget_stack.setCurrentWidget(self.budget_structure)
+        self.budget_view.currentIndexChanged.connect(lambda _:self.set_budget_view(self.budget_view.currentData()))
         self.text_editor = QPlainTextEdit()
         self.text_editor.setPlaceholderText('Texto del concepto activo')
         self.text_editor.setUndoRedoEnabled(False)
@@ -146,6 +175,10 @@ class PrestoWorkspace(BudgetEditor):
             self.measurements_table.setColumnWidth(col, 86 if col < 8 else 70)
         self.measurements_table.setEditTriggers(QAbstractItemView.EditTrigger.DoubleClicked | QAbstractItemView.EditTrigger.EditKeyPressed)
         self.measurements_table.itemChanged.connect(self.edit_measurement_cell)
+        self.measurements_widget=QWidget();measurement_layout=QVBoxLayout(self.measurements_widget);measurement_layout.setContentsMargins(0,0,0,0);measurement_layout.setSpacing(0)
+        measurement_bar=QHBoxLayout();measurement_bar.setContentsMargins(3,2,3,2)
+        add_measurement=QToolButton();add_measurement.setIcon(icon('measure'));add_measurement.setToolTip('Añadir medición');add_measurement.clicked.connect(lambda:self.commands['Introducir medición…'][0].trigger());measurement_bar.addWidget(add_measurement)
+        context=QComboBox();context.addItem('Datos generales');context.setMaximumWidth(220);measurement_bar.addWidget(context);measurement_bar.addStretch();measurement_layout.addLayout(measurement_bar);measurement_layout.addWidget(self.measurements_table)
         self.concepts_table.itemSelectionChanged.connect(self.select_concept)
         self.relations_table.itemSelectionChanged.connect(self.select_relation)
         self.certification_table = self._table(['Capítulo','Partida','Ud','CanPres','CanCert a origen','Precio','Importe certificado','Estado'])
@@ -166,7 +199,7 @@ class PrestoWorkspace(BudgetEditor):
             'informes': ('Informes', self.reports_panel),
             'precios': ('Precios · Presupuesto', self.prices_widget),
             'texto': ('Texto 1', self.text_editor),
-            'mediciones': ('Medición del presupuesto', self.measurements_table),
+            'mediciones': ('Medición del presupuesto', self.measurements_widget),
             'conceptos': ('Conceptos', self.concepts_table),
             'relaciones': ('Relaciones', self.relations_table),
             'avisos': ('Avisos de importación', self.import_notes),
@@ -377,7 +410,7 @@ class PrestoWorkspace(BudgetEditor):
                 enabled = enabled and self.active_concept in self.budget.locked_prices
             if key == 'Eliminar':
                 # Supr dentro de una celda o del texto pertenece al editor de texto.
-                enabled = enabled and QApplication.focusWidget() in (self.prices,self.concepts_table,self.relations_table,self.measurements_table)
+                enabled = enabled and QApplication.focusWidget() in (self.prices,self.concepts_table,self.relations_table,self.measurements_table,self.budget_structure.tree) and self._selected_table() is not None
             action.setEnabled(enabled)
         if self.project_open and self._text_pending:
             self.setWindowTitle(f'{self.path.name if self.path else "Sin guardar"} * — OpenPresto')
@@ -413,6 +446,7 @@ class PrestoWorkspace(BudgetEditor):
         self.update_titles()
 
     def show_widget(self,widget):
+        if widget is self.measurements_table:self.show_panel('mediciones');return
         for key,(_,candidate) in self.panels.items():
             if candidate is widget:
                 self.show_panel(key)
@@ -441,7 +475,7 @@ class PrestoWorkspace(BudgetEditor):
         for key in ('precios','conceptos','mediciones','texto'):
             self.show_panel(key)
         width, height = self.mdi.viewport().width(), self.mdi.viewport().height()
-        top = height * 63 // 100
+        top = height * 59 // 100
         left = width * 59 // 100
         measurement = left * 64 // 100
         rectangles = (
@@ -476,10 +510,27 @@ class PrestoWorkspace(BudgetEditor):
     def update_titles(self):
         for key,sub in self.windows.items():
             suffix = self.current_code if key == 'precios' else self.active_concept if key in ('texto','mediciones') else None
-            sub.setWindowTitle(self.panels[key][0] + (f' · {suffix}' if suffix else ''))
+            title=self.panels[key][0]
+            if key=='precios' and self.budget_stack.currentWidget() is self.budget_structure:title=self.budget_view.currentText()+' · Presupuesto';suffix=None
+            if key=='mediciones':title='Mediciones'
+            if key=='texto':title='Texto'
+            sub.setWindowTitle(title + (f' · {suffix}' if suffix else ''))
+        if hasattr(self,'section_ui'):self.section_ui.ribbon.sync_views()
+
+    def set_budget_view(self,key):
+        index=self.budget_view.findData(key)
+        if index<0:return
+        with QSignalBlocker(self.budget_view):self.budget_view.setCurrentIndex(index)
+        if key=='precios':self.budget_stack.setCurrentWidget(self.prices)
+        else:
+            if self.budget_structure.mode!=key:self.budget_structure.mode=key;self.budget_structure._stamp=None
+            self.budget_stack.setCurrentWidget(self.budget_structure)
+            if self.project_open:self.budget_structure.render();self.budget_structure.sync_selection();self.budget_structure.filter(self.search.text())
+        if self.project_open:self.update_titles()
 
     def _open_views(self):
         self.project_open = True
+        self.budget_structure._stamp=None
         self._selection_origin = 'precios'
         with QSignalBlocker(self.search):
             self.search.clear()
@@ -601,8 +652,16 @@ class PrestoWorkspace(BudgetEditor):
         from .concept_keywords import validate as keyword_state
         keywords=keyword_state(self.budget)
         search_terms={code:tuple(synonyms.get(code,()))+tuple(keywords.get(code,{}).get('terms',())) for code in self.budget.concepts}
+        self._budget_search_terms=search_terms
         for row, code in enumerate(self.budget.concepts):
-            if data_changed:style_code(self.concepts_table.item(row,0),self.budget.concepts[code],self.budget.root_code)
+            if data_changed:
+                concept=self.budget.concepts[code];style_code(self.concepts_table.item(row,0),concept,self.budget.root_code)
+                self.concepts_table.item(row,3).setIcon(nature_icon(concept.nature));self.concepts_table.item(row,3).setToolTip(concept.nature)
+                self.concepts_table.item(row,4).setForeground(QColor('#c445cc'))
+                if concept.nature.casefold() in ('capitulo','capítulo') or code==self.budget.root_code:
+                    for col in range(self.concepts_table.columnCount()):
+                        item=self.concepts_table.item(row,col);item.setBackground(QColor('#cbd4e2'));font=item.font();font.setBold(True);item.setFont(font)
+                style_code(self.concepts_table.item(row,0),concept,self.budget.root_code)
             if synonyms.get(code):
                 self.concepts_table.item(row,0).setToolTip('Sinónimos BC3: ' + ', '.join(synonyms[code]))
         self._relation_ids = [r.id for r in self.budget.relations]
@@ -702,6 +761,8 @@ class PrestoWorkspace(BudgetEditor):
         self.section_ui.refresh()
         for key in ('arbol','capitulos','capitulos-partidas'):
             if key in self.windows and self.windows[key].isVisible():self.panels[key][1].render()
+        if self.project_open and self.budget_stack.currentWidget() is self.budget_structure:
+            self.budget_structure.render();self.budget_structure.sync_selection();self.budget_structure.filter(self.search.text())
 
     def _render_measurements(self):
         from .measurement_operations import native_displays
@@ -779,6 +840,15 @@ class PrestoWorkspace(BudgetEditor):
             if code:
                 text += ' ' + (code.data(Qt.ItemDataRole.UserRole + 1) or '')
             self.prices.setRowHidden(row,query not in text.casefold())
+        if hasattr(self,'budget_stack') and self.budget_stack.currentWidget() is self.budget_structure and not self._refreshing:
+            self.budget_structure.filter(query)
+            if query:
+                matches=getattr(self.budget_structure,'_matching_paths',[]);tree=self.budget_structure.tree;current=tree.currentItem()
+                if not matches:
+                    with QSignalBlocker(tree):tree.clearSelection();tree.setCurrentItem(None)
+                    self.selected_relation=None;self.active_concept=None;self.sync_secondary()
+                elif current is None or current.data(0,Qt.ItemDataRole.UserRole) not in matches:tree.setCurrentItem(self.budget_structure.items[matches[0]])
+            return
         if not self._refreshing:
             if self.prices.currentRow() < 0 or self.prices.isRowHidden(self.prices.currentRow()):
                 row = next((r for r in range(self.prices.rowCount()) if not self.prices.isRowHidden(r)),-1)
@@ -1241,6 +1311,8 @@ class PrestoWorkspace(BudgetEditor):
         if sub is None:
             return None
         table = self.prices if sub.widget() is self.prices_widget else sub.widget()
+        if table is self.prices and self.budget_stack.currentWidget() is self.budget_structure and self.selected_relation is None:return None
+        if table is self.measurements_widget:table=self.measurements_table
         if table in (self.prices,self.concepts_table,self.relations_table,self.measurements_table) and table.currentRow() >= 0 and not table.isRowHidden(table.currentRow()):
             return table
         return None
@@ -1248,6 +1320,7 @@ class PrestoWorkspace(BudgetEditor):
     def edit_selected(self):
         self.flush_text()
         if self._selected_table() is self.prices:
+            if self.budget_stack.currentWidget() is self.budget_structure:self.set_budget_view('precios')
             item = self.prices.currentItem()
             if item and item.flags() & Qt.ItemFlag.ItemIsEditable:
                 self.prices.editItem(item)

@@ -1,14 +1,34 @@
 """Resizable MDI frames with local, optional edge snapping."""
 from PySide6.QtCore import Qt,QRect,QSize,QEvent
-from PySide6.QtGui import QMouseEvent
+from PySide6.QtGui import QMouseEvent,QColor,QPen
 from PySide6.QtWidgets import QMdiSubWindow,QWidget,QSizePolicy,QLayout,QStyle,QStyleOptionTitleBar,QProxyStyle,QStyleFactory
 
 
 class WorkspaceStyle(QProxyStyle):
     def __init__(self):super().__init__(QStyleFactory.create('Fusion'))
     def pixelMetric(self,metric,option=None,widget=None):
-        if metric==QStyle.PixelMetric.PM_MdiSubWindowFrameWidth:return 6
+        if metric==QStyle.PixelMetric.PM_MdiSubWindowFrameWidth:return 2
+        if metric==QStyle.PixelMetric.PM_TitleBarHeight and isinstance(widget,QMdiSubWindow):return 22
         return super().pixelMetric(metric,option,widget)
+    def drawComplexControl(self,control,option,painter,widget=None):
+        if control!=QStyle.ComplexControl.CC_TitleBar or not isinstance(widget,QMdiSubWindow):return super().drawComplexControl(control,option,painter,widget)
+        painter.save();painter.fillRect(option.rect,QColor('#e6ecf4' if widget.mdiArea() and widget.mdiArea().activeSubWindow() is widget else '#f3f3f3'))
+        painter.setPen(QColor('#c5c9d0'));painter.drawLine(option.rect.bottomLeft(),option.rect.bottomRight())
+        buttons=[]
+        for sub in (QStyle.SubControl.SC_TitleBarMinButton,QStyle.SubControl.SC_TitleBarMaxButton,QStyle.SubControl.SC_TitleBarNormalButton,QStyle.SubControl.SC_TitleBarCloseButton):
+            if option.subControls&sub:
+                rect=self.subControlRect(control,option,sub,widget)
+                if not rect.isEmpty():buttons.append((sub,rect))
+        text=option.rect.adjusted(6,0,-4,0)
+        if buttons:text.setRight(min(rect.left() for _,rect in buttons)-4)
+        painter.setPen(QColor('#46505d'));painter.drawText(text,Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter,painter.fontMetrics().elidedText(option.text,Qt.TextElideMode.ElideRight,text.width()))
+        for sub,rect in buttons:
+            center=rect.center();painter.setPen(QPen(QColor('#68717c'),1))
+            if sub==QStyle.SubControl.SC_TitleBarCloseButton:
+                painter.drawLine(center.x()-3,center.y()-3,center.x()+3,center.y()+3);painter.drawLine(center.x()-3,center.y()+3,center.x()+3,center.y()-3)
+            elif sub==QStyle.SubControl.SC_TitleBarMinButton:painter.drawLine(center.x()-4,center.y()+2,center.x()+4,center.y()+2)
+            else:painter.drawRect(center.x()-4,center.y()-3,7,6)
+        painter.restore()
 
 
 def snapped_rect(rect,area,neighbors,edges=(),distance=10):
@@ -74,6 +94,7 @@ class WorkspaceWindow(QMdiSubWindow):
         self._position_grips()
     def _edges(self,point):
         if self.isMaximized() or self.isMinimized():return ()
+        if point.y()>=4 and point.y()<22 and point.x()>self.width()-80:return ()
         edges=[]
         band=12
         if point.x()<band:edges.append('left')

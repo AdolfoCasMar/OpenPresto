@@ -63,6 +63,22 @@ def report_table(budget, kind='presupuesto'):
     if kind in ('documentos_tecnicos','documentos_tecnicos_contenido'):
         from .technical_documents import HEADERS,report_rows,validate
         return (HEADERS,report_rows(budget)) if kind=='documentos_tecnicos' else (('Referencia','Título','Texto'),[(r['reference'],r['title'],r['text']) for r in validate(budget)])
+    if kind=='inventario_abc' or kind.startswith('inventario_abc:'):
+        from datetime import date
+        from .inventory_control import abc,ABC_HEADERS,ABC_SUMMARY_HEADERS
+        parts=kind.split(':')
+        if len(parts) not in (1,4) or (len(parts)==4 and (parts[2] not in ('detalle','resumen') or parts[3] not in ('saldos','todos'))):raise ValueError('Vista ABC de inventario inválida')
+        cut,mode,zeros=parts[1:] if len(parts)==4 else (date.today().isoformat(),'detalle','saldos')
+        view=abc(budget,cut,zeros=='todos')
+        return (ABC_SUMMARY_HEADERS,view['summary']) if mode=='resumen' else (ABC_HEADERS,view['rows'])
+    if kind=='inventario_periodo' or kind.startswith('inventario_periodo:'):
+        from datetime import date
+        from .inventory_control import period,PERIOD_HEADERS,MOVEMENT_HEADERS
+        parts=kind.split(':')
+        if len(parts) not in (1,4) or (len(parts)==4 and parts[3] not in ('saldos','todos','movimientos')):raise ValueError('Vista del período de inventario inválida')
+        today=date.today();start,end,mode=(parts[1:4] if len(parts)==4 else (today.replace(day=1).isoformat(),today.isoformat(),'saldos'))
+        view=period(budget,start,end,mode=='todos')
+        return (MOVEMENT_HEADERS,view['movements']) if mode=='movimientos' else (PERIOD_HEADERS,view['rows'])
     if kind=='inventario' or kind.startswith('inventario:'):
         from datetime import date
         from .inventory_control import snapshot,HEADERS,MOVEMENT_HEADERS
@@ -130,6 +146,13 @@ def report_table(budget, kind='presupuesto'):
         if len(parts)==3:
             return (CONCEPT_HEADERS,concept_rows(view)) if parts[2]=='conceptos' else (DOCUMENT_HEADERS,document_rows(view))
         return SUMMARY_HEADERS,summary_rows(view)
+    if kind=='antiguedad' or kind.startswith('antiguedad:'):
+        from datetime import date
+        from .receivables_aging import snapshot,HEADERS,DETAIL_HEADERS
+        parts=kind.split(':')
+        if len(parts) not in (1,3,4) or (len(parts)>1 and parts[2] not in ('resumen','detalle')) or (len(parts)==4 and parts[3]!='+proformas'):raise ValueError('Informe de antigüedad inválido')
+        view=snapshot(budget,parts[1] if len(parts)>1 else date.today().isoformat(),len(parts)==4)
+        return (DETAIL_HEADERS,view['details']) if len(parts)>1 and parts[2]=='detalle' else (HEADERS,view['rows'])
     if kind=='tesoreria' or kind.startswith('tesoreria:'):
         from datetime import date
         from .treasury import snapshot,month_rows
