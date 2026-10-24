@@ -1,4 +1,4 @@
-name: Release Windows and Linux
+name: Release Windows, Linux and macOS
 
 on:
   push:
@@ -57,7 +57,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-22.04]
+        os: [windows-latest, ubuntu-22.04, macos-15-intel, macos-15]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     env:
@@ -110,7 +110,8 @@ jobs:
           from pathlib import Path
           folder = Path('release-assets')
           version = os.environ['RELEASE_TAG'][1:]
-          expected = {f'OpenPresto-{version}-windows-x86_64.zip', f'OpenPresto-{version}-linux-x86_64.tar.gz'}
+          expected = {f'OpenPresto-{version}-windows-x86_64.zip', f'OpenPresto-{version}-linux-x86_64.tar.gz',
+                      f'OpenPresto-{version}-macos-x86_64.zip', f'OpenPresto-{version}-macos-arm64.zip'}
           assert {p.name for p in folder.glob('*.sha256')} == {n + '.sha256' for n in expected}
           assert {p.name for p in folder.iterdir()} == expected | {n + '.sha256' for n in expected}
           for name in expected:
@@ -121,7 +122,7 @@ jobs:
           subprocess.run(['git', 'archive', '--format=tar.gz', f'--prefix=OpenPresto-{version}/', '-o', str(source), 'HEAD'], check=True)
           Path(str(source) + '.sha256').write_text(f'{hashlib.sha256(source.read_bytes()).hexdigest()}  {source.name}\n')
           PY
-      - name: Create release after both native builds succeed
+      - name: Create release after all four native builds succeed
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
