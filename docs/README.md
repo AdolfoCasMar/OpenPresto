@@ -2,6 +2,7 @@
 
 Start with the [User guide](USER-GUIDE.md). The application interface is in Spanish; these guides use its existing menu labels where necessary.
 
+- [Function and gap catalogue](CATALOGO-FUNCIONES.md): 27 areas linked to source, related tests, limits and prioritized acceptance criteria (Spanish).
 - [Features](FEATURES.md): what the application currently provides.
 - [Compatibility](COMPATIBILITY.md): supported files, conversion results and boundaries.
 - [Building](BUILDING.md): source installation and desktop packages.
