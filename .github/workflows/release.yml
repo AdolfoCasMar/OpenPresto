@@ -1,0 +1,132 @@
+name: Release Windows and Linux
+
+on:
+  push:
+    tags: ['v[0-9]*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag to build and publish (for example v1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-22.04
+    outputs:
+      sha: ${{ steps.version.outputs.sha }}
+      tag: ${{ steps.version.outputs.tag }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Resolve existing tag and verify project version
+        id: version
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          python - <<'PY'
+          import os, re, runpy, subprocess, tomllib
+          tag = os.environ['RELEASE_TAG']
+          if not re.fullmatch(r'v\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?', tag):
+              raise SystemExit('Expected vMAJOR.MINOR.PATCH, optionally followed by aN, bN or rcN')
+          sha = subprocess.check_output(['git', 'rev-parse', '--verify', f'refs/tags/{tag}^{{commit}}'], text=True).strip()
+          subprocess.run(['git', 'checkout', '--detach', sha], check=True)
+          version = runpy.run_path('openpresto/__init__.py')['__version__']
+          with open('pyproject.toml', 'rb') as source:
+              metadata = tomllib.load(source)['project']['version']
+          if tag != 'v' + version or metadata != version:
+              raise SystemExit('Tag, __version__ and pyproject.toml version must match')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'sha={sha}\ntag={tag}\nprerelease={str(bool(re.search(r"a|b|rc", version))).lower()}\n')
+          PY
+
+  build:
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Linux Qt libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0 libxcb-xinerama0
+      - run: python -m pip install -r requirements-build.txt
+      - run: python tools/audit_architecture.py
+      - run: python tools/audit_delivery.py
+      - name: Build native package with startup and functional smoke checks
+        run: python tools/build_desktop.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.os }}
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: [prepare, build]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: release-*
+          path: release-assets
+          merge-multiple: true
+      - name: Include complete tracked source and verify package checksums
+        env:
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        run: |
+          python - <<'PY'
+          import hashlib, os, subprocess
+          from pathlib import Path
+          folder = Path('release-assets')
+          version = os.environ['RELEASE_TAG'][1:]
+          expected = {f'OpenPresto-{version}-windows-x86_64.zip', f'OpenPresto-{version}-linux-x86_64.tar.gz'}
+          assert {p.name for p in folder.glob('*.sha256')} == {n + '.sha256' for n in expected}
+          assert {p.name for p in folder.iterdir()} == expected | {n + '.sha256' for n in expected}
+          for name in expected:
+              digest, recorded = (folder / (name + '.sha256')).read_text().split()
+              assert recorded == name
+              assert hashlib.sha256((folder / name).read_bytes()).hexdigest() == digest
+          source = folder / f'OpenPresto-{version}-source.tar.gz'
+          subprocess.run(['git', 'archive', '--format=tar.gz', f'--prefix=OpenPresto-{version}/', '-o', str(source), 'HEAD'], check=True)
+          Path(str(source) + '.sha256').write_text(f'{hashlib.sha256(source.read_bytes()).hexdigest()}  {source.name}\n')
+          PY
+      - name: Create release after both native builds succeed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+          PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+        run: |
+          args=()
+          if [[ "$PRERELEASE" == true ]]; then args+=(--prerelease --latest=false); fi
+          gh release create "$RELEASE_TAG" release-assets/* --verify-tag --title "OpenPresto $RELEASE_TAG" --notes-file docs/RELEASE-NOTES.md "${args[@]}"
