@@ -61,6 +61,10 @@ Python 3.11 or later is required. Native desktop packages do not require a separ
 - [Release notes](https://github.com/AdolfoCasMar/OpenPresto/blob/integracion-1.0/docs/RELEASE-NOTES.md)
 - [Licensing and project identity](https://github.com/AdolfoCasMar/OpenPresto/blob/integracion-1.0/docs/LEGAL-NOTICE.md)
 
+## Author
+
+Developed by **Adolfo Castaño Martín** (GitHub: [AdolfoCasMar](https://github.com/AdolfoCasMar)), university lecturer, artist and software developer based in Spain.
+
 ## Contribute
 
 Report reproducible problems in [Issues](https://github.com/AdolfoCasMar/OpenPresto/issues). Include the application version, operating system, steps to reproduce and the relevant import message. Use a small anonymized example when possible. Do not publish confidential project files, personal information or material you do not have permission to share.
